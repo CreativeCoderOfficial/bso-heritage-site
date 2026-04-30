@@ -1,7 +1,14 @@
 field,index,display
 title,true,true
-date,true,true
-creator,true,false
 description,true,true
 subject,true,true
+organisation,true,true
+district,true,true
+country,true,true
+date,true,true
+type,true,true
+era,true,true
+group_number,true,false
+badge_type,true,false
+document_type,true,false
 location,true,false

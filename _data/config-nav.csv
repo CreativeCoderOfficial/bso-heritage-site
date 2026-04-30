@@ -1,9 +1,7 @@
 display_name,stub,dropdown_parent
 Home,/
-Browse,/browse.html
-Subjects,/subjects.html
-Locations,/locations.html
-Map,/map.html
+Groups,/browse.html?filter=type%3AGroup
+Badges,/browse.html?filter=type%3ABadge
+Documents,/browse.html?filter=type%3ADocument
+Far & Wide,/browse.html?filter=type%3AFar & Wide
 Timeline,/timeline.html
-Data,/data.html
-About,/about.html

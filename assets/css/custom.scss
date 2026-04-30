@@ -1,0 +1,307 @@
+// BSO Heritage Website - Custom SCSS Overrides
+// Since CB-Sheets uses precompiled Bootstrap, we override directly without @import
+// Brand colors: $bso-purple: #5C2D91, $bso-purple-dark: #3B1A5E, $bso-purple-light: #EDE7F6, $bso-white: #FFFFFF
+
+// ============================================
+// BSO BRAND COLORS
+// ============================================
+$bso-purple: #5C2D91;
+$bso-purple-dark: #3B1A5E;
+$bso-purple-light: #EDE7F6;
+$bso-white: #FFFFFF;
+
+// ============================================
+// CUSTOM BSO STYLES
+// ============================================
+
+// Body base styles
+body {
+  font-family: Arial, system-ui, sans-serif;
+  line-height: 1.6;
+  color: #191919;
+  background-color: $bso-white;
+}
+
+// BSO Purple accent for headings
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: $bso-purple;
+  font-family: Arial, system-ui, sans-serif;
+  font-weight: 600;
+}
+
+// Navbar styling - dark background with BSO purple brand
+.navbar {
+  background-color: $bso-purple-dark !important;
+  padding: 1rem 0;
+  
+  .navbar-brand {
+    color: $bso-white !important;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 1rem;
+    
+    &:hover {
+      color: $bso-purple-light !important;
+    }
+  }
+  
+  .nav-link {
+    color: rgba($bso-white, 0.8) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    
+    &:hover,
+    &:focus {
+      color: $bso-white !important;
+      background-color: rgba($bso-white, 0.1);
+    }
+    
+    &.active {
+      color: $bso-white !important;
+      background-color: rgba($bso-white, 0.2);
+    }
+  }
+  
+  .navbar-toggler {
+    border-color: rgba($bso-white, 0.3);
+    
+    &:hover,
+    &:focus {
+      background-color: rgba($bso-white, 0.1);
+    }
+  }
+  
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+}
+
+// BSO Primary buttons
+.btn-primary {
+  background-color: $bso-purple;
+  border-color: $bso-purple;
+  color: $bso-white;
+  font-weight: 600;
+  
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $bso-purple-dark !important;
+    border-color: $bso-purple-dark !important;
+    color: $bso-white !important;
+  }
+}
+
+// Secondary buttons - purple light
+.btn-secondary {
+  background-color: $bso-purple-light;
+  border-color: $bso-purple-light;
+  color: $bso-purple-dark;
+  font-weight: 600;
+  
+  &:hover,
+  &:focus {
+    background-color: darken($bso-purple-light, 5%);
+    border-color: darken($bso-purple-light, 10%);
+    color: $bso-purple-dark;
+  }
+}
+
+// Outline buttons
+.btn-outline-primary {
+  color: $bso-purple;
+  border-color: $bso-purple;
+  
+  &:hover,
+  &:focus {
+    background-color: $bso-purple;
+    border-color: $bso-purple;
+    color: $bso-white;
+  }
+}
+
+// Cards - subtle BSO styling
+.card {
+  border: none;
+  box-shadow: 0 2px 8px rgba($bso-purple, 0.1);
+  
+  .card-header {
+    background-color: $bso-purple;
+    color: $bso-white;
+    font-weight: 600;
+  }
+}
+
+// Links
+a {
+  color: $bso-purple;
+  text-decoration: none;
+  
+  &:hover {
+    color: $bso-purple-dark;
+    text-decoration: underline;
+  }
+}
+
+// BSO-specific classes
+.bso-brand {
+  color: $bso-purple;
+}
+
+.bg-bso-purple {
+  background-color: $bso-purple;
+}
+
+.bg-bso-purple-dark {
+  background-color: $bso-purple-dark;
+}
+
+.bg-bso-purple-light {
+  background-color: $bso-purple-light;
+}
+
+.text-bso-purple {
+  color: $bso-purple;
+}
+
+// Footer styling
+.footer {
+  background-color: $bso-purple-dark;
+  color: rgba($bso-white, 0.7);
+  
+  a {
+    color: $bso-purple-light;
+    
+    &:hover {
+      color: $bso-white;
+      text-decoration: underline;
+    }
+  }
+}
+
+// Home page banner
+#home-banner {
+  background-color: $bso-purple;
+  color: $bso-white;
+  
+  h1 {
+    color: $bso-white;
+    text-shadow: 2px 2px 4px rgba($bso-purple-dark, 0.5);
+  }
+}
+
+// Item page metadata
+.item-metadata {
+  dt {
+    color: $bso-purple;
+    font-weight: 600;
+  }
+}
+
+// Browse page filters
+.facet-filter {
+  .facet-title {
+    background-color: $bso-purple;
+    color: $bso-white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+  }
+  
+  .filter-option {
+    &:hover {
+      background-color: $bso-purple-light;
+    }
+    
+    &.active {
+      background-color: $bso-purple;
+      color: $bso-white;
+    }
+  }
+}
+
+// Pagination
+.pagination {
+  .page-link {
+    color: $bso-purple;
+    border-color: $bso-purple;
+    
+    &:hover,
+    &:focus {
+      background-color: $bso-purple;
+      color: $bso-white;
+      border-color: $bso-purple;
+    }
+  }
+  
+  .page-item.active .page-link {
+    background-color: $bso-purple;
+    border-color: $bso-purple;
+    color: $bso-white;
+  }
+}
+
+// Form controls
+.form-control,
+.form-select {
+  &:focus {
+    border-color: $bso-purple;
+    box-shadow: 0 0 0 0.25rem rgba($bso-purple, 0.25);
+  }
+}
+
+// Alerts
+.alert-primary {
+  background-color: lighten($bso-purple, 35%);
+  border-color: lighten($bso-purple, 25%);
+  color: darken($bso-purple, 15%);
+}
+
+// Badges
+.badge.bg-primary {
+  background-color: $bso-purple;
+}
+
+// Bootstrap dropdown overrides
+.dropdown-item {
+  &:hover,
+  &:focus {
+    background-color: $bso-purple-light;
+    color: $bso-purple-dark;
+  }
+}
+
+// Card titles
+.card-title {
+  color: $bso-purple;
+}
+
+// Breadcrumb
+.breadcrumb {
+  .breadcrumb-item {
+    a {
+      color: $bso-purple;
+      
+      &:hover {
+        color: $bso-purple-dark;
+      }
+    }
+  }
+  
+  .breadcrumb-item.active {
+    color: $bso-purple-dark;
+  }
+}
+
+// Table styling
+.table {
+  th {
+    background-color: $bso-purple;
+    color: $bso-white;
+    border-color: $bso-purple;
+  }
+  
+  td {
+    border-color: rgba($bso-purple, 0.2);
+  }
+}
