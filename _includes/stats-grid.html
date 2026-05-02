@@ -1,0 +1,25 @@
+<!-- Stats Section -->
+<section class="stats py-5 bg-light">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            {% for stat in site.data.home-stats %}
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="stat-card h-100 text-center p-4 border rounded-3">
+                    <div class="stat-icon mb-3">
+                        <i class="bi {{ stat.icon }} fs-1 text-primary"></i>
+                    </div>
+                    <div class="stat-number h2 fw-bold text-primary mb-1">
+                        {{ stat.number }}
+                    </div>
+                    <div class="stat-label h5 text-muted">
+                        {{ stat.label }}
+                    </div>
+                    <small class="text-muted d-block mt-2">
+                        {{ stat.description }}
+                    </small>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

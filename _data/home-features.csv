@@ -1,0 +1,4 @@
+icon,title,description,cta_text,cta_link,badge_color
+bi-collection-fill,Explore Groups,Browse our global network of BSO groups and their histories,Explore,/browse.html?filter=type%3AGroup,primary
+bi-gem-fill,Discover Badges,View historical badges and awards earned by scouts worldwide,Explore,/browse.html?filter=type%3ABadge,success
+bi-file-text-fill,Read Documents,Access historical documents, newsletters, and archives,Explore,/browse.html?filter=type%3ADocument,info

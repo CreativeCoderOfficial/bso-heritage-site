@@ -1,84 +1,84 @@
-##########
-# CollectionBuilder Theme Customization - BSO Heritage
-# BSO brand colors: purple (#5C2D91), purple-dark (#3B1A5E), purple-light (#EDE7F6), white (#FFFFFF)
-##########
-
-##########
-# HOME PAGE
-#
-# BSO featured image - update when available
-featured-image: /assets/img/bso-featured.jpg
-home-title-y-padding: 8em
-home-banner-image-position: center
-
-##########
-# ITEM PAGE
-#
-browse-buttons: true
-
-##########
-# SUBJECTS PAGE
-#
-subjects-fields: subject
-subjects-min: 1
-
-##########
-# LOCATIONS PAGE
-#
-locations-fields: location
-locations-min: 1
-
-##########
-# MAP PAGE
-#
-auto-center-map: true
-latitude: 51.5074
-longitude: -0.1278
-zoom-level: 4
-map-base: Esri_WorldStreetMap
-map-search: true
-map-search-fuzziness: 0.35
-map-cluster: true
-map-cluster-radius: 25
-
-##########
-# TIMELINE PAGE
-#
-year-navigation:
-year-nav-increment: 5
-
-##########
-# DATA 
-#
-metadata-export-fields: "title,organisation,district,country,date,description,subject,location,latitude,longitude,format,rights"
-metadata-facets-fields: "subject,organisation,district,era,format"
-
-##########
-# COMPOUND OBJECTS
-#
-map-child-objects: true
-timeline-child-objects: true
-data-child-objects: false
-carousel-child-objects: false
-browse-child-objects: false
-search-child-objects: true
-
-##########
-# ADVANCED OPTIONS
-#
-
-# NAVBAR COLORS - BSO Purple Dark
-navbar-color: navbar-dark
-navbar-background: bg-dark
-
-# BOOTSWATCH THEMES - using custom BSO theme via SCSS
-bootswatch: # leave blank for custom BSO styling
-
-# THEME FONTS - BSO uses system sans-serif
-base-font-size: 1.1em
-text-color: "#191919"
-link-color: "#5C2D91"
-base-font-family: "Arial, system-ui, sans-serif"
-
-# THEME ICONS [optional!]
-# Using Bootstrap Icons defaults
+##########
+# CollectionBuilder Theme Customization - BSO Heritage
+# BSO brand colors: purple (#5C2D91), purple-dark (#3B1A5E), purple-light (#EDE7F6), white (#FFFFFF)
+##########
+
+##########
+# HOME PAGE
+#
+# BSO featured image - update when available
+featured-image: /assets/img/bso-featured.jpg
+home-title-y-padding: 8em
+home-banner-image-position: center
+
+##########
+# ITEM PAGE
+#
+browse-buttons: true
+
+##########
+# SUBJECTS PAGE
+#
+subjects-fields: subject
+subjects-min: 1
+
+##########
+# LOCATIONS PAGE
+#
+locations-fields: location
+locations-min: 1
+
+##########
+# MAP PAGE
+#
+auto-center-map: true
+latitude: 51.5074
+longitude: -0.1278
+zoom-level: 4
+map-base: Esri_WorldStreetMap
+map-search: true
+map-search-fuzziness: 0.35
+map-cluster: true
+map-cluster-radius: 25
+
+##########
+# TIMELINE PAGE
+#
+year-navigation:
+year-nav-increment: 5
+
+##########
+# DATA 
+#
+metadata-export-fields: "title,organisation,district,country,date,description,subject,location,latitude,longitude,format,rights"
+metadata-facets-fields: "subject,organisation,district,era,format"
+
+##########
+# COMPOUND OBJECTS
+#
+map-child-objects: true
+timeline-child-objects: true
+data-child-objects: false
+carousel-child-objects: false
+browse-child-objects: false
+search-child-objects: true
+
+##########
+# ADVANCED OPTIONS
+#
+
+# NAVBAR COLORS - BSO Purple Dark
+navbar-color: navbar-dark
+navbar-background: bg-primary
+
+# BOOTSWATCH THEMES - using custom BSO theme via SCSS
+bootswatch: # leave blank for custom BSO styling
+
+# THEME FONTS - BSO uses system sans-serif
+base-font-size: 1.1em
+text-color: "#191919"
+link-color: "#5C2D91"
+base-font-family: "Arial, system-ui, sans-serif"
+
+# THEME ICONS [optional!]
+# Using Bootstrap Icons defaults

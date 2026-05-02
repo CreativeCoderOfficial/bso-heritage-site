@@ -1,4 +1,152 @@
-/* 
-    Put your custom SCSS here! 
-    This allows you to override any CollectionBuilder or Bootstrap CSS without modifying the base theme files directly.
+/*
+   BSO Heritage Custom Styles
+   Homepage layout styling based on design spec
 */
+
+/* ============================================
+   SPACING SYSTEM
+   ============================================ */
+:root {
+    --bs-spacer-xs: 0.5rem;  /* 8px - tight */
+    --bs-spacer-sm: 1rem;    /* 16px - standard */
+    --bs-spacer-md: 1.5rem;  /* 24px - grid gaps */
+    --bs-spacer-lg: 3rem;    /* 48px - section separation */
+    --bs-spacer-xl: 4rem;    /* 64px - large section spacing */
+}
+
+/* ============================================
+   COLOR ROLES
+   ============================================ */
+/* Using BSO brand colors from theme.yml */
+/* Primary: #5C2D91 (purple), Secondary: #EDE7F6 (purple-light) */
+/* Dark: #3B1A5E (purple-dark), Light: #FFFFFF (white) */
+
+/* Ensure text contrast on light backgrounds */
+.text-muted {
+    color: #6c757d !important; /* Bootstrap gray-600 for muted text */
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+    background-color: #fff;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+}
+
+.hero .badge {
+    font-size: 0.9rem;
+    border-radius: 50px; /* Pill shape */
+}
+
+.hero .display-4 {
+    font-size: 3rem;
+    @media (min-width: 992px) {
+        font-size: 3.5rem;
+    }
+}
+
+.hero .lead {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================
+   STATS SECTION
+   ============================================ */
+.stats {
+    background-color: #f8f9fa; /* Very light gray */
+}
+
+.stat-card {
+    border: 1px solid #dee2e6 !important; /* Light gray border */
+    border-radius: 12px !important; /* Rounded corners */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    color: #5C2D91; /* Primary purple */
+}
+
+.stat-number {
+    color: #5C2D91; /* Primary purple */
+}
+
+.stat-label {
+    color: #6c757d; /* Muted gray */
+}
+
+/* ============================================
+   FEATURES SECTION
+   ============================================ */
+.features {
+    background-color: #fff;
+}
+
+.feature-card {
+    border: 1px solid #dee2e6 !important; /* Light gray border */
+    border-radius: 12px !important; /* Rounded corners */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    color: #5C2D91; /* Primary purple */
+}
+
+.feature-card .btn-primary {
+    border-radius: 50px; /* Pill shape */
+}
+
+/* Badge colors for feature cards */
+.bg-primary {
+    background-color: #5C2D91 !important;
+}
+
+.bg-success {
+    background-color: #198754 !important;
+}
+
+.bg-info {
+    background-color: #0dcaf0 !important;
+}
+
+/* ============================================
+   SECONDARY NAVIGATION (if added later)
+   ============================================ */
+.secondary-nav {
+    background-color: #fff;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 0;
+}
+
+.secondary-nav .nav-item {
+    margin: 0 0.5rem;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+@media (max-width: 767.98px) {
+    .hero .display-4 {
+        font-size: 2rem;
+    }
+    
+    .stat-card,
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+}
