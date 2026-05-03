@@ -1,0 +1,89 @@
+##########
+# BSO Heritage Footer Configuration
+##########
+
+# Brand & Description (Column 1)
+brand:
+  title: "British Scouting Overseas Heritage"
+  subtitle: "Since 1908"
+  description: "Preserving and sharing the history of British Scouting Overseas through our digital archive of groups, badges, documents, and historical records."
+  logo: "/assets/img/bso-logo.png"  # Update when available
+
+# Social Media Links
+social:
+  - icon: "bi-facebook"
+    url: "https://facebook.com"
+    label: "Facebook"
+  - icon: "bi-twitter-x"
+    url: "https://twitter.com"
+    label: "Twitter"
+  - icon: "bi-instagram"
+    url: "https://instagram.com"
+    label: "Instagram"
+  - icon: "bi-youtube"
+    url: "https://youtube.com"
+    label: "YouTube"
+
+# Heritage Periods (Column 2)
+heritage_periods:
+  title: "Heritage Periods"
+  links:
+    - text: "British Groups Abroad (1909-2013)"
+      url: "/british-groups-abroad.html"
+    - text: "BSWE Germany/Europe (1947-2013)"
+      url: "/bswe-germany-europe.html"
+    - text: "British Scouting Overseas (2013-Present)"
+      url: "/bso-2013-present.html"
+    - text: "Historical Timeline"
+      url: "/timeline.html"
+
+# Resources (Column 3)
+resources:
+  title: "Resources"
+  links:
+    - text: "Group Directory"
+      url: "/browse.html?filter=type%3AGroup"
+    - text: "Badge Catalog"
+      url: "/browse.html?filter=type%3ABadge"
+    - text: "Publications Archive"
+      url: "/browse.html?filter=type%3ADocument"
+    - text: "Historical Documents"
+      url: "/browse.html"
+    - text: "Contribute or Support"
+      url: "/about.html#contribute"
+
+# Contact & Social (Column 4)
+contact:
+  title: "Stay Connected"
+  email: "archive@bso.scouts.org.uk"
+  external_links:
+    - text: "Scouts UK"
+      url: "https://www.scouts.org.uk"
+      icon: "bi-box-arrow-up-right"
+    - text: "British Scouting Overseas"
+      url: "https://bso.scouts.org.uk"
+      icon: "bi-box-arrow-up-right"
+
+# Legal / Meta Row
+legal:
+  copyright: "&copy; {{ site.time | date: '%Y' }} British Scouting Overseas Heritage"
+  links:
+    - text: "Privacy Policy"
+      url: "/about.html#privacy"
+    - text: "Terms of Use"
+      url: "/about.html#terms"
+    - text: "Accessibility"
+      url: "/about.html#accessibility"
+
+external_official:
+  title: "Official Scout Links:"
+  links:
+    - text: "Scouts UK"
+      url: "https://www.scouts.org.uk"
+    - text: "BSO"
+      url: "https://bso.scouts.org.uk"
+
+# Bottom Note
+bottom_note:
+  text: "Preserving scouting history for future generations"
+  icon: "bi-heart-fill"

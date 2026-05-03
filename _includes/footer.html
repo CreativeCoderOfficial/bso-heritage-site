@@ -1,51 +1,166 @@
-<footer class="bg-dark pt-4 mt-auto container-fluid">
-
-    <div class="row border-bottom border-white pb-4 mb-2">
-
-        <div class="col-md-7 px-4 mt-3">
-
-            <h2 class="h4"><a href="{{ '/' | relative_url }}" class="text-white">{{ site.title }}</a></h2>
-            <p class="text-white"><small>{{ site.description }}</small></p>
-            <nav>
-                <ul id="footer-nav" class="nav nav-pills ">
-                    {%- assign navItems = site.data.config-nav | where_exp: 'item', 'item.dropdown_parent == nil' -%}
-                    {% for nav in navItems %}
-                    <li class="nav-item">
-                    {% if nav.stub %}
-                        <a class="nav-link text-light{% if page.url == nav.stub %} active{% endif %}" href="{{ nav.stub | relative_url }}">{{ nav.display_name }}</a>
-                    {%- else -%}
-                    {% assign childStub = site.data.config-nav | where_exp: 'item', 'item.dropdown_parent == nav.display_name' | first %}
-                        <a class="nav-link text-light{% if page.url == childStub.stub %} active{% endif %}" href="{{ childStub.stub | relative_url }}">{{ nav.display_name }}</a>
+<!-- BSO Heritage Footer -->
+<footer class="bs-footer bg-light mt-auto">
+    
+    <!-- Main Footer Grid (4 columns) -->
+    <div class="container py-5">
+        <div class="row g-4">
+            
+            <!-- Column 1: Brand & Description -->
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-brand mb-4">
+                    {% if site.organization-logo-nav %}
+                    <img src="{{ site.organization-logo-nav | relative_url }}" 
+                         alt="{{ site.organization-name | escape }}" 
+                         class="footer-logo mb-3" >
+                    {% else %}
+                    <h3 class="h5 fw-bold text-primary mb-3">{{ site.data.footer.brand.title }}</h3>
                     {% endif %}
-                    </li>
-                    {%- endfor -%}
-                </ul>
-            </nav>
-
-        </div>
-
-        <div class="col-md-5 mt-3 text-center">
-
-           {% if site.organization-logo-nav %} <p class="text-md-end">
-                <a href="{{ site.organization-link }}">
-                    <img id="footer-logo" class="img-fluid" src="{{ site.organization-logo-nav | relative_url }}" alt="{{ site.organization-name | escape }} home">
-                </a>
-            </p>
-            {% endif %}
-            <p class="text-white text-md-end" id="footer-credits">
-                <small><em>built with</em>
-                    <a href="https://collectionbuilder.github.io/" title="CollectionBuilder">
-                        <img src="{{ '/assets/img/collectionbuilder-logo.png' | relative_url }}" class="img-fluid" alt="CollectionBuilder" >
+                    <p class="small text-muted mb-1">{{ site.data.footer.brand.subtitle }}</p>
+                    <p class="small text-muted">{{ site.data.footer.brand.description }}</p>
+                </div>
+                <div class="footer-social">
+                    {% for social in site.data.footer.social %}
+                    <a href="{{ social.url }}" 
+                       class="text-muted me-2"
+                       title="{{ social.label }}"
+                       aria-label="{{ social.label }}">
+                        <i class="bi {{ social.icon }} fs-5"></i>
                     </a>
-                </small>
-            </p>
-
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Column 2: Heritage Periods -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="fw-bold text-primary mb-4">{{ site.data.footer.heritage_periods.title }}</h4>
+                <ul class="list-unstyled small">
+                    {% for link in site.data.footer.heritage_periods.links %}
+                    <li class="mb-2">
+                        <a href="{{ link.url | relative_url }}" 
+                           class="text-muted text-decoration-none"
+                           onmouseover="this.style.color='#5C2D91'" 
+                           onmouseout="this.style.color='#6c757d'">
+                            {{ link.text }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- Column 3: Resources -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="fw-bold text-primary mb-4">{{ site.data.footer.resources.title }}</h4>
+                <ul class="list-unstyled small">
+                    {% for link in site.data.footer.resources.links %}
+                    <li class="mb-2">
+                        <a href="{{ link.url | relative_url }}" 
+                           class="text-muted text-decoration-none"
+                           onmouseover="this.style.color='#5C2D91'" 
+                           onmouseout="this.style.color='#6c757d'">
+                            {{ link.text }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- Column 4: Contact & Social -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="fw-bold text-primary mb-4">{{ site.data.footer.contact.title }}</h4>
+                
+                <!-- Email with icon -->
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-envelope-fill text-muted me-2"></i>
+                    <a href="mailto:{{ site.data.footer.contact.email }}" 
+                       class="small text-muted text-decoration-none"
+                       onmouseover="this.style.color='#5C2D91'" 
+                       onmouseout="this.style.color='#6c757d'">
+                        {{ site.data.footer.contact.email }}
+                    </a>
+                </div>
+                
+                <!-- External Links with icons -->
+                <div class="mb-4">
+                    {% for link in site.data.footer.contact.external_links %}
+                    <div class="mb-2">
+                        <a href="{{ link.url }}" 
+                           class="small text-muted text-decoration-none d-inline-flex align-items-center"
+                           onmouseover="this.style.color='#5C2D91'" 
+                           onmouseout="this.style.color='#6c757d'">
+                            <i class="bi {{ link.icon | default: 'bi-box-arrow-up-right' }} me-2"></i>
+                            {{ link.text }}
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Social Icons -->
+                <div class="footer-social">
+                    {% for social in site.data.footer.social %}
+                    <a href="{{ social.url }}" 
+                       class="text-muted me-2"
+                       title="{{ social.label }}"
+                       aria-label="{{ social.label }}">
+                        <i class="bi {{ social.icon }} fs-5"></i>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-
     </div>
-
-    <div class="col-md-12 text-center pt-3 pb-1">
-        <p class="text-white">Last updated {{ site.time | date: '%Y' }}</p>
+    
+    <!-- Divider -->
+    <hr class="m-0 border-top border-secondary">
+    
+    <!-- Legal / Meta Row -->
+    <div class="container py-3">
+        <div class="row align-items-center">
+            <!-- Left Zone: Copyright + Legal Links -->
+            <div class="col-md-6 col-lg-8 text-center text-md-start mb-3 mb-md-0">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start gap-3">
+                    <small class="text-muted">{{ site.data.footer.legal.copyright }}</small>
+                    <div class="d-flex gap-3">
+                        {% for link in site.data.footer.legal.links %}
+                        <a href="{{ link.url | relative_url }}" 
+                           class="small text-muted text-decoration-none"
+                           onmouseover="this.style.color='#5C2D91'" 
+                           onmouseout="this.style.color='#6c757d'">
+                            {{ link.text }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Zone: Official Scout Links -->
+            <div class="col-md-6 col-lg-4 text-center text-md-end">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-end gap-3">
+                    <small class="text-muted">{{ site.data.footer.external_official.title }}</small>
+                    <div class="d-flex gap-3">
+                        {% for link in site.data.footer.external_official.links %}
+                        <a href="{{ link.url }}" 
+                           class="small text-muted text-decoration-none d-inline-flex align-items-center"
+                           onmouseover="this.style.color='#5C2D91'" 
+                           onmouseout="this.style.color='#6c757d'">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>
+                            {{ link.text }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
+    
+    <!-- Divider -->
+    <hr class="m-0 border-top border-secondary">
+    
+    <!-- Bottom Note -->
+    <div class="container py-3 text-center">
+        <p class="small text-muted mb-0">
+            <i class="bi {{ site.data.footer.bottom_note.icon }} text-primary me-2"></i>
+            {{ site.data.footer.bottom_note.text }}
+        </p>
+    </div>
+    
 </footer>

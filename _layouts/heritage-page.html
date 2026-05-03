@@ -1,0 +1,84 @@
+---
+# Heritage Period Page Layout
+# Polished UI for historical period pages
+layout: default
+---
+
+<div class="container my-5">
+    <div class="row g-4">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            {{ content }}
+        </div>
+        
+        <!-- Sidebar with navigation and related content -->
+        <div class="col-lg-4">
+            <div class="card border-0 bg-light mb-4">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold text-primary mb-3">Heritage Periods</h4>
+                    <ul class="nav nav-pills flex-column gap-2">
+                        <li class="nav-item">
+                            <a class="nav-link {% if page.url contains 'british-groups-abroad' %}active{% endif %}" 
+                               href="{{ '/british-groups-abroad.html' | relative_url }}">
+                                British Groups Abroad (1909-2013)
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if page.url contains 'bswe-germany-europe' %}active{% endif %}" 
+                               href="{{ '/bswe-germany-europe.html' | relative_url }}">
+                                BSWE Germany/Europe (1947-2013)
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if page.url contains 'bso-2013-present' %}active{% endif %}" 
+                               href="{{ '/bso-2013-present.html' | relative_url }}">
+                                British Scouting Overseas (2013-Present)
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if page.url == '/timeline.html' %}active{% endif %}" 
+                               href="{{ '/timeline.html' | relative_url }}">
+                                Historical Timeline
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card border-0 bg-light">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold text-primary mb-3">Explore</h4>
+                    <a href="{{ '/browse.html' | relative_url }}" class="btn btn-outline-primary w-100 mb-2">
+                        <i class="bi bi-collection me-2"></i>Browse Collection
+                    </a>
+                    <a href="{{ '/map.html' | relative_url }}" class="btn btn-outline-primary w-100 mb-2">
+                        <i class="bi bi-geo-alt me-2"></i>View Map
+                    </a>
+                    <a href="{{ '/search.html' | relative_url }}" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-search me-2"></i>Search Archives
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .nav-pills .nav-link {
+        color: #5C2D91;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        transition: all 0.2s ease-in-out;
+    }
+    .nav-pills .nav-link:hover {
+        background-color: #EDE7F6;
+        color: #5C2D91;
+        border-color: #5C2D91;
+    }
+    .nav-pills .nav-link.active {
+        background-color: #5C2D91;
+        color: white;
+        border-color: #5C2D91;
+    }
+</style>
