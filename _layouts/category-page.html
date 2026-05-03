@@ -2,6 +2,7 @@
 # Category Page Layout
 # Displays filtered browse items with custom description
 layout: page
+custom-foot: js/browse-js.html
 ---
 
 <div class="container my-5">
@@ -76,19 +77,28 @@ layout: page
 <!-- Auto-filter on page load -->
 <script>
 // Set the filter based on page category
-var pageFilter = "{{ page.filter | default: '' }}";
-if (pageFilter) {
-    // Wait for page init, then apply filter
-    var checkItems = setInterval(function() {
-        if (typeof browsePageInit !== 'undefined' && typeof cb_items !== 'undefined') {
-            clearInterval(checkItems);
-            // Apply the category filter
-            setTimeout(function() {
-                document.getElementById('filterTextBox').value = pageFilter;
-                window.location.hash = encodeURIComponent(pageFilter);
-                filterItems(cb_items, pageFilter);
-            }, 100);
-        }
-    }, 100);
+// page.filter is plain string like "Group", "Badge", etc.
+var pageFilterValue = "{{ page.filter | default: '' }}";
+
+// Map page filter to field filter
+var fieldFilter = {};
+if (pageFilterValue) {
+    // Determine which field to filter on based on the page
+    // For category pages: Groups -> type:Group, Badges -> type:Badge, etc.
+    if (pageFilterValue === "Group" || pageFilterValue === "Badge" || pageFilterValue === "Document" || pageFilterValue === "Far & Wide") {
+        fieldFilter.type = pageFilterValue;
+    }
 }
+
+// Wait for page init, then apply filter
+defereCategoryFilter = setInterval(function() {
+    if (typeof browsePageInit !== 'undefined' && typeof cb_items !== 'undefined') {
+        clearInterval(defereCategoryFilter);
+        // Apply the category filter
+        setTimeout(function() {
+            currentFieldFilters = fieldFilter;
+            filterItems(cb_items, currentTextQuery, currentFieldFilters, currentDateRange);
+        }, 100);
+    }
+}, 100);
 </script>

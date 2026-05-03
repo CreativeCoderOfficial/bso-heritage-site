@@ -1,7 +1,7 @@
 {%- if site.data.theme.icons -%}{% assign icons = site.data.theme.icons %}{% else %}
 {% assign cb_icons = site.pages | where: "name","cb-icons.svg" | first %}
 {% assign icons = cb_icons.icons %}{%- endif -%}
-{%- assign fields = site.data.config-browse -%}
+{% assign fields = site.data.config-browse -%}
 <script>
 
 /* function to make each item card on page */
@@ -51,7 +51,7 @@ function makeCard(obj) {
     var btns = obj[{{ f.field | jsonify }}].split(";");
     for (var i = 0, len = btns.length; i < len; i++) {
       if(btns[i] != "") {
-        card += '<a class="btn btn-sm btn-secondary m-1 text-wrap" href="{{ page.url | relative_url }}#' + encodeURIComponent(btns[i].trim()) + '">' + btns[i].trim() + '</a>';
+        card += '<a class="btn btn-sm btn-secondary m-1 text-wrap" href="' + window.location.pathname + '#' + encodeURIComponent(btns[i].trim()) + '">' + btns[i].trim() + '</a>';
       }
     }
     {% else %}
@@ -63,7 +63,7 @@ function makeCard(obj) {
     card += '</p>';
     // media type
     if(obj.format != "") {
-      card += '<p class="card-text"><small><a class="btn btn-sm btn-outline-secondary" href="{{ page.url | relative_url }}#' + encodeURIComponent(obj.format) + '">' + 
+      card += '<p class="card-text"><small><a class="btn btn-sm btn-outline-secondary" href="' + window.location.pathname + '#' + encodeURIComponent(obj.format) + '">' + 
       obj.format.split("/").pop().replace("_", " ").toUpperCase() + ' <svg class="bi icon-sprite"><use xlink:href="{{ "/assets/lib/cb-icons.svg" | relative_url }}#';
       if(obj.format.includes('image')){
           card += 'icon-image';
@@ -89,30 +89,95 @@ function makeCard(obj) {
 }
 
 /* function to filter items to be displayed on browse */
-function filterItems(arr,q) {
+function filterItems(arr, textQuery, fieldFilters, dateRange) {
   // show loading icon
   loadingIcon.classList.remove("d-none");
-  // dont filter if no q 
-  if (q=="") { 
-    var filteredItems = arr; 
+  
+  // Build date range filter
+  var dateFrom = dateRange ? dateRange.from : null;
+  var dateTo = dateRange ? dateRange.to : null;
+  
+  // dont filter if no queries
+  if (!textQuery && !fieldFilters && !dateFrom && !dateTo) {
+    var filteredItems = arr;
   } else {
-    q = q.trim().toUpperCase(); 
     // filter items
     var filteredItems = [];
     for (var i = 0, len = arr.length; i < len; i++) {
-      // get browse fields from metadata
-      var val = "";
-      if(arr[i]["title"]) { val += arr[i]["title"] + " "; }
-      if(arr[i]["format"]) { val += arr[i]["format"] + " "; }
-      {% for f in fields  %}
-      if(arr[i]["{{ f.field }}"]) { val += arr[i]["{{ f.field }}"] + " "; }
-      {% endfor %}
-      // filter
-      if(val.toUpperCase().indexOf(q) != -1){
-        filteredItems.push(arr[i]);
+      var item = arr[i];
+      var matches = true;
+      
+      // Check text search (OR logic across all fields)
+      if (textQuery && textQuery.trim() !== "") {
+          var val = "";
+          if(item["title"]) { val += item["title"] + " "; }
+          if(item["format"]) { val += item["format"] + " "; }
+          {% for f in fields  %}
+          if(item["{{ f.field }}"]) { val += item["{{ f.field }}"] + " "; }
+          {% endfor %}
+          
+          if (val.toUpperCase().indexOf(textQuery.trim().toUpperCase()) === -1) {
+              matches = false;
+          }
+      }
+      
+      // Check field filters (AND logic - all must match)
+      if (matches && fieldFilters) {
+          for (var fieldName in fieldFilters) {
+              var expectedValue = fieldFilters[fieldName];
+              if (item[fieldName] !== expectedValue) {
+                  matches = false;
+                  break;
+              }
+          }
+      }
+      
+      // Check date range filter
+      if (matches && (dateFrom || dateTo)) {
+          var dateFields = ['date', 'date_founded', 'date_closed'];
+          var hasValidDate = false;
+          var itemMatchesDate = false;
+          
+          for (var k = 0; k < dateFields.length; k++) {
+              var dateField = dateFields[k];
+              if (item[dateField]) {
+                  hasValidDate = true;
+                  var itemDate = new Date(item[dateField]);
+                  
+                  // Check from date
+                  if (dateFrom && itemDate < dateFrom) {
+                      continue;
+                  }
+                  
+                  // Check to date  
+                  if (dateTo) {
+                      var toDatePlusOne = new Date(dateTo);
+                      toDatePlusOne.setDate(toDatePlusOne.getDate() + 1);
+                      if (itemDate > toDatePlusOne) {
+                          continue;
+                      }
+                  }
+                  
+                  // If we get here, this date field passes
+                  itemMatchesDate = true;
+                  break;
+              }
+          }
+          
+          // If no valid date field found, exclude the item
+          // OR if valid date fields exist but none matched the range
+          if (!hasValidDate || !itemMatchesDate) {
+              matches = false;
+          }
+      }
+      
+      // Add to results if matches all filters
+      if (matches) {
+        filteredItems.push(item);
       }
     }
   }
+  
   // add number 
   document.querySelector("#numberOf").innerHTML = filteredItems.length + " of " + arr.length + " items";
   
@@ -122,13 +187,13 @@ function filterItems(arr,q) {
     cards += makeCard(filteredItems[i]);
   }
   browseItemsDiv.innerHTML = cards;
-
+  
   // finish
-  if (q != "") {
+  if (textQuery && textQuery !== "") {
       filterTextBox.focus();
   }
   loadingIcon.classList.add("d-none");
-};
+}
 
 /* Fisher-Yates shuffle https://bost.ocks.org/mike/shuffle/ */
 function shuffle(array) {
@@ -152,27 +217,38 @@ var browseItemsDiv = document.querySelector("#browseItems");
 var query = "";
 var browse_items;
 
+/* Global filter state */
+var currentTextQuery = "";
+var currentFieldFilters = {};
+var currentDateRange = null;
+
 /* function to init browse after loading items */ 
 var browsePageInit = function (cb_items) {
   {% unless site.data.theme.browse-child-objects == true %}
   // filter compound objects
   var cb_items = cb_items.filter(item => !item.parentid);
   {% endunless %}
+  
+  // Store reference to items
+  browse_items = cb_items;
+  
   /* randomize items once at page load */
   shuffle(cb_items);
+  
   /* filter if hash in initial URL */
-  if(window.location.hash) {
+  if(window.location.hash) { 
       var hashValue = decodeURIComponent(location.hash.substr(1));
       if (hashValue != 'maincontent') { 
           query = hashValue;
-      } else {
+          currentTextQuery = hashValue;
+      } else { 
           query = "";
       }
       filterTextBox.value = query;
-      filterItems(cb_items,query);
+      filterItems(cb_items, currentTextQuery, currentFieldFilters, currentDateRange);
   } else {
       query = "";
-      filterItems(cb_items,query);
+      filterItems(cb_items, currentTextQuery, currentFieldFilters, currentDateRange);
   }
 }
 
@@ -181,14 +257,41 @@ includeFunctions.push(browsePageInit);
 
 /* filter form */
 function submitFilter() {
-    query = filterTextBox.value;
-    window.location.hash = encodeURIComponent(query);
+    currentTextQuery = filterTextBox.value;
+    window.location.hash = encodeURIComponent(currentTextQuery);
+    filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange);
 }
+
 /* reset filters */ 
 function resetFilter() {
-    query = "";
-    filterTextBox.value = query;
-    window.location.hash = encodeURIComponent(query);
+    // Clear text query
+    currentTextQuery = "";
+    filterTextBox.value = "";
+    
+    // Clear field filters
+    currentFieldFilters = {};
+    
+    // Reset dropdowns
+    var typeFilter = document.getElementById('typeFilter');
+    if (typeFilter) typeFilter.value = "";
+    
+    var countryFilter = document.getElementById('countryFilter');
+    if (countryFilter) countryFilter.value = "";
+    
+    var districtFilter = document.getElementById('districtFilter');
+    if (districtFilter) districtFilter.value = "";
+    
+    // Clear date range
+    currentDateRange = null;
+    var dateFrom = document.getElementById('dateFrom');
+    if (dateFrom) dateFrom.value = "";
+    
+    var dateTo = document.getElementById('dateTo');
+    if (dateTo) dateTo.value = "";
+    
+    // Clear hash and re-filter
+    window.location.hash = "";
+    filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange);
 }
 
 /* filter if hash changes */ 
@@ -196,12 +299,55 @@ window.addEventListener("hashchange", function() {
     // read hash
     var hashValue = decodeURIComponent(location.hash.substr(1));
     if (hashValue != 'maincontent') { 
-        query = hashValue;
-        filterTextBox.value = query;
-        // filter
-        filterItems(cb_items,query);
+        currentTextQuery = hashValue;
+        filterTextBox.value = hashValue;
+        // filter with current field filters
+        filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange);
     }
 });
+
+/* Apply all filters together */
+function applyAllFilters() {
+    // Get text search
+    currentTextQuery = filterTextBox ? filterTextBox.value : "";
+    
+    // Get field filter values (only if selected, not "All...")
+    currentFieldFilters = {};
+    
+    var typeFilter = document.getElementById('typeFilter');
+    if (typeFilter && typeFilter.value && typeFilter.value !== "") {
+        currentFieldFilters.type = typeFilter.value;
+    }
+    
+    var countryFilter = document.getElementById('countryFilter');
+    if (countryFilter && countryFilter.value && countryFilter.value !== "") {
+        currentFieldFilters.country = countryFilter.value;
+    }
+    
+    var districtFilter = document.getElementById('districtFilter');
+    if (districtFilter && districtFilter.value && districtFilter.value !== "") {
+        currentFieldFilters.district = districtFilter.value;
+    }
+    
+    // Get date range
+    var dateFromEl = document.getElementById('dateFrom');
+    var dateToEl = document.getElementById('dateTo');
+    
+    if (dateFromEl || dateToEl) {
+        var fromDate = dateFromEl && dateFromEl.value ? new Date(dateFromEl.value) : null;
+        var toDate = dateToEl && dateToEl.value ? new Date(dateToEl.value) : null;
+        
+        currentDateRange = {
+            from: fromDate,
+            to: toDate
+        };
+    } else {
+        currentDateRange = null;
+    }
+    
+    // Re-filter with all current filters
+    filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange);
+}
 
 /* item array sorting function */
 function sorting(json_object, key_to_sort_by) {
@@ -213,32 +359,30 @@ function sorting(json_object, key_to_sort_by) {
         return ((x==null) ? 1: (y==null) ? -1: (x < y) ? -1 : ((x > y) ? 1 : 0));
     }
     json_object.sort(sortByKey);
-};
+}
 
 /* add sort function on click of sort options */
 var sortFilter = document.querySelector("#sortFilter");
 var sortOptions = document.querySelectorAll(".browse-sort-item");
-sortOptions.forEach((button) => {
-  button.addEventListener("click", (event) => {
+sortOptions.forEach((button) => { 
+  button.addEventListener("click", (event) => { 
     // get the sort field
-    var field = button.dataset.filter;
-    var display_name = button.textContent;
-    // get current filter
-    var query = filterTextBox.value;
+    var field = button.dataset.filter; 
+    var display_name = button.textContent; 
     // switch active sort option
     sortOptions.forEach((option) => { option.classList.remove("active"); } );
     button.classList.add("active");
-    sortFilter.innerHTML = display_name;
+    sortFilter.innerHTML = display_name; 
     // send to sort and filter
-    if (field != 'random') {
-        sorting(cb_items, field);
-        filterItems(cb_items, query);
-    }
-    else {
-        shuffle(cb_items);
-        filterItems(cb_items, query);
-    }
-  });
+    if (field != 'random') { 
+        sorting(browse_items, field); 
+        filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange); 
+    } 
+    else { 
+        shuffle(browse_items); 
+        filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange); 
+    } 
+  }); 
 }); 
 
 </script>

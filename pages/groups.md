@@ -2,7 +2,7 @@
 title: Groups
 layout: category-page
 permalink: /groups.html
-filter: type:Group
+filter: Group
 description: Explore our network of BSO Scout Groups worldwide. From long-established units to newly formed sections, discover the communities that make up British Scouting Overseas.
 ---
 

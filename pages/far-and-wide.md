@@ -2,7 +2,7 @@
 title: Far & Wide
 layout: category-page
 permalink: /far-and-wide.html
-filter: type:Far & Wide
+filter: Far & Wide
 description: The Far & Wide magazine and newsletter collection. Stay connected with stories, updates, and features from BSO Groups around the world.
 ---
 

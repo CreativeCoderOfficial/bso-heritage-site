@@ -1,41 +1,189 @@
----
-# collection "Browse" page
-layout: page
-custom-foot: js/browse-js.html
----
-
-{{ content }}
-
-<div class="row mb-3 justify-content-center">
-    <div class="col-md-8 text-center">
-        <form role="search" id="browseFilter" onsubmit="submitFilter(); return false;">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control" id="filterTextBox" placeholder="Filter ... " aria-label="Search"> 
-                <button class="btn btn-success" type="submit" title="Filter items" id="filterButton" >Search</button>
-                <button class="btn btn-outline-primary filter" onclick="resetFilter(); return false;" data-filter="">Reset</button>
-            </div>
-        </form>
-        <div class="h2" id="numberOf"></div>
-    </div>
-    <div class="col-md-2">
-        <div class="dropdown">
-            <button class="btn btn-primary mt-1 dropdown-toggle" type="button" id="browseSortButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sort by <span id="sortFilter">Random</span>
-            </button>
-            <div class="dropdown-menu browse-sort-menu" aria-labelledby="browseSortButton">
-                <button class="dropdown-item browse-sort-item active" data-filter="random">Random</button>
-                <button class="dropdown-item browse-sort-item" data-filter="title">Title</button>
-                {% assign sort_options = site.data.config-browse | where_exp: 'i','i.sort_name != nil' %}
-                {% for o in sort_options %}
-                <button class="dropdown-item browse-sort-item" data-filter="{{ o.field | escape }}">{{ o.sort_name }}</button>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="loadingIcon" class="text-center">
-    <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
-</div>
-
-<div class="row" id="browseItems"></div>
+---
+# collection "Browse" page
+layout: page
+custom-foot: js/browse-js.html
+---
+
+{{ content }}
+
+<div class="container my-4">
+    <!-- Advanced Filters Row -->
+    <div class="row mb-4 g-3">
+        <!-- Type Filter -->
+        <div class="col-md-3">
+            <label for="typeFilter" class="form-label fw-bold"><i class="bi bi-tag me-1"></i>Type</label>
+            <select class="form-select" id="typeFilter">
+                <option value="">All Types</option>
+                <option value="Group">Groups</option>
+                <option value="Badge">Badges</option>
+                <option value="Document">Documents</option>
+                <option value="Far & Wide">Far & Wide</option>
+            </select>
+        </div>
+        
+        <!-- Country Filter (dynamically populated) -->
+        <div class="col-md-3">
+            <label for="countryFilter" class="form-label fw-bold"><i class="bi bi-geo-alt me-1"></i>Country</label>
+            <select class="form-select" id="countryFilter">
+                <option value="">All Countries</option>
+            </select>
+        </div>
+        
+        <!-- District Filter (dynamically populated) -->
+        <div class="col-md-3">
+            <label for="districtFilter" class="form-label fw-bold"><i class="bi bi-pin-map me-1"></i>District</label>
+            <select class="form-select" id="districtFilter">
+                <option value="">All Districts</option>
+            </select>
+        </div>
+        
+        <!-- Date Range Filters -->
+        <div class="col-md-3">
+            <label class="form-label fw-bold"><i class="bi bi-calendar-range me-1"></i>Date Range</label>
+            <div class="d-flex gap-2">
+                <div class="flex-grow-1">
+                    <input type="date" class="form-control form-control-sm" id="dateFrom" placeholder="From">
+                </div>
+                <div class="flex-grow-1">
+                    <input type="date" class="form-control form-control-sm" id="dateTo" placeholder="Until">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Original Filter/Sort Row -->
+    <div class="row mb-3 justify-content-center">
+        <div class="col-md-8 text-center">
+            <form role="search" id="browseFilter" onsubmit="submitFilter(); return false;">
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" id="filterTextBox" placeholder="Filter ... " aria-label="Search"> 
+                    <button class="btn btn-primary" type="submit" title="Filter items" id="filterButton">Search</button>
+                    <button class="btn btn-outline-primary filter" onclick="resetFilter(); return false;" data-filter="">Reset</button>
+                </div>
+            </form>
+            <div class="h2" id="numberOf"></div>
+        </div>
+        <div class="col-md-2">
+            <div class="dropdown">
+                <button class="btn btn-primary mt-1 dropdown-toggle" type="button" id="browseSortButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by <span id="sortFilter">Random</span>
+                </button>
+                <div class="dropdown-menu browse-sort-menu" aria-labelledby="browseSortButton">
+                    <button class="dropdown-item browse-sort-item active" data-filter="random">Random</button>
+                    <button class="dropdown-item browse-sort-item" data-filter="title">Title</button>
+                    {% assign sort_options = site.data.config-browse | where_exp: 'i','i.sort_name != nil' %}
+                    {% for o in sort_options %}
+                    <button class="dropdown-item browse-sort-item" data-filter="{{ o.field | escape }}">{{ o.sort_name }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingIcon" class="text-center">
+        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+    </div>
+
+    <div class="row" id="browseItems"></div>
+</div>
+
+<div class="container my-4">
+    <div class="alert alert-info">
+        <i class="bi bi-info-circle me-2"></i>
+        <strong>Tip:</strong> Use the filters above to narrow down results. Date filters search across <code>date</code>, <code>date_founded</code>, and <code>date_closed</code> fields.
+    </div>
+</div>
+
+<!-- Dynamically populate country and district dropdowns -->
+<script>
+// Wait for items to load, then populate dropdowns
+defereExecution = setInterval(function() {
+    if (typeof cb_items !== 'undefined' && cb_items.length > 0) {
+        clearInterval(defereExecution);
+        
+        // Get unique countries
+        var countries = new Set();
+        cb_items.forEach(function(item) {
+            if (item.country && item.country.trim() !== '') {
+                countries.add(item.country.trim());
+            }
+        });
+        
+        // Populate country dropdown
+        var countryFilter = document.getElementById('countryFilter');
+        if (countryFilter) {
+            // Keep the "All Countries" option
+            var existingOptions = Array.from(countryFilter.options);
+            countryFilter.innerHTML = '';
+            
+            // Add All Countries
+            var allOption = document.createElement('option');
+            allOption.value = '';
+            allOption.textContent = 'All Countries';
+            countryFilter.appendChild(allOption);
+            
+            // Add sorted countries
+            Array.from(countries).sort().forEach(function(country) {
+                var option = document.createElement('option');
+                option.value = country;
+                option.textContent = country;
+                countryFilter.appendChild(option);
+            });
+        }
+        
+        // Get unique districts
+        var districts = new Set();
+        cb_items.forEach(function(item) {
+            if (item.district && item.district.trim() !== '') {
+                districts.add(item.district.trim());
+            }
+        });
+        
+        // Populate district dropdown
+        var districtFilter = document.getElementById('districtFilter');
+        if (districtFilter) {
+            districtFilter.innerHTML = '';
+            
+            // Add All Districts
+            var allOption = document.createElement('option');
+            allOption.value = '';
+            allOption.textContent = 'All Districts';
+            districtFilter.appendChild(allOption);
+            
+            // Add sorted districts
+            Array.from(districts).sort().forEach(function(district) {
+                var option = document.createElement('option');
+                option.value = district;
+                option.textContent = district;
+                districtFilter.appendChild(option);
+            });
+        }
+        
+        // Re-attach event listeners (in case they were lost)
+        var typeFilter = document.getElementById('typeFilter');
+        if (typeFilter) {
+            typeFilter.addEventListener('change', applyAllFilters);
+        }
+        
+        var countryFilter = document.getElementById('countryFilter');
+        if (countryFilter) {
+            countryFilter.addEventListener('change', applyAllFilters);
+        }
+        
+        var districtFilter = document.getElementById('districtFilter');
+        if (districtFilter) {
+            districtFilter.addEventListener('change', applyAllFilters);
+        }
+        
+        var dateFrom = document.getElementById('dateFrom');
+        if (dateFrom) {
+            dateFrom.addEventListener('change', applyAllFilters);
+        }
+        
+        var dateTo = document.getElementById('dateTo');
+        if (dateTo) {
+            dateTo.addEventListener('change', applyAllFilters);
+        }
+    }
+}, 100);
+</script>
