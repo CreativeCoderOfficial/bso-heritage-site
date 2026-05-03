@@ -2,7 +2,7 @@
 
 A static digital archive for British Scouting Overseas, built on [CollectionBuilder-Sheets](https://github.com/CollectionBuilder/collectionbuilder-sheets) (CB-Sheets). The site loads collection metadata from a published Google Sheet CSV at runtime — no build-time database, no backend.
 
-**Live site:** https://CreativeCoderOfficial.github.io/bso-heritage-site-codespace
+**Live site:** https://CreativeCoderOfficial.github.io/bso-heritage-site (to be set up)
 
 ---
 
