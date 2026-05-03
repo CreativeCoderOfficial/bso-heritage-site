@@ -1,0 +1,94 @@
+---
+# Category Page Layout
+# Displays filtered browse items with custom description
+layout: page
+---
+
+<div class="container my-5">
+    <div class="row g-4">
+        <!-- Main Content: Description + Filtered Items -->
+        <div class="col-lg-12">
+            <!-- Category Header -->
+            <div class="category-header mb-4 p-4 bg-light rounded-3 border">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold text-primary mb-2">{{ page.title }}</h1>
+                        <p class="lead text-muted mb-0">{{ page.description }}</p>
+                    </div>
+                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                        <a href="{{ '/browse.html' | relative_url }}" class="btn btn-outline-primary">
+                            <i class="bi bi-grid me-2"></i>View All Items
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Browse Interface -->
+            <div class="browse-container">
+                <div class="row mb-3 justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <form role="search" id="browseFilter" onsubmit="submitFilter(); return false;">
+                            <div class="input-group input-group-lg">
+                                <input type="text" class="form-control" id="filterTextBox" 
+                                       placeholder="Filter {{ page.title }}..." 
+                                       aria-label="Search"> 
+                                <button class="btn btn-primary" type="submit" title="Filter items" id="filterButton">
+                                    <i class="bi bi-search"></i> Search
+                                </button>
+                                <button class="btn btn-outline-primary filter" 
+                                        onclick="resetFilter(); return false;" 
+                                        data-filter="">
+                                    <i class="bi bi-arrow-clockwise"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+                        <div class="h2" id="numberOf"></div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="dropdown">
+                            <button class="btn btn-primary mt-1 dropdown-toggle" type="button" 
+                                    id="browseSortButton" data-bs-toggle="dropdown" 
+                                    aria-haspopup="true" aria-expanded="false">
+                                Sort by <span id="sortFilter">Random</span>
+                            </button>
+                            <div class="dropdown-menu browse-sort-menu" aria-labelledby="browseSortButton">
+                                <button class="dropdown-item browse-sort-item active" data-filter="random">Random</button>
+                                <button class="dropdown-item browse-sort-item" data-filter="title">Title</button>
+                                {% assign sort_options = site.data.config-browse | where_exp: 'i','i.sort_name != nil' %} 
+                                {% for o in sort_options %}
+                                <button class="dropdown-item browse-sort-item" data-filter="{{ o.field | escape }}">{{ o.sort_name }}</button>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="loadingIcon" class="text-center">
+                    <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+                </div>
+
+                <div class="row" id="browseItems"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Auto-filter on page load -->
+<script>
+// Set the filter based on page category
+var pageFilter = "{{ page.filter | default: '' }}";
+if (pageFilter) {
+    // Wait for page init, then apply filter
+    var checkItems = setInterval(function() {
+        if (typeof browsePageInit !== 'undefined' && typeof cb_items !== 'undefined') {
+            clearInterval(checkItems);
+            // Apply the category filter
+            setTimeout(function() {
+                document.getElementById('filterTextBox').value = pageFilter;
+                window.location.hash = encodeURIComponent(pageFilter);
+                filterItems(cb_items, pageFilter);
+            }, 100);
+        }
+    }, 100);
+}
+</script>

@@ -1,15 +1,19 @@
 field,display_name,browse_link,external_link
-title,Title,
-creator,Creator,
-date,Date Created,
-description,Description,
-subject,Subjects,true
-location,Location
-latitude,Latitude
-longitude,Longitude
-source,Source
-identifier,Source Identifier,,
-type,Type,
-format,Format,
-rights,Rights,
-rightsstatement,Rights Statement,,true
+title,Title,,
+date,Date,,
+type,Type,,
+organisation,Organisation,,
+district,District,,
+country,Country,,
+group_number,Group Number,,
+badge_type,Badge Type,,
+badge_tier,Badge Tier,,
+document_type,Document Type,,
+description,Description,,
+subject,Subjects,true,,
+era,Era,,
+date_founded,Founded,,
+date_closed,Closed,,
+location,Location,,
+scarf_colour,Scarf Colour,,
+rights,Rights,,

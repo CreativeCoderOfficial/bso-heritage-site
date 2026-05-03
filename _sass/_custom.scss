@@ -1,4 +1,319 @@
-/* 
-    Put your custom SCSS here! 
-    This allows you to override any CollectionBuilder or Bootstrap CSS without modifying the base theme files directly.
+/*
+   BSO Heritage Custom Styles
+   Homepage layout and category pages styling
 */
+
+/* ============================================
+   SPACING SYSTEM
+   ============================================ */
+:root {
+    --bs-spacer-xs: 0.5rem;
+    --bs-spacer-sm: 1rem;
+    --bs-spacer-md: 1.5rem;
+    --bs-spacer-lg: 3rem;
+    --bs-spacer-xl: 4rem;
+}
+
+/* ============================================
+   COLOR ROLES
+   ============================================ */
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+    background-color: #fff;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+}
+
+.hero .badge {
+    font-size: 0.9rem;
+    border-radius: 50px;
+}
+
+.hero .display-4 {
+    font-size: 3rem;
+}
+
+@media (min-width: 992px) {
+    .hero .display-4 {
+        font-size: 3.5rem;
+    }
+}
+
+.hero .lead {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================
+   STATS SECTION
+   ============================================ */
+.stats {
+    background-color: #f8f9fa;
+}
+
+.stat-card {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 12px !important;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon,
+.stat-number {
+    color: #5C2D91;
+}
+
+.stat-label {
+    color: #6c757d;
+}
+
+/* ============================================
+   FEATURES SECTION
+   ============================================ */
+.features {
+    background-color: #fff;
+}
+
+.feature-card {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 12px !important;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    color: #5C2D91;
+}
+
+.feature-card .btn-primary {
+    border-radius: 50px;
+}
+
+/* Badge colors */
+.bg-primary {
+    background-color: #5C2D91 !important;
+}
+
+.bg-success {
+    background-color: #198754 !important;
+}
+
+.bg-info {
+    background-color: #0dcaf0 !important;
+}
+
+/* ============================================
+   FOOTER STYLING
+   ============================================ */
+.bs-footer {
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+.bs-footer .text-muted {
+    color: #6c757d !important;
+}
+
+.bs-footer a:hover {
+    color: #5C2D91 !important;
+}
+
+.bs-footer h4 {
+    color: #5C2D91;
+    font-size: 1rem;
+}
+
+.bs-footer .bi {
+    color: #6c757d;
+    transition: color 0.2s ease-in-out;
+}
+
+.bs-footer a:hover .bi,
+.bs-footer a:hover i {
+    color: #5C2D91 !important;
+}
+
+.bs-footer hr {
+    opacity: 0.2;
+}
+
+.footer-logo {
+    max-height: 40px;
+}
+
+.footer-social a:hover .bi {
+    color: #5C2D91 !important;
+}
+
+/* ============================================
+   HERITAGE PAGES STYLING
+   ============================================ */
+.alert-light.border-start.border-4.border-primary {
+    border-left-color: #5C2D91 !important;
+}
+
+.alert-light .text-primary {
+    color: #5C2D91 !important;
+}
+
+.card.border-primary {
+    border: 1px solid #5C2D91 !important;
+    border-radius: 12px !important;
+}
+
+.card.border-primary .card-body {
+    padding: 1.5rem;
+}
+
+.card.border-primary .card-title {
+    color: #5C2D91;
+}
+
+.card.border-primary .btn-primary {
+    border-radius: 8px;
+}
+
+.card.bg-light {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 12px !important;
+}
+
+.card.bg-light .card-body {
+    padding: 1.5rem;
+}
+
+.card.bg-light .card-title.text-primary {
+    color: #5C2D91;
+}
+
+.card.bg-light .btn-primary {
+    border-radius: 8px;
+}
+
+.badge.bg-primary {
+    background-color: #5C2D91 !important;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Heritage sidebar */
+.nav-pills .nav-link {
+    color: #5C2D91;
+    border: 1px solid #EDE7F6;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    transition: all 0.2s ease-in-out;
+    text-align: left;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #EDE7F6;
+    color: #5C2D91;
+    border-color: #5C2D91;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #5C2D91;
+    color: white;
+    border-color: #5C2D91;
+}
+
+/* ============================================
+   CATEGORY PAGES STYLING
+   ============================================ */
+.category-header {
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+}
+
+.category-header h1 {
+    color: #5C2D91;
+}
+
+.category-header .lead {
+    color: #6c757d;
+}
+
+.browse-container .input-group {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.browse-container .btn-primary,
+.browse-container .btn-outline-primary {
+    border-radius: 8px;
+}
+
+.browse-container .btn-outline-primary {
+    border-color: #5C2D91;
+    color: #5C2D91;
+}
+
+.browse-container .btn-outline-primary:hover {
+    background-color: #5C2D91;
+    color: white;
+    border-color: #5C2D91;
+}
+
+.browse-container .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* ============================================
+   SECONDARY NAVIGATION
+   ============================================ */
+.secondary-nav {
+    background-color: #fff;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 0;
+}
+
+.secondary-nav .nav-item {
+    margin: 0 0.5rem;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+@media (max-width: 767.98px) {
+    .hero .display-4 {
+        font-size: 2rem;
+    }
+    
+    .stat-card,
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+    
+    .bs-footer .text-md-start {
+        text-align: center !important;
+    }
+    .bs-footer .text-md-end {
+        text-align: center !important;
+    }
+    .bs-footer .justify-content-md-start {
+        justify-content: center !important;
+    }
+    .bs-footer .justify-content-md-end {
+        justify-content: center !important;
+    }
+}
