@@ -2,7 +2,7 @@
 title: Documents
 layout: category-page
 permalink: /documents.html
-filter: type:Document
+filter: Document
 description: Access historical documents, newsletters, reports, and archives from over a century of British Scouting Overseas. Preserving the paper trail of scouting history.
 ---
 

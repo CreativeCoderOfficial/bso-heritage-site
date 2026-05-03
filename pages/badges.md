@@ -2,7 +2,7 @@
 title: Badges
 layout: category-page
 permalink: /badges.html
-filter: type:Badge
+filter: Badge
 description: Discover the badges earned by BSO Scouts throughout history. From early achievement awards to modern programme badges, explore the symbols of scouting accomplishment.
 ---
 

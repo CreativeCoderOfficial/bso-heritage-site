@@ -89,42 +89,16 @@ function makeCard(obj) {
 }
 
 /* function to filter items to be displayed on browse */
-function filterItems(arr, q) {
+function filterItems(arr, textQuery, fieldFilters, dateRange) {
   // show loading icon
   loadingIcon.classList.remove("d-none");
   
-  // Build combined filter query from all filter inputs
-  var filterQueries = [];
-  
-  // Get text search query
-  if (q && q.trim() != "") {
-      filterQueries.push(q.trim().toUpperCase());
-  }
-  
-  // Get dropdown filter values
-  var typeFilter = document.getElementById('typeFilter');
-  if (typeFilter && typeFilter.value) {
-      filterQueries.push(typeFilter.value.toUpperCase());
-  }
-  
-  var countryFilter = document.getElementById('countryFilter');
-  if (countryFilter && countryFilter.value) {
-      filterQueries.push(countryFilter.value.toUpperCase());
-  }
-  
-  var districtFilter = document.getElementById('districtFilter');
-  if (districtFilter && districtFilter.value) {
-      filterQueries.push(districtFilter.value.toUpperCase());
-  }
-  
-  // Get date range filter values
-  var dateFrom = document.getElementById('dateFrom');
-  var dateTo = document.getElementById('dateTo');
-  var dateFromVal = dateFrom ? dateFrom.value : '';
-  var dateToVal = dateTo ? dateTo.value : '';
+  // Build date range filter
+  var dateFrom = dateRange ? dateRange.from : null;
+  var dateTo = dateRange ? dateRange.to : null;
   
   // dont filter if no queries
-  if (filterQueries.length === 0 && !dateFromVal && !dateToVal) {
+  if (!textQuery && !fieldFilters && !dateFrom && !dateTo) {
     var filteredItems = arr;
   } else {
     // filter items
@@ -133,8 +107,8 @@ function filterItems(arr, q) {
       var item = arr[i];
       var matches = true;
       
-      // Check text/dropdown filters
-      if (filterQueries.length > 0) {
+      // Check text search (OR logic across all fields)
+      if (textQuery && textQuery.trim() !== "") {
           var val = "";
           if(item["title"]) { val += item["title"] + " "; }
           if(item["format"]) { val += item["format"] + " "; }
@@ -142,9 +116,16 @@ function filterItems(arr, q) {
           if(item["{{ f.field }}"]) { val += item["{{ f.field }}"] + " "; }
           {% endfor %}
           
-          // Check all filter queries
-          for (var j = 0; j < filterQueries.length; j++) {
-              if (val.toUpperCase().indexOf(filterQueries[j]) === -1) {
+          if (val.toUpperCase().indexOf(textQuery.trim().toUpperCase()) === -1) {
+              matches = false;
+          }
+      }
+      
+      // Check field filters (AND logic - all must match)
+      if (matches && fieldFilters) {
+          for (var fieldName in fieldFilters) {
+              var expectedValue = fieldFilters[fieldName];
+              if (item[fieldName] !== expectedValue) {
                   matches = false;
                   break;
               }
@@ -152,44 +133,40 @@ function filterItems(arr, q) {
       }
       
       // Check date range filter
-      if (matches && (dateFromVal || dateToVal)) {
-          // Get all possible date fields
+      if (matches && (dateFrom || dateTo)) {
           var dateFields = ['date', 'date_founded', 'date_closed'];
           var hasValidDate = false;
+          var itemMatchesDate = false;
           
           for (var k = 0; k < dateFields.length; k++) {
               var dateField = dateFields[k];
               if (item[dateField]) {
+                  hasValidDate = true;
                   var itemDate = new Date(item[dateField]);
                   
                   // Check from date
-                  if (dateFromVal) {
-                      var fromDate = new Date(dateFromVal);
-                      if (itemDate < fromDate) {
-                          matches = false;
-                          break;
+                  if (dateFrom && itemDate < dateFrom) {
+                      continue;
+                  }
+                  
+                  // Check to date  
+                  if (dateTo) {
+                      var toDatePlusOne = new Date(dateTo);
+                      toDatePlusOne.setDate(toDatePlusOne.getDate() + 1);
+                      if (itemDate > toDatePlusOne) {
+                          continue;
                       }
                   }
                   
-                  // Check to date
-                  if (matches && dateToVal) {
-                      var toDate = new Date(dateToVal);
-                      // Add one day to include the end date
-                      toDate.setDate(toDate.getDate() + 1);
-                      if (itemDate > toDate) {
-                          matches = false;
-                          break;
-                      }
-                  }
-                  
-                  // If we found a valid date field, we're good
-                  if (!matches) break;
-                  hasValidDate = true;
+                  // If we get here, this date field passes
+                  itemMatchesDate = true;
+                  break;
               }
           }
           
           // If no valid date field found, exclude the item
-          if (!hasValidDate && (dateFromVal || dateToVal)) {
+          // OR if valid date fields exist but none matched the range
+          if (!hasValidDate || !itemMatchesDate) {
               matches = false;
           }
       }
@@ -212,7 +189,7 @@ function filterItems(arr, q) {
   browseItemsDiv.innerHTML = cards;
   
   // finish
-  if (q != "") {
+  if (textQuery && textQuery !== "") {
       filterTextBox.focus();
   }
   loadingIcon.classList.add("d-none");
@@ -240,27 +217,38 @@ var browseItemsDiv = document.querySelector("#browseItems");
 var query = "";
 var browse_items;
 
+/* Global filter state */
+var currentTextQuery = "";
+var currentFieldFilters = {};
+var currentDateRange = null;
+
 /* function to init browse after loading items */ 
 var browsePageInit = function (cb_items) {
   {% unless site.data.theme.browse-child-objects == true %}
   // filter compound objects
   var cb_items = cb_items.filter(item => !item.parentid);
   {% endunless %}
+  
+  // Store reference to items
+  browse_items = cb_items;
+  
   /* randomize items once at page load */
   shuffle(cb_items);
+  
   /* filter if hash in initial URL */
   if(window.location.hash) { 
       var hashValue = decodeURIComponent(location.hash.substr(1));
       if (hashValue != 'maincontent') { 
           query = hashValue;
+          currentTextQuery = hashValue;
       } else { 
           query = "";
       }
       filterTextBox.value = query;
-      filterItems(cb_items,query);
+      filterItems(cb_items, currentTextQuery, currentFieldFilters, currentDateRange);
   } else {
       query = "";
-      filterItems(cb_items,query);
+      filterItems(cb_items, currentTextQuery, currentFieldFilters, currentDateRange);
   }
 }
 
@@ -269,16 +257,21 @@ includeFunctions.push(browsePageInit);
 
 /* filter form */
 function submitFilter() {
-    query = filterTextBox.value;
-    window.location.hash = encodeURIComponent(query);
+    currentTextQuery = filterTextBox.value;
+    window.location.hash = encodeURIComponent(currentTextQuery);
+    filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange);
 }
 
 /* reset filters */ 
 function resetFilter() {
-    query = "";
-    filterTextBox.value = query;
+    // Clear text query
+    currentTextQuery = "";
+    filterTextBox.value = "";
     
-    // Reset all filter controls
+    // Clear field filters
+    currentFieldFilters = {};
+    
+    // Reset dropdowns
     var typeFilter = document.getElementById('typeFilter');
     if (typeFilter) typeFilter.value = "";
     
@@ -288,13 +281,17 @@ function resetFilter() {
     var districtFilter = document.getElementById('districtFilter');
     if (districtFilter) districtFilter.value = "";
     
+    // Clear date range
+    currentDateRange = null;
     var dateFrom = document.getElementById('dateFrom');
     if (dateFrom) dateFrom.value = "";
     
     var dateTo = document.getElementById('dateTo');
     if (dateTo) dateTo.value = "";
     
-    window.location.hash = encodeURIComponent(query);
+    // Clear hash and re-filter
+    window.location.hash = "";
+    filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange);
 }
 
 /* filter if hash changes */ 
@@ -302,87 +299,54 @@ window.addEventListener("hashchange", function() {
     // read hash
     var hashValue = decodeURIComponent(location.hash.substr(1));
     if (hashValue != 'maincontent') { 
-        query = hashValue;
-        filterTextBox.value = query;
-        // filter
-        filterItems(cb_items,query);
-    }
-});
-
-/* add event listeners for new filter controls */
-document.addEventListener('DOMContentLoaded', function() {
-    // Type filter
-    var typeFilter = document.getElementById('typeFilter');
-    if (typeFilter) {
-        typeFilter.addEventListener('change', function() {
-            applyAllFilters();
-        });
-    }
-    
-    // Country filter
-    var countryFilter = document.getElementById('countryFilter');
-    if (countryFilter) {
-        countryFilter.addEventListener('change', function() {
-            applyAllFilters();
-        });
-    }
-    
-    // District filter
-    var districtFilter = document.getElementById('districtFilter');
-    if (districtFilter) {
-        districtFilter.addEventListener('change', function() {
-            applyAllFilters();
-        });
-    }
-    
-    // Date filters
-    var dateFrom = document.getElementById('dateFrom');
-    if (dateFrom) {
-        dateFrom.addEventListener('change', function() {
-            applyAllFilters();
-        });
-    }
-    
-    var dateTo = document.getElementById('dateTo');
-    if (dateTo) {
-        dateTo.addEventListener('change', function() {
-            applyAllFilters();
-        });
+        currentTextQuery = hashValue;
+        filterTextBox.value = hashValue;
+        // filter with current field filters
+        filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange);
     }
 });
 
 /* Apply all filters together */
 function applyAllFilters() {
-    var combinedQuery = '';
-    
     // Get text search
-    var textQuery = filterTextBox ? filterTextBox.value : '';
+    currentTextQuery = filterTextBox ? filterTextBox.value : "";
     
-    // Get dropdown values
+    // Get field filter values (only if selected, not "All...")
+    currentFieldFilters = {};
+    
     var typeFilter = document.getElementById('typeFilter');
-    var countryFilter = document.getElementById('countryFilter');
-    var districtFilter = document.getElementById('districtFilter');
-    
-    var typeVal = typeFilter ? typeFilter.value : '';
-    var countryVal = countryFilter ? countryFilter.value : '';
-    var districtVal = districtFilter ? districtFilter.value : '';
-    
-    // Build combined query for hash
-    var parts = [];
-    if (textQuery) parts.push(textQuery);
-    if (typeVal) parts.push(typeVal);
-    if (countryVal) parts.push(countryVal);
-    if (districtVal) parts.push(districtVal);
-    
-    combinedQuery = parts.join(' ');
-    
-    // Set hash and trigger filter
-    window.location.hash = encodeURIComponent(combinedQuery);
-    
-    // Also trigger the filter directly since hashchange might not fire
-    if (typeof cb_items !== 'undefined') {
-        filterItems(cb_items, combinedQuery);
+    if (typeFilter && typeFilter.value && typeFilter.value !== "") {
+        currentFieldFilters.type = typeFilter.value;
     }
+    
+    var countryFilter = document.getElementById('countryFilter');
+    if (countryFilter && countryFilter.value && countryFilter.value !== "") {
+        currentFieldFilters.country = countryFilter.value;
+    }
+    
+    var districtFilter = document.getElementById('districtFilter');
+    if (districtFilter && districtFilter.value && districtFilter.value !== "") {
+        currentFieldFilters.district = districtFilter.value;
+    }
+    
+    // Get date range
+    var dateFromEl = document.getElementById('dateFrom');
+    var dateToEl = document.getElementById('dateTo');
+    
+    if (dateFromEl || dateToEl) {
+        var fromDate = dateFromEl && dateFromEl.value ? new Date(dateFromEl.value) : null;
+        var toDate = dateToEl && dateToEl.value ? new Date(dateToEl.value) : null;
+        
+        currentDateRange = {
+            from: fromDate,
+            to: toDate
+        };
+    } else {
+        currentDateRange = null;
+    }
+    
+    // Re-filter with all current filters
+    filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange);
 }
 
 /* item array sorting function */
@@ -405,36 +369,18 @@ sortOptions.forEach((button) => {
     // get the sort field
     var field = button.dataset.filter; 
     var display_name = button.textContent; 
-    // get current filter from all sources
-    var combinedQuery = '';
-    var textQuery = filterTextBox ? filterTextBox.value : '';
-    var typeFilter = document.getElementById('typeFilter');
-    var countryFilter = document.getElementById('countryFilter');
-    var districtFilter = document.getElementById('districtFilter');
-    
-    var typeVal = typeFilter ? typeFilter.value : '';
-    var countryVal = countryFilter ? countryFilter.value : '';
-    var districtVal = districtFilter ? districtFilter.value : '';
-    
-    var parts = [];
-    if (textQuery) parts.push(textQuery);
-    if (typeVal) parts.push(typeVal);
-    if (countryVal) parts.push(countryVal);
-    if (districtVal) parts.push(districtVal);
-    combinedQuery = parts.join(' ');
-    
     // switch active sort option
     sortOptions.forEach((option) => { option.classList.remove("active"); } );
     button.classList.add("active");
     sortFilter.innerHTML = display_name; 
     // send to sort and filter
     if (field != 'random') { 
-        sorting(cb_items, field); 
-        filterItems(cb_items, combinedQuery); 
+        sorting(browse_items, field); 
+        filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange); 
     } 
     else { 
-        shuffle(cb_items); 
-        filterItems(cb_items, combinedQuery); 
+        shuffle(browse_items); 
+        filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange); 
     } 
   }); 
 }); 

@@ -14,37 +14,26 @@ custom-foot: js/browse-js.html
             <label for="typeFilter" class="form-label fw-bold"><i class="bi bi-tag me-1"></i>Type</label>
             <select class="form-select" id="typeFilter">
                 <option value="">All Types</option>
-                <option value="type:Group">Groups</option>
-                <option value="type:Badge">Badges</option>
-                <option value="type:Document">Documents</option>
-                <option value="type:Far & Wide">Far & Wide</option>
+                <option value="Group">Groups</option>
+                <option value="Badge">Badges</option>
+                <option value="Document">Documents</option>
+                <option value="Far & Wide">Far & Wide</option>
             </select>
         </div>
         
-        <!-- Country Filter -->
+        <!-- Country Filter (dynamically populated) -->
         <div class="col-md-3">
             <label for="countryFilter" class="form-label fw-bold"><i class="bi bi-geo-alt me-1"></i>Country</label>
             <select class="form-select" id="countryFilter">
                 <option value="">All Countries</option>
-                <option value="country:Germany">Germany</option>
-                <option value="country:Netherlands">Netherlands</option>
-                <option value="country:Belgium">Belgium</option>
-                <option value="country:France">France</option>
-                <option value="country:Spain">Spain</option>
-                <option value="country:Italy">Italy</option>
             </select>
         </div>
         
-        <!-- District Filter -->
+        <!-- District Filter (dynamically populated) -->
         <div class="col-md-3">
             <label for="districtFilter" class="form-label fw-bold"><i class="bi bi-pin-map me-1"></i>District</label>
             <select class="form-select" id="districtFilter">
                 <option value="">All Districts</option>
-                <option value="district:Europe">Europe</option>
-                <option value="district:Middle East">Middle East</option>
-                <option value="district:Asia Pacific">Asia Pacific</option>
-                <option value="district:Africa">Africa</option>
-                <option value="district:Americas">Americas</option>
             </select>
         </div>
         
@@ -104,3 +93,97 @@ custom-foot: js/browse-js.html
         <strong>Tip:</strong> Use the filters above to narrow down results. Date filters search across <code>date</code>, <code>date_founded</code>, and <code>date_closed</code> fields.
     </div>
 </div>
+
+<!-- Dynamically populate country and district dropdowns -->
+<script>
+// Wait for items to load, then populate dropdowns
+defereExecution = setInterval(function() {
+    if (typeof cb_items !== 'undefined' && cb_items.length > 0) {
+        clearInterval(defereExecution);
+        
+        // Get unique countries
+        var countries = new Set();
+        cb_items.forEach(function(item) {
+            if (item.country && item.country.trim() !== '') {
+                countries.add(item.country.trim());
+            }
+        });
+        
+        // Populate country dropdown
+        var countryFilter = document.getElementById('countryFilter');
+        if (countryFilter) {
+            // Keep the "All Countries" option
+            var existingOptions = Array.from(countryFilter.options);
+            countryFilter.innerHTML = '';
+            
+            // Add All Countries
+            var allOption = document.createElement('option');
+            allOption.value = '';
+            allOption.textContent = 'All Countries';
+            countryFilter.appendChild(allOption);
+            
+            // Add sorted countries
+            Array.from(countries).sort().forEach(function(country) {
+                var option = document.createElement('option');
+                option.value = country;
+                option.textContent = country;
+                countryFilter.appendChild(option);
+            });
+        }
+        
+        // Get unique districts
+        var districts = new Set();
+        cb_items.forEach(function(item) {
+            if (item.district && item.district.trim() !== '') {
+                districts.add(item.district.trim());
+            }
+        });
+        
+        // Populate district dropdown
+        var districtFilter = document.getElementById('districtFilter');
+        if (districtFilter) {
+            districtFilter.innerHTML = '';
+            
+            // Add All Districts
+            var allOption = document.createElement('option');
+            allOption.value = '';
+            allOption.textContent = 'All Districts';
+            districtFilter.appendChild(allOption);
+            
+            // Add sorted districts
+            Array.from(districts).sort().forEach(function(district) {
+                var option = document.createElement('option');
+                option.value = district;
+                option.textContent = district;
+                districtFilter.appendChild(option);
+            });
+        }
+        
+        // Re-attach event listeners (in case they were lost)
+        var typeFilter = document.getElementById('typeFilter');
+        if (typeFilter) {
+            typeFilter.addEventListener('change', applyAllFilters);
+        }
+        
+        var countryFilter = document.getElementById('countryFilter');
+        if (countryFilter) {
+            countryFilter.addEventListener('change', applyAllFilters);
+        }
+        
+        var districtFilter = document.getElementById('districtFilter');
+        if (districtFilter) {
+            districtFilter.addEventListener('change', applyAllFilters);
+        }
+        
+        var dateFrom = document.getElementById('dateFrom');
+        if (dateFrom) {
+            dateFrom.addEventListener('change', applyAllFilters);
+        }
+        
+        var dateTo = document.getElementById('dateTo');
+        if (dateTo) {
+            dateTo.addEventListener('change', applyAllFilters);
+        }
+    }
+}, 100);
+</script>
