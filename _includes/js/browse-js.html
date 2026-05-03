@@ -1,7 +1,7 @@
 {%- if site.data.theme.icons -%}{% assign icons = site.data.theme.icons %}{% else %}
 {% assign cb_icons = site.pages | where: "name","cb-icons.svg" | first %}
 {% assign icons = cb_icons.icons %}{%- endif -%}
-{%- assign fields = site.data.config-browse -%}
+{% assign fields = site.data.config-browse -%}
 <script>
 
 /* function to make each item card on page */
@@ -51,7 +51,7 @@ function makeCard(obj) {
     var btns = obj[{{ f.field | jsonify }}].split(";");
     for (var i = 0, len = btns.length; i < len; i++) {
       if(btns[i] != "") {
-        card += '<a class="btn btn-sm btn-secondary m-1 text-wrap" href="{{ page.url | relative_url }}#' + encodeURIComponent(btns[i].trim()) + '">' + btns[i].trim() + '</a>';
+        card += '<a class="btn btn-sm btn-secondary m-1 text-wrap" href="' + window.location.pathname + '#' + encodeURIComponent(btns[i].trim()) + '">' + btns[i].trim() + '</a>';
       }
     }
     {% else %}
@@ -63,7 +63,7 @@ function makeCard(obj) {
     card += '</p>';
     // media type
     if(obj.format != "") {
-      card += '<p class="card-text"><small><a class="btn btn-sm btn-outline-secondary" href="{{ page.url | relative_url }}#' + encodeURIComponent(obj.format) + '">' + 
+      card += '<p class="card-text"><small><a class="btn btn-sm btn-outline-secondary" href="' + window.location.pathname + '#' + encodeURIComponent(obj.format) + '">' + 
       obj.format.split("/").pop().replace("_", " ").toUpperCase() + ' <svg class="bi icon-sprite"><use xlink:href="{{ "/assets/lib/cb-icons.svg" | relative_url }}#';
       if(obj.format.includes('image')){
           card += 'icon-image';
@@ -89,30 +89,118 @@ function makeCard(obj) {
 }
 
 /* function to filter items to be displayed on browse */
-function filterItems(arr,q) {
+function filterItems(arr, q) {
   // show loading icon
   loadingIcon.classList.remove("d-none");
-  // dont filter if no q 
-  if (q=="") { 
-    var filteredItems = arr; 
+  
+  // Build combined filter query from all filter inputs
+  var filterQueries = [];
+  
+  // Get text search query
+  if (q && q.trim() != "") {
+      filterQueries.push(q.trim().toUpperCase());
+  }
+  
+  // Get dropdown filter values
+  var typeFilter = document.getElementById('typeFilter');
+  if (typeFilter && typeFilter.value) {
+      filterQueries.push(typeFilter.value.toUpperCase());
+  }
+  
+  var countryFilter = document.getElementById('countryFilter');
+  if (countryFilter && countryFilter.value) {
+      filterQueries.push(countryFilter.value.toUpperCase());
+  }
+  
+  var districtFilter = document.getElementById('districtFilter');
+  if (districtFilter && districtFilter.value) {
+      filterQueries.push(districtFilter.value.toUpperCase());
+  }
+  
+  // Get date range filter values
+  var dateFrom = document.getElementById('dateFrom');
+  var dateTo = document.getElementById('dateTo');
+  var dateFromVal = dateFrom ? dateFrom.value : '';
+  var dateToVal = dateTo ? dateTo.value : '';
+  
+  // dont filter if no queries
+  if (filterQueries.length === 0 && !dateFromVal && !dateToVal) {
+    var filteredItems = arr;
   } else {
-    q = q.trim().toUpperCase(); 
     // filter items
     var filteredItems = [];
     for (var i = 0, len = arr.length; i < len; i++) {
-      // get browse fields from metadata
-      var val = "";
-      if(arr[i]["title"]) { val += arr[i]["title"] + " "; }
-      if(arr[i]["format"]) { val += arr[i]["format"] + " "; }
-      {% for f in fields  %}
-      if(arr[i]["{{ f.field }}"]) { val += arr[i]["{{ f.field }}"] + " "; }
-      {% endfor %}
-      // filter
-      if(val.toUpperCase().indexOf(q) != -1){
-        filteredItems.push(arr[i]);
+      var item = arr[i];
+      var matches = true;
+      
+      // Check text/dropdown filters
+      if (filterQueries.length > 0) {
+          var val = "";
+          if(item["title"]) { val += item["title"] + " "; }
+          if(item["format"]) { val += item["format"] + " "; }
+          {% for f in fields  %}
+          if(item["{{ f.field }}"]) { val += item["{{ f.field }}"] + " "; }
+          {% endfor %}
+          
+          // Check all filter queries
+          for (var j = 0; j < filterQueries.length; j++) {
+              if (val.toUpperCase().indexOf(filterQueries[j]) === -1) {
+                  matches = false;
+                  break;
+              }
+          }
+      }
+      
+      // Check date range filter
+      if (matches && (dateFromVal || dateToVal)) {
+          // Get all possible date fields
+          var dateFields = ['date', 'date_founded', 'date_closed'];
+          var hasValidDate = false;
+          
+          for (var k = 0; k < dateFields.length; k++) {
+              var dateField = dateFields[k];
+              if (item[dateField]) {
+                  var itemDate = new Date(item[dateField]);
+                  
+                  // Check from date
+                  if (dateFromVal) {
+                      var fromDate = new Date(dateFromVal);
+                      if (itemDate < fromDate) {
+                          matches = false;
+                          break;
+                      }
+                  }
+                  
+                  // Check to date
+                  if (matches && dateToVal) {
+                      var toDate = new Date(dateToVal);
+                      // Add one day to include the end date
+                      toDate.setDate(toDate.getDate() + 1);
+                      if (itemDate > toDate) {
+                          matches = false;
+                          break;
+                      }
+                  }
+                  
+                  // If we found a valid date field, we're good
+                  if (!matches) break;
+                  hasValidDate = true;
+              }
+          }
+          
+          // If no valid date field found, exclude the item
+          if (!hasValidDate && (dateFromVal || dateToVal)) {
+              matches = false;
+          }
+      }
+      
+      // Add to results if matches all filters
+      if (matches) {
+        filteredItems.push(item);
       }
     }
   }
+  
   // add number 
   document.querySelector("#numberOf").innerHTML = filteredItems.length + " of " + arr.length + " items";
   
@@ -122,13 +210,13 @@ function filterItems(arr,q) {
     cards += makeCard(filteredItems[i]);
   }
   browseItemsDiv.innerHTML = cards;
-
+  
   // finish
   if (q != "") {
       filterTextBox.focus();
   }
   loadingIcon.classList.add("d-none");
-};
+}
 
 /* Fisher-Yates shuffle https://bost.ocks.org/mike/shuffle/ */
 function shuffle(array) {
@@ -161,11 +249,11 @@ var browsePageInit = function (cb_items) {
   /* randomize items once at page load */
   shuffle(cb_items);
   /* filter if hash in initial URL */
-  if(window.location.hash) {
+  if(window.location.hash) { 
       var hashValue = decodeURIComponent(location.hash.substr(1));
       if (hashValue != 'maincontent') { 
           query = hashValue;
-      } else {
+      } else { 
           query = "";
       }
       filterTextBox.value = query;
@@ -184,10 +272,28 @@ function submitFilter() {
     query = filterTextBox.value;
     window.location.hash = encodeURIComponent(query);
 }
+
 /* reset filters */ 
 function resetFilter() {
     query = "";
     filterTextBox.value = query;
+    
+    // Reset all filter controls
+    var typeFilter = document.getElementById('typeFilter');
+    if (typeFilter) typeFilter.value = "";
+    
+    var countryFilter = document.getElementById('countryFilter');
+    if (countryFilter) countryFilter.value = "";
+    
+    var districtFilter = document.getElementById('districtFilter');
+    if (districtFilter) districtFilter.value = "";
+    
+    var dateFrom = document.getElementById('dateFrom');
+    if (dateFrom) dateFrom.value = "";
+    
+    var dateTo = document.getElementById('dateTo');
+    if (dateTo) dateTo.value = "";
+    
     window.location.hash = encodeURIComponent(query);
 }
 
@@ -203,6 +309,82 @@ window.addEventListener("hashchange", function() {
     }
 });
 
+/* add event listeners for new filter controls */
+document.addEventListener('DOMContentLoaded', function() {
+    // Type filter
+    var typeFilter = document.getElementById('typeFilter');
+    if (typeFilter) {
+        typeFilter.addEventListener('change', function() {
+            applyAllFilters();
+        });
+    }
+    
+    // Country filter
+    var countryFilter = document.getElementById('countryFilter');
+    if (countryFilter) {
+        countryFilter.addEventListener('change', function() {
+            applyAllFilters();
+        });
+    }
+    
+    // District filter
+    var districtFilter = document.getElementById('districtFilter');
+    if (districtFilter) {
+        districtFilter.addEventListener('change', function() {
+            applyAllFilters();
+        });
+    }
+    
+    // Date filters
+    var dateFrom = document.getElementById('dateFrom');
+    if (dateFrom) {
+        dateFrom.addEventListener('change', function() {
+            applyAllFilters();
+        });
+    }
+    
+    var dateTo = document.getElementById('dateTo');
+    if (dateTo) {
+        dateTo.addEventListener('change', function() {
+            applyAllFilters();
+        });
+    }
+});
+
+/* Apply all filters together */
+function applyAllFilters() {
+    var combinedQuery = '';
+    
+    // Get text search
+    var textQuery = filterTextBox ? filterTextBox.value : '';
+    
+    // Get dropdown values
+    var typeFilter = document.getElementById('typeFilter');
+    var countryFilter = document.getElementById('countryFilter');
+    var districtFilter = document.getElementById('districtFilter');
+    
+    var typeVal = typeFilter ? typeFilter.value : '';
+    var countryVal = countryFilter ? countryFilter.value : '';
+    var districtVal = districtFilter ? districtFilter.value : '';
+    
+    // Build combined query for hash
+    var parts = [];
+    if (textQuery) parts.push(textQuery);
+    if (typeVal) parts.push(typeVal);
+    if (countryVal) parts.push(countryVal);
+    if (districtVal) parts.push(districtVal);
+    
+    combinedQuery = parts.join(' ');
+    
+    // Set hash and trigger filter
+    window.location.hash = encodeURIComponent(combinedQuery);
+    
+    // Also trigger the filter directly since hashchange might not fire
+    if (typeof cb_items !== 'undefined') {
+        filterItems(cb_items, combinedQuery);
+    }
+}
+
 /* item array sorting function */
 function sorting(json_object, key_to_sort_by) {
     function sortByKey(a, b) {
@@ -213,32 +395,48 @@ function sorting(json_object, key_to_sort_by) {
         return ((x==null) ? 1: (y==null) ? -1: (x < y) ? -1 : ((x > y) ? 1 : 0));
     }
     json_object.sort(sortByKey);
-};
+}
 
 /* add sort function on click of sort options */
 var sortFilter = document.querySelector("#sortFilter");
 var sortOptions = document.querySelectorAll(".browse-sort-item");
-sortOptions.forEach((button) => {
-  button.addEventListener("click", (event) => {
+sortOptions.forEach((button) => { 
+  button.addEventListener("click", (event) => { 
     // get the sort field
-    var field = button.dataset.filter;
-    var display_name = button.textContent;
-    // get current filter
-    var query = filterTextBox.value;
+    var field = button.dataset.filter; 
+    var display_name = button.textContent; 
+    // get current filter from all sources
+    var combinedQuery = '';
+    var textQuery = filterTextBox ? filterTextBox.value : '';
+    var typeFilter = document.getElementById('typeFilter');
+    var countryFilter = document.getElementById('countryFilter');
+    var districtFilter = document.getElementById('districtFilter');
+    
+    var typeVal = typeFilter ? typeFilter.value : '';
+    var countryVal = countryFilter ? countryFilter.value : '';
+    var districtVal = districtFilter ? districtFilter.value : '';
+    
+    var parts = [];
+    if (textQuery) parts.push(textQuery);
+    if (typeVal) parts.push(typeVal);
+    if (countryVal) parts.push(countryVal);
+    if (districtVal) parts.push(districtVal);
+    combinedQuery = parts.join(' ');
+    
     // switch active sort option
     sortOptions.forEach((option) => { option.classList.remove("active"); } );
     button.classList.add("active");
-    sortFilter.innerHTML = display_name;
+    sortFilter.innerHTML = display_name; 
     // send to sort and filter
-    if (field != 'random') {
-        sorting(cb_items, field);
-        filterItems(cb_items, query);
-    }
-    else {
-        shuffle(cb_items);
-        filterItems(cb_items, query);
-    }
-  });
+    if (field != 'random') { 
+        sorting(cb_items, field); 
+        filterItems(cb_items, combinedQuery); 
+    } 
+    else { 
+        shuffle(cb_items); 
+        filterItems(cb_items, combinedQuery); 
+    } 
+  }); 
 }); 
 
 </script>
