@@ -24,18 +24,20 @@ social:
     url: "https://youtube.com"
     label: "YouTube"
 
-# Heritage Periods (Column 2)
-heritage_periods:
-  title: "Heritage Periods"
+# History (Column 2)
+history:
+  title: "History"
   links:
+    - text: "Timeline"
+      url: "/history/timeline.html"
+    - text: "Heritage Organisations"
+      url: "/history/heritage-organisations.html"
     - text: "British Groups Abroad (1909-2013)"
-      url: "/british-groups-abroad.html"
+      url: "/history/british-groups-abroad.html"
     - text: "BSWE Germany/Europe (1947-2013)"
-      url: "/bswe-germany-europe.html"
+      url: "/history/bswe-germany-europe.html"
     - text: "British Scouting Overseas (2013-Present)"
-      url: "/bso-2013-present.html"
-    - text: "Historical Timeline"
-      url: "/timeline.html"
+      url: "/history/bso-2013-present.html"
 
 # Resources (Column 3)
 resources:
