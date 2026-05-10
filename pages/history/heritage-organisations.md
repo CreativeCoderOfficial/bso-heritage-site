@@ -15,15 +15,7 @@ Explore the lineage and family tree of all organisations that contributed to Bri
     <strong>Lineage Overview:</strong> The organisations below represent the scouting and guiding heritage that culminated in British Scouting Overseas (BSO).
 </div>
 
-<!-- Tony's family tree diagram placeholder -->
-<div class="card bg-light mb-4">
-    <div class="card-body text-center">
-        <i class="bi bi-diagram-3 text-primary" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-        <h5 class="card-title">Family Tree Diagram</h5>
-        <p class="card-text">Visual representation of BSO organisational lineage</p>
-        <p class="text-muted small">Diagram by Tony - to be added</p>
-    </div>
-</div>
+{% include history-diagram.html %}
 
 ---
 
