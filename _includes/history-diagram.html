@@ -1,0 +1,972 @@
+<!-- ============================================
+
+
+     HISTORY DIAGRAM - Manual Hard-Coded Version
+
+
+     ============================================
+
+
+     
+
+
+     This is a static, hand-crafted relationship map.
+
+
+     All coordinates are hard-coded in pixels.
+
+
+     
+
+
+     Coordinate calculations from percentage values:
+
+
+     - Container: 1200x1000px
+
+
+     - x_px = x_percent * 12
+
+
+     - y_px = y_percent * 10
+
+
+     
+
+
+     Example: x=16% -> 192px, y=8% -> 80px
+
+
+     ============================================ -->
+
+
+
+
+
+<div class="diagram-container">
+
+
+  <!-- SVG Layer - Connectors -->
+
+
+  <svg class="diagram-svg-layer" xmlns="http://www.w3.org/2000/svg" width="1200" height="1000" viewBox="0 0 1200 1000" preserveAspectRatio="xMidYMid meet">
+
+
+    <!-- UK Scouting -> BTIFC -->
+
+
+    <path d="M 192,80 L 192,288 L 216,288" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+    
+
+
+    <!-- BTIFC -> BGA -->
+
+
+    <path d="M 216,288 L 216,576 L 96,576" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+    
+
+
+    <!-- BTIFC -> BSG -->
+
+
+    <path d="M 216,288 L 216,400 L 408,400" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+    
+
+
+    <!-- BTIFC -> BSWE -->
+
+
+    <path d="M 216,288 L 216,600 L 408,600" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+    
+
+
+    <!-- UK Girl Guiding -> BGIFC -->
+
+
+    <path d="M 816,80 L 816,288 L 840,288" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+    
+
+
+    <!-- BGIFC -> BGO -->
+
+
+    <path d="M 840,288 L 840,600 L 840,600" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+    
+
+
+    <!-- BSWE -> BSO (via horizontal merge line at y=700) -->
+
+
+    <path d="M 408,600 L 408,700 L 552,700 L 552,840" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+    
+
+
+    <!-- BGO -> BSO (via horizontal merge line at y=700) -->
+
+
+    <path d="M 840,600 L 840,700 L 552,700 L 552,840" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+    
+
+
+    <!-- BGO -> Alternatives -->
+
+
+    <path d="M 840,600 L 840,700 L 984,700 L 984,840" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+  </svg>
+
+
+
+
+
+  <!-- HTML Layer - Nodes -->
+
+
+  <div class="diagram-nodes-layer">
+
+
+    
+
+
+    <!-- UK Scouting (Root) -->
+
+
+    <a href="{{ site.baseurl }}/history/uk-scouting.html" class="diagram-node-link" style="left: 192px; top: 80px;">
+
+
+      <div class="diagram-node diagram-node-root">
+
+
+        <div class="diagram-node-content">
+
+
+          <h4 class="diagram-node-title">UK Scouting</h4>
+
+
+          <p class="diagram-node-subtitle">The Scout Association</p>
+
+
+          <p class="diagram-node-dates">1908–Now</p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </a>
+
+
+
+
+
+    <!-- UK Girl Guiding (Root) -->
+
+
+    <a href="{{ site.baseurl }}/history/uk-girl-guiding.html" class="diagram-node-link" style="left: 816px; top: 80px;">
+
+
+      <div class="diagram-node diagram-node-root">
+
+
+        <div class="diagram-node-content">
+
+
+          <h4 class="diagram-node-title">UK Girl Guiding</h4>
+
+
+          <p class="diagram-node-subtitle">Girlguiding UK</p>
+
+
+          <p class="diagram-node-dates">1910–Now</p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </a>
+
+
+
+
+
+    <!-- BTIFC -->
+
+
+    <a href="{{ site.baseurl }}/history/btifc.html" class="diagram-node-link" style="left: 216px; top: 288px;">
+
+
+      <div class="diagram-node">
+
+
+        <div class="diagram-node-content">
+
+
+          <h4 class="diagram-node-title">British Troops in Foreign Countries</h4>
+
+
+          <p class="diagram-node-subtitle">1909–1952</p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </a>
+
+
+
+
+
+    <!-- BGIFC -->
+
+
+    <a href="{{ site.baseurl }}/history/bgifc.html" class="diagram-node-link" style="left: 840px; top: 288px;">
+
+
+      <div class="diagram-node">
+
+
+        <div class="diagram-node-content">
+
+
+          <h4 class="diagram-node-title">British Guides in Foreign Countries</h4>
+
+
+          <p class="diagram-node-subtitle">1911–2017</p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </a>
+
+
+
+
+
+    <!-- BGA -->
+
+
+    <a href="{{ site.baseurl }}/history/british-groups-abroad.html" class="diagram-node-link" style="left: 96px; top: 576px;">
+
+
+      <div class="diagram-node">
+
+
+        <div class="diagram-node-content">
+
+
+          <h4 class="diagram-node-title">British Groups Abroad</h4>
+
+
+          <p class="diagram-node-subtitle">1952–2012</p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </a>
+
+
+
+
+
+    <!-- BSG -->
+
+
+    <a href="{{ site.baseurl }}/history/bsg.html" class="diagram-node-link" style="left: 408px; top: 400px;">
+
+
+      <div class="diagram-node">
+
+
+        <div class="diagram-node-content">
+
+
+          <h4 class="diagram-node-title">British Scouts in Germany</h4>
+
+
+          <p class="diagram-node-subtitle">1952–present</p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </a>
+
+
+
+
+
+    <!-- BSWE -->
+
+
+    <a href="{{ site.baseurl }}/history/bswe-germany-europe.html" class="diagram-node-link" style="left: 408px; top: 600px;">
+
+
+      <div class="diagram-node">
+
+
+        <div class="diagram-node-content">
+
+
+          <h4 class="diagram-node-title">British Scouts in Western Europe</h4>
+
+
+          <p class="diagram-node-subtitle">regional branch</p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </a>
+
+
+
+
+
+    <!-- BGO -->
+
+
+    <a href="{{ site.baseurl }}/history/bgifc-bgo.html" class="diagram-node-link" style="left: 840px; top: 600px;">
+
+
+      <div class="diagram-node">
+
+
+        <div class="diagram-node-content">
+
+
+          <h4 class="diagram-node-title">British Guiding Overseas</h4>
+
+
+          <p class="diagram-node-subtitle">modern guiding branch</p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </a>
+
+
+
+
+
+    <!-- BSO (Emphasized - final merged org) -->
+
+
+    <a href="{{ site.baseurl }}/history/bso-2013-present.html" class="diagram-node-link" style="left: 552px; top: 840px;">
+
+
+      <div class="diagram-node diagram-node-emphasized">
+
+
+        <div class="diagram-node-content">
+
+
+          <h4 class="diagram-node-title">British Scouting Overseas</h4>
+
+
+          <p class="diagram-node-subtitle">2013–present</p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </a>
+
+
+
+
+
+    <!-- Alternatives -->
+
+
+    <a href="{{ site.baseurl }}/history/alternatives.html" class="diagram-node-link" style="left: 984px; top: 840px;">
+
+
+      <div class="diagram-node">
+
+
+        <div class="diagram-node-content">
+
+
+          <h4 class="diagram-node-title">Other Alternatives</h4>
+
+
+          <p class="diagram-node-subtitle">independent options</p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </a>
+
+
+  </div>
+
+
+</div>
+
+
+
+
+
+<!-- Self-contained CSS for the diagram -->
+
+
+<style>
+
+
+  /* Diagram container */
+
+
+  .diagram-container {
+
+
+    position: relative;
+
+
+    width: 1200px;
+
+
+    height: 1000px;
+
+
+    margin: 0 auto;
+
+
+    overflow: visible;
+
+
+  }
+
+
+
+
+
+  /* SVG layer */
+
+
+  .diagram-svg-layer {
+
+
+    position: absolute;
+
+
+    top: 0;
+
+
+    left: 0;
+
+
+    width: 100%;
+
+
+    height: 100%;
+
+
+    z-index: 1;
+
+
+    pointer-events: none;
+
+
+  }
+
+
+
+
+
+  /* Nodes layer */
+
+
+  .diagram-nodes-layer {
+
+
+    position: absolute;
+
+
+    top: 0;
+
+
+    left: 0;
+
+
+    width: 100%;
+
+
+    height: 100%;
+
+
+    z-index: 2;
+
+
+  }
+
+
+
+
+
+  /* Node link */
+
+
+  .diagram-node-link {
+
+
+    position: absolute;
+
+
+    display: inline-block;
+
+
+    text-decoration: none;
+
+
+    color: inherit;
+
+
+    transform: translate(-50%, -50%);
+
+
+  }
+
+
+
+
+
+  .diagram-node-link:hover {
+
+
+    text-decoration: none;
+
+
+  }
+
+
+
+
+
+  .diagram-node-link:focus {
+
+
+    outline: 2px solid #5C2D91;
+
+
+    outline-offset: 4px;
+
+
+  }
+
+
+
+
+
+  /* Node card - BSO theme for all cards */
+
+
+  .diagram-node {
+
+
+    background: #ffffff;
+
+
+    border: 2px solid #5C2D91;
+
+
+    border-radius: 6px;
+
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+
+    padding: 12px 16px;
+
+
+    user-select: none;
+
+
+  }
+
+
+
+
+
+  .diagram-node:hover {
+
+
+    z-index: 10;
+
+
+  }
+
+
+
+
+
+  .diagram-node-content {
+
+
+    text-align: center;
+
+
+  }
+
+
+
+
+
+  .diagram-node-title {
+
+
+    font-family: Georgia, "Times New Roman", Times, serif;
+
+
+    font-size: 1rem;
+
+
+    font-weight: 600;
+
+
+    color: #3a2c1a;
+
+
+    margin: 0 0 4px 0;
+
+
+    line-height: 1.3;
+
+
+  }
+
+
+
+
+
+  .diagram-node-subtitle {
+
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+
+    font-size: 0.85rem;
+
+
+    color: #6b5b4b;
+
+
+    margin: 0 0 2px 0;
+
+
+    font-style: italic;
+
+
+  }
+
+
+
+
+
+  .diagram-node-dates {
+
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+
+    font-size: 0.75rem;
+
+
+    color: #8b7d6b;
+
+
+    margin: 0;
+
+
+  }
+
+
+
+
+
+  /* Root nodes - UK Scouting & UK Girl Guiding with BSO purple branding */
+
+
+  .diagram-node-root {
+
+
+    border: 3px solid #5C2D91;
+
+
+    padding: 18px 24px;
+
+
+  }
+
+
+
+
+
+  .diagram-node-root .diagram-node-title {
+
+
+    font-size: 1.1rem;
+
+
+    color: #5C2D91;
+
+
+  }
+
+
+
+
+
+  .diagram-node-root .diagram-node-subtitle {
+
+
+    font-size: 0.9rem;
+
+
+    color: #5C2D91;
+
+
+  }
+
+
+
+
+
+  .diagram-node-root .diagram-node-dates {
+
+
+    font-size: 0.8rem;
+
+
+    color: #8b7d6b;
+
+
+  }
+
+
+
+
+
+  /* Emphasized node (BSO) */
+
+
+  .diagram-node-emphasized {
+
+
+    border: 3px solid #5C2D91;
+
+
+    background: #fdfaf2;
+
+
+    padding: 14px 20px;
+
+
+  }
+
+
+
+
+
+  .diagram-node-emphasized .diagram-node-title {
+
+
+    font-size: 1.05rem;
+
+
+    color: #5C2D91;
+
+
+  }
+
+
+
+
+
+  /* Responsive - horizontal scroll on small screens */
+
+
+  @media (max-width: 1200px) {
+
+
+    .diagram-container {
+
+
+      width: 100%;
+
+
+      min-width: 1200px;
+
+
+      overflow-x: auto;
+
+
+      overflow-y: hidden;
+
+
+      height: 1000px;
+
+
+    }
+
+
+
+
+
+    .diagram-container::-webkit-scrollbar {
+
+
+      display: none;
+
+
+    }
+
+
+
+
+
+    .diagram-container {
+
+
+      -ms-overflow-style: none;
+
+
+      scrollbar-width: none;
+
+
+    }
+
+
+  }
+
+
+
+
+
+  @media (max-width: 768px) {
+
+
+    .diagram-node {
+
+
+      padding: 14px 18px;
+
+
+    }
+
+
+
+
+
+    .diagram-node-title {
+
+
+      font-size: 0.95rem;
+
+
+    }
+
+
+
+
+
+    .diagram-node-root .diagram-node-title {
+
+
+      font-size: 1.05rem;
+
+
+    }
+
+
+
+
+
+    .diagram-node-emphasized .diagram-node-title {
+
+
+      font-size: 1rem;
+
+
+    }
+
+
+
+
+
+    .diagram-node-root {
+
+
+      padding: 16px 20px;
+
+
+    }
+
+
+
+
+
+    .diagram-node-emphasized {
+
+
+      padding: 14px 18px;
+
+
+    }
+
+
+  }
+
+
+</style>
+
+

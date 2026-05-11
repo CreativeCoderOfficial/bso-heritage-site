@@ -1,8 +1,8 @@
 ---
 title: British Groups Abroad (1909-2013)
 layout: heritage-page
-permalink: /british-groups-abroad.html
----
+permalink: /history/british-groups-abroad.html
+--- 
 
 ## British Groups Abroad: The Founding Era (1909-2013)
 
@@ -28,6 +28,24 @@ This period saw the formation of countless Scout Groups across Europe, the Commo
 **Legacy:**
 The BGA era established the foundation for British Scouting's international presence, creating a network that would eventually evolve into the modern British Scouting Overseas organization. Many Groups founded during this period continue to operate today under the BSO name.
 
+### Lineage Box
+
+<div class="card bg-light mb-4">
+    <div class="card-body">
+        <h5 class="card-title"><i class="bi bi-node-plus me-2"></i>Organisational Lineage</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Predecessor:</strong><br>
+                <a href="{{ '/history/btifc.html' | relative_url }}">British Troops in Foreign Countries (BTIFC)</a>
+            </div>
+            <div class="col-md-6">
+                <strong>Successor:</strong><br>
+                <a href="{{ '/history/bso-2013-present.html' | relative_url }}">British Scouting Overseas (BSO)</a> (2013)
+            </div>
+        </div>
+    </div>
+</div>
+
 ### Notable Groups from This Era
 
 While a complete directory is available in our [Group Directory](/browse.html?filter=type%3AGroup), some historically significant Groups from the BGA period include:
@@ -36,6 +54,18 @@ While a complete directory is available in our [Group Directory](/browse.html?fi
 - **Hong Kong British Scouts** - Serving the British community in Asia
 - **Brussels British Scouts** - Long-standing presence in the heart of Europe
 - **Gibraltar Scouts** - Unique British Overseas Territory Group
+
+### Mini Timeline
+
+**1909** — First British Scout Groups formed abroad
+
+**1920s-1930s** — Growth alongside British military presence
+
+**Post-WWII** — Expansion as British communities rebuilt
+
+**1960s-1970s** — Formalized structures
+
+**2013** — <span class="badge bg-info text-dark">Merge</span> Merged with BSWE to form BSO
 
 ### Explore the Archive
 
@@ -61,3 +91,9 @@ Browse items from the British Groups Abroad era in our collection:
         </div>
     </div>
 </div>
+
+### Related Organisations
+
+- <a href="{{ '/history/btifc.html' | relative_url }}">British Troops in Foreign Countries (BTIFC)</a>
+- <a href="{{ '/history/bswe-germany-europe.html' | relative_url }}">BSWE Germany/Europe</a>
+- <a href="{{ '/history/bso-2013-present.html' | relative_url }}">British Scouting Overseas (BSO)</a>

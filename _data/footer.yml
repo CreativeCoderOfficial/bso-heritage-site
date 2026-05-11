@@ -24,20 +24,37 @@ social:
     url: "https://youtube.com"
     label: "YouTube"
 
-# Heritage Periods (Column 2)
+# Heritage Periods / Scouting Lineage (Column 2)
 heritage_periods:
-  title: "Heritage Periods"
+  title: "Scouting Lineage"
   links:
-    - text: "British Groups Abroad (1909-2013)"
-      url: "/british-groups-abroad.html"
-    - text: "BSWE Germany/Europe (1947-2013)"
-      url: "/bswe-germany-europe.html"
-    - text: "British Scouting Overseas (2013-Present)"
-      url: "/bso-2013-present.html"
-    - text: "Historical Timeline"
-      url: "/timeline.html"
+    - text: "UK Scouting"
+      url: "/history/uk-scouting.html"
+    - text: "BTIFC (1909-1952)"
+      url: "/history/btifc.html"
+    - text: "BSG (1947-1952)"
+      url: "/history/bsg.html"
+    - text: "BGA (1952-2013)"
+      url: "/history/british-groups-abroad.html"
+    - text: "BSWE (1952-2013)"
+      url: "/history/bswe-germany-europe.html"
+    - text: "BSO (2013-Present)"
+      url: "/history/bso-2013-present.html"
+      
+# Guiding Periods (Column 3)
+guiding_periods:
+  title: "Guiding & Alternatives"
+  links:
+    - text: "UK Girl Guiding"
+      url: "/history/uk-girl-guiding.html"
+    - text: "BGIFC (1911-2017)"
+      url: "/history/bgifc.html"
+    - text: "BGO (2017-Present)"
+      url: "/history/bgifc-bgo.html"
+    - text: "Alternatives"
+      url: "/history/alternatives.html"
 
-# Resources (Column 3)
+# Resources (Column 4)
 resources:
   title: "Resources"
   links:
@@ -52,7 +69,7 @@ resources:
     - text: "Contribute or Support"
       url: "/about.html#contribute"
 
-# Contact & Social (Column 4)
+# Contact & Social (Column 5)
 contact:
   title: "Stay Connected"
   email: "archive@bso.scouts.org.uk"

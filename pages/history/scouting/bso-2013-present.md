@@ -1,8 +1,8 @@
 ---
 title: British Scouting Overseas (2013-Present)
 layout: heritage-page
-permalink: /bso-2013-present.html
----
+permalink: /history/bso-2013-present.html
+--- 
 
 ## British Scouting Overseas: The Modern Era (2013-Present)
 
@@ -11,11 +11,40 @@ permalink: /bso-2013-present.html
     <strong>Period:</strong> 2013 - Present | <strong>Status:</strong> Active
 </div>
 
+### Lineage Box
+
+<div class="card bg-light mb-4">
+    <div class="card-body">
+        <h5 class="card-title"><i class="bi bi-node-plus me-2"></i>Organisational Lineage</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Predecessors:</strong><br>
+                <a href="{{ '/history/british-groups-abroad.html' | relative_url }}">British Groups Abroad (BGA)</a><br>
+                <a href="{{ '/history/bswe-germany-europe.html' | relative_url }}">BSWE Germany/Europe</a>
+            </div>
+            <div class="col-md-6">
+                <strong>Status:</strong><br>
+                <span class="text-success">Active organisation</span>
+            </div>
+        </div>
+    </div>
+</div>
+
 ### The Formation of BSO
 
 British Scouting Overseas (BSO) was officially established in 2013, bringing together the former British Groups Abroad (BGA) and British Scouting in Western Europe (BSWE) under a single, unified organization. This merger created a more cohesive structure for delivering British Scouting to young people living outside the United Kingdom.
 
 The formation of BSO reflected the changing nature of British expatriate communities worldwide and the need for a more flexible, responsive organization that could support Scouting in diverse international contexts.
+
+### Mini Timeline
+
+**2013** — <span class="badge bg-success">Formation</span> BSO created from BGA + BSWE merger
+
+**2013-2015** — Establishment Phase: Governance structure, unified branding
+
+**2016-2020** — Growth and Expansion: Increase in member countries, digital resources
+
+**2021-Present** — Modernization: New UK Scouting programmes, enhanced digital tools
 
 ### Modern BSO Structure
 
@@ -103,3 +132,9 @@ BSO is always welcoming new members and adult volunteers. Whether you're a Briti
         </a>
     </div>
 </div>
+
+### Related Organisations
+
+- <a href="{{ '/history/british-groups-abroad.html' | relative_url }}">British Groups Abroad (BGA)</a>
+- <a href="{{ '/history/bswe-germany-europe.html' | relative_url }}">BSWE Germany/Europe</a>
+- <a href="{{ '/history/bgifc-bgo.html' | relative_url }}">British Guides Overseas (BGO)</a>

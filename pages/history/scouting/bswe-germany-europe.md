@@ -1,8 +1,8 @@
 ---
 title: BSWE Germany/Europe (1947-2013)
 layout: heritage-page
-permalink: /bswe-germany-europe.html
----
+permalink: /history/bswe-germany-europe.html
+--- 
 
 ## British Scouting in Western Europe: The BSWE Era (1947-2013)
 
@@ -16,6 +16,24 @@ permalink: /bswe-germany-europe.html
 The British Scouting in Western Europe (BSWE) organization represented a specialized branch of British Scouting that served the unique needs of British military personnel and their families stationed in Germany and across Western Europe during the post-World War II era.
 
 Formed in 1947 in the aftermath of World War II, BSWE provided Scouting opportunities for children of British military personnel serving in the British Army of the Rhine (BAOR) and other NATO postings across Western Europe. This period was characterized by close cooperation with military authorities and adaptation to the mobile lifestyle of service families.
+
+### Lineage Box
+
+<div class="card bg-light mb-4">
+    <div class="card-body">
+        <h5 class="card-title"><i class="bi bi-node-plus me-2"></i>Organisational Lineage</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Predecessor:</strong><br>
+                <a href="{{ '/history/bsg.html' | relative_url }}">British Scouts in Germany (BSG)</a>
+            </div>
+            <div class="col-md-6">
+                <strong>Successor:</strong><br>
+                <a href="{{ '/history/bso-2013-present.html' | relative_url }}">British Scouting Overseas (BSO)</a> (2013)
+            </div>
+        </div>
+    </div>
+</div>
 
 ### Historical Context
 
@@ -37,6 +55,18 @@ BSWE developed several unique programmes and traditions:
 - **Joint Activities**: Collaboration with German Scout organizations (DPSG, VCP)
 - **International Camps**: Large gatherings bringing together Scouts from across Europe
 - **Military Support**: Close relationships with base commanders and welfare services
+
+### Mini Timeline
+
+**1947** — <span class="badge bg-success">Formation</span> BSWE founded
+
+**1950s-1960s** — Expansion across BAOR bases
+
+**1970s-1980s** — Integration with wider European communities
+
+**1990s** — Adaptation following German reunification
+
+**2013** — <span class="badge bg-info text-dark">Merge</span> Merged with BGA to form BSO
 
 ### BSWE Legacy
 
@@ -64,3 +94,9 @@ Many traditions and practices developed during the BSWE era continue in BSO Grou
         </div>
     </div>
 </div>
+
+### Related Organisations
+
+- <a href="{{ '/history/bsg.html' | relative_url }}">British Scouts in Germany (BSG)</a>
+- <a href="{{ '/history/british-groups-abroad.html' | relative_url }}">British Groups Abroad (BGA)</a>
+- <a href="{{ '/history/bso-2013-present.html' | relative_url }}">British Scouting Overseas (BSO)</a>
