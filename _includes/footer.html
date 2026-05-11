@@ -1,7 +1,7 @@
 <!-- BSO Heritage Footer -->
 <footer class="bs-footer bg-light mt-auto">
     
-    <!-- Main Footer Grid (4 columns) -->
+    <!-- Main Footer Grid (5 columns) -->
     <div class="container py-5">
         <div class="row g-4">
             
@@ -30,8 +30,8 @@
                 </div>
             </div>
             
-            <!-- Column 2: Heritage Periods -->
-            <div class="col-lg-3 col-md-6">
+            <!-- Column 2: Scouting Lineage -->
+            <div class="col-lg-2 col-md-4">
                 <h4 class="fw-bold text-primary mb-4">{{ site.data.footer.heritage_periods.title }}</h4>
                 <ul class="list-unstyled small">
                     {% for link in site.data.footer.heritage_periods.links %}
@@ -47,8 +47,25 @@
                 </ul>
             </div>
             
-            <!-- Column 3: Resources -->
-            <div class="col-lg-3 col-md-6">
+            <!-- Column 3: Guiding & Alternatives -->
+            <div class="col-lg-2 col-md-4">
+                <h4 class="fw-bold text-primary mb-4">{{ site.data.footer.guiding_periods.title }}</h4>
+                <ul class="list-unstyled small">
+                    {% for link in site.data.footer.guiding_periods.links %}
+                    <li class="mb-2">
+                        <a href="{{ link.url | relative_url }}" 
+                           class="text-muted text-decoration-none"
+                           onmouseover="this.style.color='#5C2D91'" 
+                           onmouseout="this.style.color='#6c757d'">
+                            {{ link.text }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- Column 4: Resources -->
+            <div class="col-lg-2 col-md-4">
                 <h4 class="fw-bold text-primary mb-4">{{ site.data.footer.resources.title }}</h4>
                 <ul class="list-unstyled small">
                     {% for link in site.data.footer.resources.links %}
@@ -64,7 +81,7 @@
                 </ul>
             </div>
             
-            <!-- Column 4: Contact & Social -->
+            <!-- Column 5: Contact & Social -->
             <div class="col-lg-3 col-md-6">
                 <h4 class="fw-bold text-primary mb-4">{{ site.data.footer.contact.title }}</h4>
                 
