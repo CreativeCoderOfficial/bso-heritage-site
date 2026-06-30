@@ -1,0 +1,85 @@
+{%- assign meta_fields = site.data.config-metadata -%}
+<script>
+
+// Fields to skip in the article sidebar metadata display
+var articleMetaSkipFields = ['article_url', 'filename', 'youtubeid', 'objectid', 'parentid'];
+
+// The objectid for this article page, baked in at Jekyll build time
+var articleObjectId = {{ page.objectid | jsonify }};
+
+// generateMetadata: builds a <dl> from a cb_items record.
+// Modelled directly on the same function in item-js.html.
+function articleGenerateMetadata(item) {
+  var fields = '<dl>';
+  {% for f in meta_fields %}
+    {% if f.browse_link == "true" %}
+    if (item[{{ f.field | jsonify }}] && articleMetaSkipFields.indexOf({{ f.field | jsonify }}) === -1) {
+      var topics = item[{{ f.field | jsonify }}].split(';');
+      var browseLinks = "";
+      for (var i = 0, len = topics.length; i < len; i++) {
+        if (topics[i] != "") {
+          browseLinks += '<a class="btn btn-link p-0 me-1" href="{{ "/browse.html" | relative_url }}#'
+            + encodeURIComponent(topics[i].trim()) + '">' + topics[i].trim() + '</a>';
+        }
+      }
+      fields += '<dt class="field small text-muted">{{ f.display_name }}:</dt>'
+             +  '<dd class="field-value mb-2">' + browseLinks + '</dd>';
+    }
+    {% else %}
+    if (item[{{ f.field | jsonify }}] && articleMetaSkipFields.indexOf({{ f.field | jsonify }}) === -1) {
+      fields += '<dt class="field small text-muted">{{ f.display_name }}:</dt>'
+             +  '<dd class="field-value mb-2">'
+             +  {% if f.external_link == "true" %}
+                '<a href="' + item[{{ f.field | jsonify }}] + '" target="_blank" rel="noopener">'
+                + item[{{ f.field | jsonify }}] + '</a>'
+                {% else %}
+                item[{{ f.field | jsonify }}]
+                {% endif %}
+             +  '</dd>';
+    }
+    {% endif %}
+  {% endfor %}
+  fields += '</dl>';
+  return fields;
+}
+
+// articleMetaInit: the main includeFunctions entry point.
+// Receives the full cb_items array, finds this page's record, populates the sidebar.
+var articleMetaInit = function(cb_items) {
+  var record = cb_items.find(function(item) {
+    return item.objectid === articleObjectId;
+  });
+
+  var loadingEl = document.getElementById('article-meta-loading');
+  var cardEl    = document.getElementById('article-meta-card');
+
+  if (!record) {
+    // objectid in front matter doesn't match any Sheet row
+    if (loadingEl) loadingEl.innerHTML =
+      '<p class="text-danger small">Metadata not found for objectid: ' + articleObjectId + '</p>';
+    return;
+  }
+
+  // Populate title
+  var titleEl = document.getElementById('article-meta-title');
+  if (titleEl) titleEl.textContent = record.title || '';
+
+  // Populate fields
+  var fieldsEl = document.getElementById('article-meta-fields');
+  if (fieldsEl) fieldsEl.innerHTML = articleGenerateMetadata(record);
+
+  // Set full record link
+  var fullRecordLink = document.getElementById('article-full-record-link');
+  if (fullRecordLink) {
+    fullRecordLink.href = "{{ '/item.html' | relative_url }}?id=" + articleObjectId;
+  }
+
+  // Swap loading spinner for populated card
+  if (loadingEl) loadingEl.classList.add('d-none');
+  if (cardEl)    cardEl.classList.remove('d-none');
+};
+
+// Register with CB-Sheets page init system
+includeFunctions.push(articleMetaInit);
+
+</script>

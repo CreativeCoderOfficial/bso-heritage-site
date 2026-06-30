@@ -386,3 +386,106 @@
         margin-bottom: 1rem;
     }
 }
+
+/* ============================================
+   ARTICLE PAGES
+   ============================================ */
+
+.article-content {
+
+  // Constrain prose line length for readability without constraining the column
+  p, li, blockquote, dl {
+    max-width: 68ch;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #5C2D91;
+    border-bottom: 2px solid #EDE7F6;
+    padding-bottom: 0.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #3B1A5E;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  h4, h5, h6 {
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 1.5rem auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  blockquote {
+    border-left: 4px solid #5C2D91;
+    padding: 0.75rem 1.25rem;
+    margin: 1.5rem 0;
+    background-color: #f8f9fa;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #495057;
+  }
+
+  ul, ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+
+    li {
+      margin-bottom: 0.35rem;
+      line-height: 1.65;
+    }
+  }
+
+  // Code blocks
+  pre {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid #dee2e6;
+    margin-bottom: 1rem;
+  }
+
+  code {
+    font-family: monospace;
+    font-size: 0.9rem;
+  }
+
+  // Metadata dl in sidebar uses Bootstrap defaults — no override needed here
+}
+
+// Sidebar metadata dl styling (inside #article-meta-card)
+#article-meta-card {
+  .field {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #6c757d;
+    margin-bottom: 0.1rem;
+  }
+
+  .field-value {
+    font-size: 0.95rem;
+    color: #191919;
+  }
+}
