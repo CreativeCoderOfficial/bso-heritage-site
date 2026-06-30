@@ -37,6 +37,9 @@ custom-foot: js/article-js.html
 
     {% comment %} Main article body (built from markdown at Jekyll build time) {% endcomment %}
     <div class="col-lg-8">
+      {% comment %} Article header with image + title from metadata {% endcomment %}
+      <header id="article-header" class="article-header text-center mb-4"></header>
+
       <article class="article-content">
         {{ content }}
       </article>

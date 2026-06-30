@@ -489,3 +489,24 @@
     color: #191919;
   }
 }
+
+/* Article header styling */
+.article-header {
+  margin-bottom: 2rem;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    color: #5C2D91;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+}

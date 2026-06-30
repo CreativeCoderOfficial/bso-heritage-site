@@ -60,7 +60,30 @@ var articleMetaInit = function(cb_items) {
     return;
   }
 
-  // Populate title
+  // Build article header with image and title from metadata
+  var headerEl = document.getElementById('article-header');
+  if (headerEl && record) {
+    var headerHTML = '';
+
+    // Add image if available (matches logic from browse-js.html)
+    if (record.filename) {
+      var imgSrc = record.filename.includes('/') 
+        ? record.filename 
+        : "{{ '/objects/' | relative_url }}" + record.filename;
+      headerHTML += '<img src="' + imgSrc + '" alt="' + 
+        (record.title || 'Item image') + 
+        '" class="img-fluid rounded shadow mb-3">';
+    }
+
+    // Add title
+    if (record.title) {
+      headerHTML += '<h1 class="display-5 fw-bold">' + record.title + '</h1>';
+    }
+
+    headerEl.innerHTML = headerHTML;
+  }
+
+  // Populate metadata sidebar title
   var titleEl = document.getElementById('article-meta-title');
   if (titleEl) titleEl.textContent = record.title || '';
 
