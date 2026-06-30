@@ -106,7 +106,7 @@ function displayItem(record, prev_id, next_id, compound_object) {
             } else {
                 itemYear = item.date;
             }
-            var timelineButton = '<a href="{{ "/timeline.html" | relative_url }}#y' + itemYear + '" class="btn btn-outline-primary">View on Timeline</a>';
+            var timelineButton = '<a href="{{ "/history.html" | relative_url }}#y' + itemYear + '" class="btn btn-outline-primary">View on Timeline</a>';
             /* add timeline link to children only if specified in theme.yml */
             {% if site.data.theme.timeline-child-objects == true %}
                 itemLink += timelineButton;
