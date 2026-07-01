@@ -1,0 +1,77 @@
+---
+layout: default
+custom-foot: js/article-js.html
+---
+
+<div class="container my-5">
+
+  {% comment %} Breadcrumb {% endcomment %}
+  <nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{{ '/' | relative_url }}">Home</a>
+      </li>
+      <li class="breadcrumb-item">
+        {%- assign back_url = '/browse.html' -%}
+        {%- assign back_label = 'Browse' -%}
+        {%- if page.type == 'Group' -%}
+          {%- assign back_url = '/groups.html' -%}
+          {%- assign back_label = 'Groups' -%}
+        {%- elsif page.type == 'Badge' -%}
+          {%- assign back_url = '/badges.html' -%}
+          {%- assign back_label = 'Badges' -%}
+        {%- elsif page.type == 'Document' -%}
+          {%- assign back_url = '/documents.html' -%}
+          {%- assign back_label = 'Documents' -%}
+        {%- elsif page.type == 'Far & Wide' -%}
+          {%- assign back_url = '/far-and-wide.html' -%}
+          {%- assign back_label = 'Far & Wide' -%}
+        {%- endif -%}
+        <a href="{{ back_url | relative_url }}">{{ back_label }}</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+    </ol>
+  </nav>
+
+  <div class="row g-4">
+
+    {% comment %} Main article body (built from markdown at Jekyll build time) {% endcomment %}
+    <div class="col-lg-8">
+      {% comment %} Article header with image + title from metadata {% endcomment %}
+      <header id="article-header" class="article-header text-center mb-4"></header>
+
+      <article class="article-content">
+        {{ content }}
+      </article>
+    </div>
+
+    {% comment %} Metadata sidebar (populated at runtime by article-js.html) {% endcomment %}
+    <div class="col-lg-4">
+      <div class="sticky-top" style="top: 1.5rem;">
+
+        {% comment %} Loading state — visible until JS replaces it {% endcomment %}
+        <div id="article-meta-loading" class="text-center p-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading metadata...</span>
+          </div>
+        </div>
+
+        {% comment %} Metadata card — hidden until JS populates it {% endcomment %}
+        <div id="article-meta-card" class="d-none card border-primary">
+          <div class="card-body">
+            <h5 class="card-title text-primary mb-3" id="article-meta-title"></h5>
+            <div id="article-meta-fields"></div>
+            <hr>
+            <a id="article-full-record-link"
+               href="#"
+               class="btn btn-outline-primary btn-sm w-100">
+              View Full Metadata Record
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

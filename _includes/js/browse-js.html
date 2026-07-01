@@ -7,7 +7,16 @@
 /* function to make each item card on page */
 function makeCard(obj) {
     // find item link
-    var itemHref = obj.parentid ?  "{{ '/item.html' | relative_url | append: '?id=' }}" + obj.parentid + "#" + obj.objectid : "{{ '/item.html' | relative_url | append: '?id=' }}" + obj.objectid;
+    var itemHref;
+    if (obj.article_url) {
+      // Item has a rich article page — link there directly.
+      // Normalize the path: strip leading slashes and prepend baseurl.
+      itemHref = "{{ '/' | relative_url }}" + obj.article_url.replace(/^\/+/, '');
+    } else if (obj.parentid) {
+      itemHref = "{{ '/item.html' | relative_url | append: '?id=' }}" + obj.parentid + "#" + obj.objectid;
+    } else {
+      itemHref = "{{ '/item.html' | relative_url | append: '?id=' }}" + obj.objectid;
+    }
     // find images
     var imgSrc, thumbSrc;
     // add images or thumb for objects based on format

@@ -78,7 +78,7 @@ contact:
       url: "https://www.scouts.org.uk"
       icon: "bi-box-arrow-up-right"
     - text: "British Scouting Overseas"
-      url: "https://bso.scouts.org.uk"
+      url: "https://https://www.britishscoutingoverseas.org.uk"
       icon: "bi-box-arrow-up-right"
 
 # Legal / Meta Row
@@ -98,7 +98,7 @@ external_official:
     - text: "Scouts UK"
       url: "https://www.scouts.org.uk"
     - text: "BSO"
-      url: "https://bso.scouts.org.uk"
+      url: "https://https://www.britishscoutingoverseas.org.uk"
 
 # Bottom Note
 bottom_note:
