@@ -23,13 +23,22 @@ permalink: /articles/REPLACE-WITH-OBJECTID.html
 
   Markdown guide: https://guides.github.com/features/mastering-markdown/
   
-  Images: Use standard markdown ![alt text](/objects/filename.jpg) if the image
-  is already uploaded to the objects/ folder.
+  Images: Use Liquid syntax for proper path handling with baseurl:
+    ![alt text]({{ '/objects/filename.jpg' | relative_url }})
+  Replace 'filename.jpg' with your image filename. The image must be uploaded to the
+  /objects/ folder in the repository.
 -->
 
 ## About This [Group / Badge / Document]
 
 Write a brief introduction here. One or two paragraphs explaining what this item is and why it matters.
+
+### Example Image
+
+To add an image from the /objects/ folder, use:
+```markdown
+![Image description]({{ '/objects/your-image.jpg' | relative_url }})
+```
 
 ## History
 

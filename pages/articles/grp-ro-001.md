@@ -17,10 +17,10 @@ The **1st Bucharest Group** represents a unique chapter in Eastern European scou
 ## Visual Archives
 
 ### 1. Local Image (Repository Hosted)
-This image requires the file to be present in your repository. The path points directly to the root `/objects/` directory.
+This image requires the file to be present in your repository. Use Liquid syntax for proper path handling:
 
-![1935 Troop Meeting in Bucharest](/grp-ro-001-archival.jpg)
-*Caption: A historical troop meeting. Note: This will only render if `grp-ro-001-archival.jpg` exists in your `objects` folder.*
+![1935 Troop Meeting in Bucharest]({{ 'objects/grp-ro-001-archival.jpg' | relative_url }})
+*Caption: A historical troop meeting in Bucharest.*
 
 ### 2. External Image (Online/Stock Data)
 This image is hosted externally and fetches dynamically. It is useful for placeholder graphics during development.
