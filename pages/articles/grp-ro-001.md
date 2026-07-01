@@ -19,7 +19,7 @@ The **1st Bucharest Group** represents a unique chapter in Eastern European scou
 ### 1. Local Image (Repository Hosted)
 This image requires the file to be present in your repository. Use Liquid syntax for proper path handling:
 
-![1935 Troop Meeting in Bucharest]({{ 'objects/grp-ro-001-archival.jpg' | relative_url }})
+![1935 Troop Meeting in Bucharest]({{ '/objects/grp-ro-001-archival.jpg' | relative_url }})
 *Caption: A historical troop meeting in Bucharest.*
 
 ### 2. External Image (Online/Stock Data)
