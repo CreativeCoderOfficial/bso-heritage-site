@@ -1,0 +1,549 @@
+---
+layout: none
+title: "Volunteer Guide Overview"
+permalink: /volunteer-guide-overview.html
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volunteer Guide Overview — BSO Heritage Website</title>
+<style>
+  :root {
+    --purple: #5C2D91;
+    --purple-dark: #3B1A5E;
+    --purple-light: #EDE7F6;
+    --purple-mid: #8B5BBD;
+    --text: #191919;
+    --muted: #6c757d;
+    --border: #dee2e6;
+    --bg-light: #f8f9fa;
+    --success: #198754;
+    --danger: #dc3545;
+    --warning-bg: #fff3cd;
+    --warning-border: #ffc107;
+    --info-bg: #e7f3ff;
+    --info-border: #0d6efd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+    background: #fff;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  .guide-header {
+    background: var(--purple);
+    color: #fff;
+    border-radius: 12px;
+    padding: 2.5rem 2rem 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .guide-header .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.75;
+    margin-bottom: 0.5rem;
+  }
+  .guide-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .guide-header p { opacity: 0.88; font-size: 1.05rem; max-width: 600px; }
+  section { margin-bottom: 3rem; }
+  h2.section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--purple);
+    border-bottom: 2px solid var(--purple-light);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+  h3 { font-size: 1.1rem; font-weight: 700; color: var(--purple-dark); margin: 1.5rem 0 0.5rem; }
+  p { margin-bottom: 0.85rem; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 0.85rem; }
+  li { margin-bottom: 0.35rem; }
+  strong { color: var(--purple-dark); }
+  code {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.88em;
+    color: var(--purple-dark);
+  }
+  pre {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1rem 0 1.25rem;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.25rem; font-size: 0.93rem; }
+  th { background: var(--purple); color: #fff; padding: 0.6rem 0.85rem; text-align: left; font-weight: 600; }
+  td { padding: 0.55rem 0.85rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--bg-light); }
+  .callout {
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0 1.25rem;
+    display: flex; gap: 0.75rem; align-items: flex-start;
+  }
+  .callout-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.05rem; }
+  .callout-body { flex: 1; }
+  .callout-body p:last-child { margin-bottom: 0; }
+  .callout.info { background: var(--info-bg); border-left: 4px solid var(--info-border); }
+  .callout.info .callout-icon::after { content: "💡"; }
+  .callout.tip { background: var(--purple-light); border-left: 4px solid var(--purple); }
+  .callout.tip .callout-icon::after { content: "🎯"; }
+  .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; margin: 1rem 0; }
+  .video-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .video-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(92, 45, 145, 0.15); }
+  .video-card-header {
+    background: var(--purple);
+    color: #fff;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .video-card-body {
+    padding: 1rem;
+  }
+  .video-card-body h4 { font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--purple-dark); }
+  .video-card-body p { font-size: 0.88rem; color: var(--muted); margin-bottom: 0; }
+  .video-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.88rem;
+    margin-top: 0.75rem;
+    transition: background 0.2s ease;
+  }
+  .video-link:hover { background: var(--purple); color: #fff; }
+  .video-link::before { content: "▶"; font-size: 0.8rem; }
+  .column-group { margin-bottom: 1.5rem; }
+  .column-group h4 { font-size: 1rem; color: var(--purple-dark); margin-bottom: 0.75rem; }
+  .column-list { display: grid; gap: 0.5rem; }
+  .column-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    background: var(--bg-light);
+  }
+  .column-item code { font-size: 0.85rem; }
+  .column-item span { flex: 1; color: var(--muted); font-size: 0.88rem; }
+  .guide-footer {
+    background: var(--purple-light);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--purple-dark);
+    font-size: 0.9rem;
+  }
+  .related-guides {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .guide-link {
+    display: block;
+    padding: 1rem 1.25rem;
+    background: var(--bg-light);
+    border-radius: 8px;
+    border-left: 4px solid var(--purple);
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s ease;
+  }
+  .guide-link:hover {
+    background: var(--purple-light);
+    color: var(--purple-dark);
+  }
+  .guide-link strong { color: var(--purple-dark); }
+  .guide-link p { font-size: 0.9rem; margin-bottom: 0; color: var(--muted); }
+  @media (max-width: 600px) {
+    .video-grid { grid-template-columns: 1fr; }
+    body { padding: 1rem 1rem 3rem; }
+    .guide-header h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="guide-header">
+  <div class="label">BSO Heritage Website · Volunteer Guide</div>
+  <h1>Volunteer Guide Overview</h1>
+  <p>Welcome! This overview connects all the resources you need to contribute to the BSO Heritage Website. Start with the video tutorials, then explore the Google Sheets structure, and use the detailed guides for specific tasks.</p>
+</div>
+
+<!-- SECTION A: Video Tutorials -->
+<section id="video-tutorials">
+  <h2 class="section-title">🎥 Video Tutorials (A0-A6)</h2>
+  <p>These videos walk you through everything from the basics to advanced features. Watch them in order for the best learning experience.</p>
+  
+  <div class="video-grid">
+    <div class="video-card">
+      <div class="video-card-header">A0 · Introduction</div>
+      <div class="video-card-body">
+        <h4>How Google Sheets work + intro</h4>
+        <p>Understanding the foundation of our metadata system</p>
+        <a href="https://www.loom.com/share/d491be6a71cd4802a22d04efaf77f940" class="video-link" target="_blank">Watch Video A0</a>
+      </div>
+    </div>
+    
+    <div class="video-card">
+      <div class="video-card-header">A1 · Articles & Markdown</div>
+      <div class="video-card-body">
+        <h4>Showcasing articles and explaining markdown briefly</h4>
+        <p>See how articles are displayed and learn Markdown basics</p>
+        <a href="https://www.loom.com/share/6f5b678562b047d0a6793c6fb3bb17b0" class="video-link" target="_blank">Watch Video A1</a>
+      </div>
+    </div>
+    
+    <div class="video-card">
+      <div class="video-card-header">A2 · Metadata & GitHub</div>
+      <div class="video-card-body">
+        <h4>Adding metadata and creating folders on GitHub</h4>
+        <p>Step-by-step guide to adding items to the collection</p>
+        <a href="https://www.loom.com/share/64014c71fef449a8ad85da7c583c0986" class="video-link" target="_blank">Watch Video A2</a>
+      </div>
+    </div>
+    
+    <div class="video-card">
+      <div class="video-card-header">A3 · Local Images</div>
+      <div class="video-card-body">
+        <h4>Embedding local images in articles</h4>
+        <p>How to include images stored in the objects folder</p>
+        <a href="https://www.loom.com/share/cc6d6917388d4266b2b5af0d4b3e6f9e" class="video-link" target="_blank">Watch Video A3</a>
+      </div>
+    </div>
+    
+    <div class="video-card">
+      <div class="video-card-header">A4 · Items with Images</div>
+      <div class="video-card-body">
+        <h4>Adding items with images</h4>
+        <p>Creating collection items that have associated images</p>
+        <a href="https://www.loom.com/share/409e1aa8250d48728273eab05a4f7ed5" class="video-link" target="_blank">Watch Video A4</a>
+      </div>
+    </div>
+    
+    <div class="video-card">
+      <div class="video-card-header">A5 · PDF Documents</div>
+      <div class="video-card-body">
+        <h4>Adding PDF's to items</h4>
+        <p>Including PDF documents in your collection items</p>
+        <a href="https://www.loom.com/share/e9d067e747b5484699c38418ab859f4b" class="video-link" target="_blank">Watch Video A5</a>
+      </div>
+    </div>
+    
+    <div class="video-card">
+      <div class="video-card-header">A6 · Map Feature</div>
+      <div class="video-card-body">
+        <h4>Final video and the Cool Map feature explained</h4>
+        <p>Discover the interactive map and wrap up your learning</p>
+        <a href="https://www.loom.com/share/6bb491fd660b4305a591e1d7ced76a43" class="video-link" target="_blank">Watch Video A6</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION B: Google Sheets Explained -->
+<section id="google-sheets">
+  <h2 class="section-title">📊 Google Sheets Columns Explained</h2>
+  <p>The collection is driven by a Google Sheet with multiple tabs. Each tab serves a specific purpose, and they're all aggregated into a combined table that the website uses.</p>
+
+  <div class="callout tip">
+    <div class="callout-icon"></div>
+    <div class="callout-body">
+      <p><strong>Remember:</strong> There are four main sections (Groups, Badges, Documents, Far & Wide), each with their own table in the Google Sheet. The combined table aggregates all of them for the website to use.</p>
+    </div>
+  </div>
+
+  <div class="column-group">
+    <h3>The essentials — every row needs these</h3>
+    <div class="column-list">
+      <div class="column-item">
+        <code>objectid</code>
+        <span>Unique ID for each item. Used internally to identify records, build links, and connect articles to metadata. Must be lowercase, no spaces, no slashes. <strong>Once set, never change it.</strong></span>
+      </div>
+      <div class="column-item">
+        <code>title</code>
+        <span>Display name shown on browse cards, the map, search results, and the article page. Keep it concise and consistent.</span>
+      </div>
+      <div class="column-item">
+        <code>format</code>
+        <span>Tells the website what kind of file this is using MIME type codes like <code>image/jpeg</code>, <code>application/pdf</code>, <code>audio/mpeg</code>. Controls how the item is displayed (image viewer, PDF embed, audio player, etc.). <a href="#mime-types">See the MIME types reference table below</a> for all supported formats.</span>
+      </div>
+      <div class="column-item">
+        <code>filename</code>
+        <span>Name of the actual file in the <code>objects/</code> folder (e.g., <code>grp-be-001.jpg</code>). Leave blank for items with no file, or paste a full external URL if hosted elsewhere.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="column-group">
+    <h3>Classification — what kind of thing is it</h3>
+    <div class="column-list">
+      <div class="column-item">
+        <code>type</code>
+        <span>Broad category. Must be exactly one of: <code>Group</code>, <code>Badge</code>, <code>Document</code>, <code>Far & Wide</code>. Used by category pages and article navigation trail.</span>
+      </div>
+      <div class="column-item">
+        <code>era</code>
+        <span>Historical period the item belongs to (e.g., <code>BGA</code>, <code>BSWE</code>, <code>BSO</code>). Used for filtering and the subjects cloud.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="column-group">
+    <h3>Organisation and location — where does it belong</h3>
+    <div class="column-list">
+      <div class="column-item">
+        <code>organisation</code>
+        <span>Specific organisation name (e.g., <code>1st Brussels Group</code>).</span>
+      </div>
+      <div class="column-item">
+        <code>district</code>
+        <span>BSO district (e.g., <code>Brussels</code>, <code>Rhine</code>).</span>
+      </div>
+      <div class="column-item">
+        <code>country</code>
+        <span>Country the item relates to (e.g., <code>Belgium</code>, <code>Germany</code>). Populates the country filter on browse page.</span>
+      </div>
+      <div class="column-item">
+        <code>group_number</code>
+        <span>Group's number (e.g., <code>1st</code>, <code>3rd</code>). Separate from organisation name for independent searching and filtering.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="column-group">
+    <h3>Group-specific detail</h3>
+    <div class="column-list">
+      <div class="column-item">
+        <code>scarf_colour</code>
+        <span>Colour of the group's neckscarf. Historical detail for groups.</span>
+      </div>
+      <div class="column-item">
+        <code>date_founded</code>
+        <span>When the group was established. Separate from general <code>date</code> field so date range filtering can check founding dates independently.</span>
+      </div>
+      <div class="column-item">
+        <code>date_closed</code>
+        <span>When the group closed, if applicable. Also checked by the date range filter.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="column-group">
+    <h3>Content and context</h3>
+    <div class="column-list">
+      <div class="column-item">
+        <code>subject</code>
+        <span>Topics or themes associated with the item, separated by semicolons (e.g., <code>camping; jamboree; Baden-Powell</code>). Powers the subjects cloud page and browse filtering.</span>
+      </div>
+      <div class="column-item">
+        <code>latitude</code> and <code>longitude</code>
+        <span>Geographic coordinates. Used to place the item as a pin on the map page. Leave blank if there's no meaningful location.</span>
+      </div>
+      <div class="column-item">
+        <code>description</code>
+        <span>Free-text summary of the item. Shown on the item page and indexed by search.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="column-group">
+    <h3>Badge-specific fields</h3>
+    <div class="column-list">
+      <div class="column-item">
+        <code>badge_tier</code>
+        <span>Level of the badge (e.g., <code>Bronze</code>, <code>Silver</code>, <code>Gold</code>, or programme stage like <code>Scout</code>, <code>Explorer</code>).</span>
+      </div>
+      <div class="column-item">
+        <code>badge_type</code>
+        <span>Category of badge (e.g., <code>Activity</code>, <code>Staged</code>, <code>Challenge Award</code>).</span>
+      </div>
+      <div class="column-item">
+        <code>colour_variant</code>
+        <span>For badges that come in multiple colour versions, note which variant this record represents.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="column-group">
+    <h3>Document and publication-specific fields</h3>
+    <div class="column-list">
+      <div class="column-item">
+        <code>document_type</code>
+        <span>Kind of document (e.g., <code>Annual Report</code>, <code>Newsletter</code>, <code>Minutes</code>, <code>Programme</code>).</span>
+      </div>
+      <div class="column-item">
+        <code>date</code>
+        <span>General date associated with the item (publication date, event date, etc.). Used by the timeline page. Format as <code>YYYY</code>, <code>YYYY-MM</code>, or <code>YYYY-MM-DD</code>.</span>
+      </div>
+      <div class="column-item">
+        <code>issue_number</code>
+        <span>For Far & Wide issues, the issue number.</span>
+      </div>
+      <div class="column-item">
+        <code>season</code>
+        <span>For Far & Wide issues, the season or term (e.g., <code>Spring 1987</code>, <code>Autumn 2003</code>).</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="column-group">
+    <h3>Article linking</h3>
+    <div class="column-list">
+      <div class="column-item">
+        <code>article_url</code>
+        <span><strong>Optional.</strong> If a volunteer has written a rich markdown article for this item, paste the permalink here (e.g., <code>/articles/grp-be-001.html</code>). When filled in, browse card clicks go directly to the article page instead of the standard item page.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION C: Related Guides -->
+<section id="related-guides">
+  <h2 class="section-title">📚 Additional Resources</h2>
+  <p>For more detailed information, check out these specialized guides:</p>
+  
+  <div class="related-guides">
+    <a href="/bso-heritage-site/adding-articles-guide.html" class="guide-link">
+      <strong>📝 How to Add Articles Guide</strong>
+      <p>Complete step-by-step instructions for writing and adding articles to the BSO Heritage Website, including front matter, Markdown formatting, and uploading to GitHub.</p>
+    </a>
+    
+    <a href="/bso-heritage-site/markdown-guide.html" class="guide-link">
+      <strong>📖 Markdown Guide</strong>
+      <p>Detailed reference for all Markdown formatting options with examples showing exactly how your text will appear on the published page.</p>
+    </a>
+    
+    <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" class="guide-link" target="_blank">
+      <strong>🔗 GitHub Markdown Guide (External)</strong>
+      <p>Official GitHub documentation on Markdown syntax, useful for more advanced formatting needs.</p>
+    </a>
+  </div>
+  
+  <div class="callout info" style="margin-top: 2rem;">
+    <div class="callout-icon"></div>
+    <div class="callout-body">
+      <p><strong>Need help?</strong> For questions about contributing or if something isn't working, reach out in the team channel. We're happy to help!</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION D: MIME Types Reference -->
+<section id="mime-types">
+  <h2 class="section-title">📋 MIME Types Reference Table</h2>
+  <p>Use these standard MIME type values in the <code>format</code> field to tell the website how to display your item. Look at which extension your file ends. Then copy the exact MIME type from this table.</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>MIME Type</th>
+        <th>Description</th>
+        <th>Example Files</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="4">Images</td>
+        <td><code>image/jpeg</code></td>
+        <td>JPEG image format</td>
+        <td><code>.jpg</code>, <code>.jpeg</code></td>
+      </tr>
+      <tr>
+        <td><code>image/png</code></td>
+        <td>PNG image format (supports transparency)</td>
+        <td><code>.png</code></td>
+      </tr>
+      <tr>
+        <td><code>image/gif</code></td>
+        <td>GIF image format (supports animation)</td>
+        <td><code>.gif</code></td>
+      </tr>
+      <tr>
+        <td><code>image/svg+xml</code></td>
+        <td>SVG vector image</td>
+        <td><code>.svg</code></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="2">Documents</td>
+        <td><code>application/pdf</code></td>
+        <td>Adobe PDF document</td>
+        <td><code>.pdf</code></td>
+      </tr>
+      <tr>
+        <td><code>text/plain</code></td>
+        <td>Plain text document</td>
+        <td><code>.txt</code></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="2">Audio</td>
+        <td><code>audio/mpeg</code></td>
+        <td>MP3 audio file</td>
+        <td><code>.mp3</code></td>
+      </tr>
+      <tr>
+        <td><code>audio/wav</code></td>
+        <td>WAV audio file (uncompressed)</td>
+        <td><code>.wav</code></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="3">Video</td>
+        <td><code>video/mp4</code></td>
+        <td>MP4 video file</td>
+        <td><code>.mp4</code></td>
+      </tr>
+      <tr>
+        <td><code>video/webm</code></td>
+        <td>WebM video format</td>
+        <td><code>.webm</code></td>
+      </tr>
+      <tr>
+        <td><code>video/quicktime</code></td>
+        <td>QuickTime/MOV video</td>
+        <td><code>.mov</code></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  
+</section>
+
+<div class="guide-footer">
+  <strong>BSO Heritage Website</strong> · Volunteer Guide Overview<br>
+</div>
+
+</body>
+</html>

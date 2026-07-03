@@ -1,0 +1,812 @@
+---
+layout: none
+title: "How to use the BSO Heritage Website as a volunteer"
+permalink: /adding-articles-guide.html
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Write an Article — BSO Heritage Website</title>
+<style>
+  :root {
+    --purple: #5C2D91;
+    --purple-dark: #3B1A5E;
+    --purple-light: #EDE7F6;
+    --purple-mid: #8B5BBD;
+    --text: #191919;
+    --muted: #6c757d;
+    --border: #dee2e6;
+    --bg-light: #f8f9fa;
+    --success: #198754;
+    --danger: #dc3545;
+    --warning-bg: #fff3cd;
+    --warning-border: #ffc107;
+    --info-bg: #e7f3ff;
+    --info-border: #0d6efd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+    background: #fff;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  .guide-header {
+    background: var(--purple);
+    color: #fff;
+    border-radius: 12px;
+    padding: 2.5rem 2rem 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .guide-header .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.75;
+    margin-bottom: 0.5rem;
+  }
+  .guide-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .guide-header p { opacity: 0.88; font-size: 1.05rem; max-width: 600px; }
+  .toc {
+    background: var(--purple-light);
+    border-left: 4px solid var(--purple);
+    border-radius: 0 8px 8px 0;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc h2 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--purple); margin-bottom: 0.75rem; }
+  .toc ol { padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.3rem; }
+  .toc a { color: var(--purple-dark); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+  section { margin-bottom: 3rem; }
+  h2.section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--purple);
+    border-bottom: 2px solid var(--purple-light);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+  h3 { font-size: 1.1rem; font-weight: 700; color: var(--purple-dark); margin: 1.5rem 0 0.5rem; }
+  p { margin-bottom: 0.85rem; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 0.85rem; }
+  li { margin-bottom: 0.35rem; }
+  strong { color: var(--purple-dark); }
+  .step { display: flex; gap: 1.25rem; margin-bottom: 2rem; align-items: flex-start; }
+  .step-number {
+    flex-shrink: 0;
+    width: 2.25rem; height: 2.25rem;
+    background: var(--purple);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1rem;
+    margin-top: 0.1rem;
+  }
+  .step-body { flex: 1; }
+  .step-body h3 { margin-top: 0; }
+  .callout {
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0 1.25rem;
+    display: flex; gap: 0.75rem; align-items: flex-start;
+  }
+  .callout-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.05rem; }
+  .callout-body { flex: 1; }
+  .callout-body p:last-child { margin-bottom: 0; }
+  .callout.warning { background: var(--warning-bg); border-left: 4px solid var(--warning-border); }
+  .callout.warning .callout-icon::after { content: "⚠️"; }
+  .callout.info { background: var(--info-bg); border-left: 4px solid var(--info-border); }
+  .callout.info .callout-icon::after { content: "💡"; }
+  .callout.success { background: #d1e7dd; border-left: 4px solid var(--success); }
+  .callout.success .callout-icon::after { content: "✅"; }
+  .callout.danger { background: #f8d7da; border-left: 4px solid var(--danger); }
+  .callout.danger .callout-icon::after { content: "🚫"; }
+  code {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.88em;
+    color: var(--purple-dark);
+  }
+  pre {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1rem 0 1.25rem;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  pre .comment { color: #6c7086; }
+  pre .key { color: #89b4fa; }
+  pre .value { color: #a6e3a1; }
+  pre .heading { color: #cba6f7; font-weight: bold; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.25rem; font-size: 0.93rem; }
+  th { background: var(--purple); color: #fff; padding: 0.6rem 0.85rem; text-align: left; font-weight: 600; }
+  td { padding: 0.55rem 0.85rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--bg-light); }
+  .diagram-wrap {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1.25rem 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .diagram-wrap figcaption {
+    background: var(--bg-light);
+    border-top: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-align: center;
+  }
+  .flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin: 1.25rem 0; }
+  .flow-step {
+    background: var(--purple-light);
+    border: 2px solid var(--purple);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--purple-dark);
+    text-align: center;
+    min-width: 130px;
+    flex: 1;
+  }
+  .flow-step.success-step { background: #d1e7dd; border-color: var(--success); color: #0a3622; }
+  .flow-arrow { font-size: 1.5rem; color: var(--purple-mid); padding: 0 0.4rem; flex-shrink: 0; }
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li {
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.4rem;
+    border-radius: 6px;
+    display: flex; align-items: flex-start; gap: 0.6rem;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+  }
+  .checklist li::before { content: "☐"; color: var(--purple); font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
+  .frontmatter {
+    border: 2px dashed var(--purple-mid);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1rem 0 1.25rem;
+  }
+  .frontmatter-header {
+    background: var(--purple);
+    color: #fff;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .frontmatter pre { border-radius: 0; margin: 0; }
+  .md-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
+  .md-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .md-card-header {
+    background: var(--purple-light);
+    padding: 0.4rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--purple-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .md-card pre { border-radius: 0; margin: 0; font-size: 0.82rem; padding: 0.75rem 1rem; }
+  .md-card .result {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+    background: #fff;
+  }
+  .md-card .result h2 { font-size: 1.1rem; color: var(--purple); border: none; padding: 0; margin: 0; }
+  .md-card .result h3 { font-size: 0.95rem; margin: 0; }
+  .md-card .result blockquote { border-left: 3px solid var(--purple); padding-left: 0.75rem; color: var(--muted); font-style: italic; }
+  .trouble td:first-child { font-weight: 600; color: var(--danger); }
+  .trouble td:nth-child(2) { color: var(--muted); font-size: 0.88rem; }
+  .guide-footer {
+    background: var(--purple-light);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--purple-dark);
+    font-size: 0.9rem;
+  }
+  @media (max-width: 600px) {
+    .md-grid { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+    body { padding: 1rem 1rem 3rem; }
+    .guide-header h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="guide-header">
+  <div class="label">BSO Heritage Website · Volunteer Guide</div>
+  <h1>How to Write an Article</h1>
+  <p>A step-by-step guide for adding rich stories and histories to collection items — no coding experience needed.</p>
+</div>
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#when">When should I write an article?</a></li>
+    <li><a href="#what-happens">What does an article page look like?</a></li>
+    <li><a href="#github-basics">Your first time on GitHub</a></li>
+    <li><a href="#subfolders">Creating subfolders to stay organised</a></li>
+    <li><a href="#step-by-step">Step-by-step: create your article file</a></li>
+    <li><a href="#frontmatter">Understanding the front matter</a></li>
+    <li><a href="#markdown">Writing in Markdown</a></li>
+    <li><a href="#images">Adding images</a></li>
+    <li><a href="#workflow">The workflow: what order to do things</a></li>
+    <li><a href="#rebuild">When will my changes appear on the site?</a></li>
+    <li><a href="#checklist">Quick checklist</a></li>
+    <li><a href="#troubleshoot">Troubleshooting</a></li>
+  </ol>
+</nav>
+
+
+<!-- SECTION 1 -->
+<section id="when">
+  <h2 class="section-title">1 · When should I write an article?</h2>
+
+  <p>Every item in the collection already has a <strong>metadata record</strong> — the structured information in the Google Sheet (name, dates, country, district, and so on). That is always enough for browsing and searching.</p>
+
+  <p>If you want to know more about the Google sheet and how to add simple items in general, check <a href="/volunteer-guide-overview.html">the main overview guide</a>.</p>
+
+  <p>An article is for when you want to tell a <strong>proper story</strong>: paragraphs of history, photographs, lists of notable members, timelines, and quotes. Think of the metadata as a museum label and the article as the full exhibition panel.</p>
+
+  <table>
+    <thead><tr><th>Good candidate for an article</th><th>Probably doesn't need one</th></tr></thead>
+    <tbody>
+      <tr><td>A group with 50 years of history and notable members</td><td>A badge whose description fits in two sentences</td></tr>
+      <tr><td>A Far &amp; Wide issue covering a major world jamboree</td><td>A document that speaks for itself</td></tr>
+      <tr><td>A group that has closed and whose story would otherwise be lost</td><td>A newly registered group with no history yet</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout info">
+    <div class="callout-icon"></div>
+    <div class="callout-body">Articles are optional. An item works perfectly on the site without one — you can always add an article later.</div>
+  </div>
+</section>
+
+
+<!-- SECTION 2 -->
+<section id="what-happens">
+  <h2 class="section-title">2 · What does an article page look like?</h2>
+
+  <p>When a visitor clicks on a collection item that has an article, they land on a two-column page like this:</p>
+
+  <figure class="diagram-wrap">
+    <svg viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;background:#f0f0f0;">
+      <rect x="0" y="0" width="780" height="420" fill="#e8e8e8" rx="10"/>
+      <rect x="0" y="0" width="780" height="36" fill="#d0d0d0" rx="10"/>
+      <rect x="0" y="20" width="780" height="16" fill="#d0d0d0"/>
+      <circle cx="20" cy="18" r="6" fill="#ff5f57"/>
+      <circle cx="38" cy="18" r="6" fill="#febc2e"/>
+      <circle cx="56" cy="18" r="6" fill="#28c840"/>
+      <rect x="80" y="10" width="580" height="16" fill="#fff" rx="4"/>
+      <text x="92" y="22" font-family="monospace" font-size="10" fill="#666">bso-heritage.github.io/articles/grp-be-001.html</text>
+      <rect x="0" y="36" width="780" height="36" fill="#5C2D91"/>
+      <text x="16" y="58" font-family="Arial" font-size="13" font-weight="bold" fill="white">BSO Heritage</text>
+      <text x="180" y="58" font-family="Arial" font-size="11" fill="white" opacity="0.85">Groups</text>
+      <text x="240" y="58" font-family="Arial" font-size="11" fill="white" opacity="0.85">Badges</text>
+      <text x="300" y="58" font-family="Arial" font-size="11" fill="white" opacity="0.85">Documents</text>
+      <text x="390" y="58" font-family="Arial" font-size="11" fill="white" opacity="0.85">History</text>
+      <text x="450" y="58" font-family="Arial" font-size="11" fill="white" opacity="0.85">Map</text>
+      <!-- Navigation trail -->
+      <text x="16" y="92" font-family="Arial" font-size="10" fill="#666">Home  ›  Groups  ›  1st Brussels Group</text>
+      <text x="350" y="92" font-family="Arial" font-size="9" fill="#5C2D91" font-style="italic">← Navigation trail showing where you are</text>
+      <!-- Left column -->
+      <rect x="12" y="100" width="490" height="308" fill="white" rx="6" stroke="#ddd" stroke-width="1"/>
+      <rect x="24" y="112" width="200" height="14" fill="#5C2D91" rx="3" opacity="0.9"/>
+      <text x="24" y="123" font-family="Arial" font-size="10" font-weight="bold" fill="white">1st Brussels Group</text>
+      <rect x="24" y="134" width="460" height="8" fill="#888" rx="2" opacity="0.4"/>
+      <rect x="24" y="148" width="440" height="8" fill="#888" rx="2" opacity="0.4"/>
+      <rect x="24" y="162" width="420" height="8" fill="#888" rx="2" opacity="0.4"/>
+      <rect x="24" y="176" width="460" height="8" fill="#888" rx="2" opacity="0.4"/>
+      <rect x="24" y="196" width="120" height="10" fill="#3B1A5E" rx="2" opacity="0.7"/>
+      <text x="24" y="205" font-family="Arial" font-size="9" font-weight="bold" fill="#3B1A5E">History</text>
+      <rect x="24" y="212" width="460" height="8" fill="#888" rx="2" opacity="0.4"/>
+      <rect x="24" y="226" width="430" height="8" fill="#888" rx="2" opacity="0.4"/>
+      <rect x="24" y="240" width="450" height="8" fill="#888" rx="2" opacity="0.4"/>
+      <rect x="24" y="258" width="200" height="100" fill="#EDE7F6" rx="6" stroke="#5C2D91" stroke-width="1" opacity="0.7"/>
+      <text x="124" y="313" font-family="Arial" font-size="10" fill="#5C2D91" text-anchor="middle">📷 Photo</text>
+      <rect x="240" y="262" width="240" height="8" fill="#888" rx="2" opacity="0.4"/>
+      <rect x="240" y="276" width="220" height="8" fill="#888" rx="2" opacity="0.4"/>
+      <rect x="240" y="290" width="240" height="8" fill="#888" rx="2" opacity="0.4"/>
+      <line x1="280" y1="376" x2="230" y2="355" stroke="#5C2D91" stroke-width="1.5" stroke-dasharray="4,2"/>
+      <text x="285" y="380" font-family="Arial" font-size="10" fill="#5C2D91" font-weight="bold">Your article (written in Markdown)</text>
+      <!-- Right column -->
+      <rect x="514" y="100" width="254" height="308" fill="white" rx="6" stroke="#5C2D91" stroke-width="1.5"/>
+      <text x="526" y="120" font-family="Arial" font-size="10" font-weight="bold" fill="#5C2D91">1st Brussels Group</text>
+      <line x1="526" y1="126" x2="758" y2="126" stroke="#dee2e6" stroke-width="1"/>
+      <text x="526" y="142" font-family="Arial" font-size="8" fill="#999">TYPE</text>
+      <text x="526" y="154" font-family="Arial" font-size="9" fill="#191919">Group</text>
+      <text x="526" y="170" font-family="Arial" font-size="8" fill="#999">COUNTRY</text>
+      <text x="526" y="182" font-family="Arial" font-size="9" fill="#191919">Belgium</text>
+      <text x="526" y="198" font-family="Arial" font-size="8" fill="#999">DISTRICT</text>
+      <text x="526" y="210" font-family="Arial" font-size="9" fill="#191919">Brussels</text>
+      <text x="526" y="226" font-family="Arial" font-size="8" fill="#999">FOUNDED</text>
+      <text x="526" y="238" font-family="Arial" font-size="9" fill="#191919">1954</text>
+      <text x="526" y="254" font-family="Arial" font-size="8" fill="#999">ERA</text>
+      <text x="526" y="266" font-family="Arial" font-size="9" fill="#191919">BGA</text>
+      <text x="526" y="282" font-family="Arial" font-size="8" fill="#999">SUBJECTS</text>
+      <rect x="526" y="288" width="50" height="14" fill="#EDE7F6" rx="10"/>
+      <text x="551" y="298" font-family="Arial" font-size="8" fill="#5C2D91" text-anchor="middle">Europe</text>
+      <rect x="582" y="288" width="60" height="14" fill="#EDE7F6" rx="10"/>
+      <text x="612" y="298" font-family="Arial" font-size="8" fill="#5C2D91" text-anchor="middle">BGA Era</text>
+      <line x1="526" y1="316" x2="758" y2="316" stroke="#dee2e6" stroke-width="1"/>
+      <rect x="526" y="324" width="220" height="24" fill="#5C2D91" rx="6"/>
+      <text x="636" y="340" font-family="Arial" font-size="9" fill="white" text-anchor="middle">View Full Metadata Record</text>
+      <line x1="636" y1="408" x2="636" y2="395" stroke="#5C2D91" stroke-width="1.5" stroke-dasharray="4,2"/>
+      <text x="636" y="415" font-family="Arial" font-size="10" fill="#5C2D91" font-weight="bold" text-anchor="middle">Pulled live from Google Sheet</text>
+    </svg>
+    <figcaption>The article page — your written content on the left, live metadata from the Google Sheet on the right. The navigation trail at the top shows visitors where they are and how to go back.</figcaption>
+  </figure>
+
+  <p>The metadata panel on the right is <strong>automatic</strong> — it reads directly from the Google Sheet. You only need to write the article body on the left. The "View Full Metadata Record" button takes visitors to the full item record if they want to see every field.</p>
+</section>
+
+
+<!-- SECTION 3 -->
+<section id="github-basics">
+  <h2 class="section-title">3 · Your first time on GitHub</h2>
+
+  <p>GitHub is where the website's files live. You'll use it entirely through a web browser — no software to install. Here is what the articles folder looks like.</p>
+
+  <figure class="diagram-wrap">
+    <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;background:#fff;">
+      <rect x="0" y="0" width="760" height="320" fill="#f6f8fa" rx="8"/>
+      <rect x="0" y="0" width="760" height="44" fill="#24292f" rx="8"/>
+      <rect x="0" y="30" width="760" height="14" fill="#24292f"/>
+      <text x="20" y="26" font-family="Arial" font-size="13" font-weight="bold" fill="white">GitHub</text>
+      <text x="140" y="26" font-family="Arial" font-size="11" fill="#cdd9e5">CreativeCoderOfficial / bso-heritage-site</text>
+      <text x="20" y="70" font-family="monospace" font-size="11" fill="#57606a">bso-heritage-site / pages / articles</text>
+      <rect x="20" y="82" width="720" height="180" fill="white" rx="6" stroke="#d0d7de" stroke-width="1"/>
+      <rect x="560" y="54" width="80" height="24" fill="#2da44e" rx="6"/>
+      <text x="600" y="70" font-family="Arial" font-size="10" fill="white" text-anchor="middle" font-weight="bold">Add file ▾</text>
+      <rect x="20" y="82" width="720" height="32" fill="#f6f8fa" rx="6"/>
+      <rect x="20" y="100" width="720" height="14" fill="#f6f8fa"/>
+      <text x="36" y="103" font-family="Arial" font-size="10" fill="#57606a">Name</text>
+      <text x="480" y="103" font-family="Arial" font-size="10" fill="#57606a">Last commit message</text>
+      <text x="680" y="103" font-family="Arial" font-size="10" fill="#57606a">Age</text>
+      <line x1="20" y1="114" x2="740" y2="114" stroke="#d0d7de" stroke-width="1"/>
+      <text x="36" y="130" font-family="Arial" font-size="11" fill="#0969da">📁 ..</text>
+      <line x1="20" y1="138" x2="740" y2="138" stroke="#d0d7de" stroke-width="1"/>
+      <text x="36" y="154" font-family="Arial" font-size="11" fill="#0969da">📄 _template.md</text>
+      <text x="480" y="154" font-family="Arial" font-size="10" fill="#57606a">Add volunteer article template</text>
+      <text x="680" y="154" font-family="Arial" font-size="10" fill="#57606a">2 days ago</text>
+      <line x1="20" y1="162" x2="740" y2="162" stroke="#d0d7de" stroke-width="1"/>
+      <text x="36" y="178" font-family="Arial" font-size="11" fill="#0969da">📄 grp-be-001.md</text>
+      <text x="480" y="178" font-family="Arial" font-size="10" fill="#57606a">Add 1st Brussels Group article</text>
+      <text x="680" y="178" font-family="Arial" font-size="10" fill="#57606a">yesterday</text>
+      <line x1="20" y1="186" x2="740" y2="186" stroke="#d0d7de" stroke-width="1"/>
+      <text x="36" y="202" font-family="Arial" font-size="11" fill="#0969da">📄 grp-ro-001.md</text>
+      <text x="480" y="202" font-family="Arial" font-size="10" fill="#57606a">Add 1st Bucharest Group article</text>
+      <text x="680" y="202" font-family="Arial" font-size="10" fill="#57606a">3 hours ago</text>
+      <line x1="20" y1="210" x2="740" y2="210" stroke="#d0d7de" stroke-width="1"/>
+      <rect x="540" y="48" width="84" height="28" fill="none" stroke="#f9a825" stroke-width="2" rx="6"/>
+      <line x1="582" y1="76" x2="582" y2="96" stroke="#f9a825" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="640" y="45" font-family="Arial" font-size="10" fill="#f9a825" font-weight="bold">Click here to add</text>
+      <text x="640" y="57" font-family="Arial" font-size="10" fill="#f9a825" font-weight="bold">a new article file</text>
+      <text x="20" y="295" font-family="Arial" font-size="10" fill="#5C2D91" font-weight="bold">← This is the articles folder. Each .md file is one article page on the website.</text>
+    </svg>
+    <figcaption>The <code>pages/articles/</code> folder in GitHub. Each file here becomes an article page on the website.</figcaption>
+  </figure>
+
+  <div class="callout info">
+    <div class="callout-icon"></div>
+    <div class="callout-body">
+      <strong>Never used GitHub before?</strong> You only need three actions: (1) click a folder to open it, (2) click <strong>"Add file" → "Create new file"</strong> to create a new file, (3) scroll to the bottom and click the green <strong>"Commit changes"</strong> button to save. That's it.
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 4 — NEW: SUBFOLDERS -->
+<section id="subfolders">
+  <h2 class="section-title">4 · Creating subfolders to stay organised</h2>
+
+  <p>If you have many related articles — for example, all articles about groups in Germany, or all articles from a particular era — you can organise them into subfolders. This keeps the articles folder tidy as the collection grows.</p>
+
+  <div class="callout info">
+    <div class="callout-icon"></div>
+    <div class="callout-body"><strong>GitHub cannot create an empty folder.</strong> Every folder must contain at least one file. The trick is to create the folder and a file at the same time, by typing the folder name and a slash into the filename box.</div>
+  </div>
+
+  <h3>How to create a subfolder</h3>
+
+  <div class="step">
+    <div class="step-number">1</div>
+    <div class="step-body">
+      <h3>Go to the articles folder and click "Add file" → "Create new file"</h3>
+      <p>You'll see a filename input box at the top of the editor.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">2</div>
+    <div class="step-body">
+      <h3>Type the folder name, then a slash, then the filename</h3>
+      <p>As soon as you type a <code>/</code>, GitHub turns what you typed before it into a folder. For example, typing:</p>
+      <pre>germany/grp-de-001.md</pre>
+      <p>...creates a folder called <code>germany</code> and puts your file inside it. You'll see the folder appear visually as you type.</p>
+
+      <figure class="diagram-wrap">
+        <svg viewBox="0 0 760 140" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;background:#f6f8fa;">
+          <rect x="0" y="0" width="760" height="140" fill="#f6f8fa" rx="8"/>
+          <!-- Path before slash -->
+          <text x="20" y="36" font-family="monospace" font-size="11" fill="#57606a">pages / articles /</text>
+          <!-- Folder chip -->
+          <rect x="194" y="20" width="80" height="22" fill="#EDE7F6" rx="4" stroke="#5C2D91" stroke-width="1"/>
+          <text x="234" y="34" font-family="monospace" font-size="11" fill="#5C2D91" text-anchor="middle">germany</text>
+          <text x="278" y="36" font-family="monospace" font-size="11" fill="#57606a">/</text>
+          <!-- Filename input -->
+          <rect x="292" y="20" width="200" height="22" fill="white" rx="4" stroke="#0969da" stroke-width="1.5"/>
+          <text x="300" y="34" font-family="monospace" font-size="11" fill="#24292f">grp-de-001.md</text>
+          <text x="280" y="72" font-family="Arial" font-size="10" fill="#5C2D91">↑ "germany" becomes a folder as soon as you type the /</text>
+          <text x="20" y="100" font-family="Arial" font-size="10" fill="#57606a">Result: the file will be saved at   pages/articles/germany/grp-de-001.md</text>
+          <text x="20" y="120" font-family="Arial" font-size="10" fill="#57606a">And the article URL will be:         /articles/germany/grp-de-001.html</text>
+        </svg>
+        <figcaption>Typing a <code>/</code> in the filename box automatically creates a folder. The folder name appears as a coloured chip.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">3</div>
+    <div class="step-body">
+      <h3>Update the permalink in the front matter to match</h3>
+      <p>If your file is in a subfolder, the <code>permalink</code> in the front matter must reflect that:</p>
+      <pre><span class="key">permalink</span>: <span class="value">/articles/germany/grp-de-001.html</span></pre>
+      <p>And when you add the link in the Google Sheet, use the same path:</p>
+      <pre><span class="value">/articles/germany/grp-de-001.html</span></pre>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-icon"></div>
+    <div class="callout-body">If you want to create a folder that will hold many files later but you're not ready to add them yet, create a placeholder file called <code>placeholder</code> inside it instead of an actual filename. This is just an empty file whose only purpose is to keep the folder from disappearing. You can delete it later once real article files are in the folder.</div>
+  </div>
+
+</section>
+
+
+<!-- SECTION 5 -->
+<section id="step-by-step">
+  <h2 class="section-title">5 · Step-by-step: create your article file</h2>
+
+  <div class="step">
+    <div class="step-number">1</div>
+    <div class="step-body">
+      <h3>Find the item's objectid in the Google Sheet</h3>
+      <p>Open the BSO Heritage Google Sheet. Find the row for the item you want to write about. Copy the value in the <code>objectid</code> column exactly — it looks something like <code>grp-be-001</code>.</p>
+      <div class="callout warning">
+        <div class="callout-icon"></div>
+        <div class="callout-body">The <code>objectid</code> is <strong>case-sensitive</strong>. Copy it exactly — <code>grp-be-001</code> and <code>GRP-BE-001</code> are treated as different things.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">2</div>
+    <div class="step-body">
+      <h3>Navigate to the articles folder in GitHub</h3>
+      <p>In the repository, click through: <strong>pages</strong> → <strong>articles</strong>. You'll see the list of existing article files.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">3</div>
+    <div class="step-body">
+      <h3>Open the template and copy its contents</h3>
+      <p>Click on <code>_template.md</code> to open it. Click the <strong>pencil icon ✏️</strong> in the top-right corner of the file. Select all the text (<kbd>Ctrl+A</kbd> on Windows, <kbd>Cmd+A</kbd> on Mac) and copy it (<kbd>Ctrl+C</kbd> / <kbd>Cmd+C</kbd>).</p>
+
+      <figure class="diagram-wrap">
+        <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;background:#fff;">
+          <rect x="0" y="0" width="760" height="180" fill="#f6f8fa" rx="8"/>
+          <rect x="0" y="0" width="760" height="44" fill="#24292f" rx="8"/>
+          <rect x="0" y="30" width="760" height="14" fill="#24292f"/>
+          <text x="20" y="26" font-family="Arial" font-size="13" font-weight="bold" fill="white">GitHub</text>
+          <text x="20" y="70" font-family="monospace" font-size="11" fill="#57606a">pages / articles / _template.md</text>
+          <rect x="600" y="56" width="28" height="24" fill="white" rx="4" stroke="#d0d7de" stroke-width="1"/>
+          <text x="614" y="72" font-family="Arial" font-size="14" text-anchor="middle">✏️</text>
+          <rect x="632" y="56" width="28" height="24" fill="white" rx="4" stroke="#d0d7de" stroke-width="1"/>
+          <text x="646" y="72" font-family="Arial" font-size="12" text-anchor="middle">⋯</text>
+          <rect x="20" y="84" width="720" height="80" fill="white" rx="6" stroke="#d0d7de" stroke-width="1"/>
+          <text x="36" y="102" font-family="monospace" font-size="10" fill="#57606a">---</text>
+          <text x="36" y="116" font-family="monospace" font-size="10" fill="#0550ae">layout</text>
+          <text x="92" y="116" font-family="monospace" font-size="10" fill="#24292f">: article</text>
+          <text x="36" y="130" font-family="monospace" font-size="10" fill="#0550ae">objectid</text>
+          <text x="108" y="130" font-family="monospace" font-size="10" fill="#24292f">: REPLACE-WITH-OBJECTID</text>
+          <text x="36" y="144" font-family="monospace" font-size="10" fill="#0550ae">title</text>
+          <text x="76" y="144" font-family="monospace" font-size="10" fill="#24292f">: REPLACE-WITH-TITLE</text>
+          <text x="36" y="158" font-family="monospace" font-size="10" fill="#57606a">...</text>
+          <rect x="594" y="50" width="42" height="36" fill="none" stroke="#f9a825" stroke-width="2" rx="4"/>
+          <text x="700" y="54" font-family="Arial" font-size="10" fill="#f9a825" font-weight="bold" text-anchor="middle">Click the pencil</text>
+          <text x="700" y="66" font-family="Arial" font-size="10" fill="#f9a825" font-weight="bold" text-anchor="middle">icon to open</text>
+          <text x="700" y="78" font-family="Arial" font-size="10" fill="#f9a825" font-weight="bold" text-anchor="middle">the editor</text>
+          <line x1="636" y1="68" x2="650" y2="68" stroke="#f9a825" stroke-width="1.5" stroke-dasharray="3,2"/>
+        </svg>
+        <figcaption>Click the pencil ✏️ icon to open the template in edit mode, then select all and copy.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">4</div>
+    <div class="step-body">
+      <h3>Create a new file</h3>
+      <p>Go back to the <code>pages/articles/</code> folder. Click <strong>"Add file" → "Create new file"</strong>. In the filename box, type your filename using the objectid: <code>grp-be-001.md</code>. Then paste the template content into the editor below.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">5</div>
+    <div class="step-body">
+      <h3>Fill in the front matter and write your article</h3>
+      <p>Replace the placeholder values in the top section (the <strong>front matter</strong> — see <a href="#frontmatter">Section 6</a>), then write your article below the second <code>---</code> line (see <a href="#markdown">Section 7</a> for formatting help).</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">6</div>
+    <div class="step-body">
+      <h3>Save the file by committing it</h3>
+      <p>Scroll to the bottom of the page. You'll see a "Commit changes" panel. Optionally write a short note like <em>"Add article for 1st Brussels Group"</em>. Click the green <strong>"Commit changes"</strong> button.</p>
+      <figure class="diagram-wrap">
+        <svg viewBox="0 0 760 140" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;background:#fff;">
+          <rect x="0" y="0" width="760" height="140" fill="#f6f8fa" rx="8"/>
+          <rect x="20" y="14" width="720" height="112" fill="white" rx="6" stroke="#d0d7de" stroke-width="1"/>
+          <text x="36" y="36" font-family="Arial" font-size="11" font-weight="bold" fill="#24292f">Commit changes</text>
+          <rect x="36" y="44" width="440" height="24" fill="#f6f8fa" rx="4" stroke="#d0d7de" stroke-width="1"/>
+          <text x="48" y="60" font-family="Arial" font-size="10" fill="#57606a">Add article for 1st Brussels Group</text>
+          <rect x="36" y="74" width="440" height="36" fill="#f6f8fa" rx="4" stroke="#d0d7de" stroke-width="1"/>
+          <text x="48" y="90" font-family="Arial" font-size="10" fill="#aaa">Add an optional extended description…</text>
+          <rect x="496" y="44" width="140" height="28" fill="#2da44e" rx="6"/>
+          <text x="566" y="62" font-family="Arial" font-size="11" fill="white" text-anchor="middle" font-weight="bold">Commit changes</text>
+          <rect x="642" y="44" width="90" height="28" fill="white" rx="6" stroke="#d0d7de" stroke-width="1"/>
+          <text x="687" y="62" font-family="Arial" font-size="11" fill="#24292f" text-anchor="middle">Cancel</text>
+          <rect x="490" y="38" width="152" height="40" fill="none" stroke="#2da44e" stroke-width="2" rx="8"/>
+          <text x="700" y="30" font-family="Arial" font-size="10" fill="#2da44e" font-weight="bold">← Click this to save!</text>
+        </svg>
+        <figcaption>Scroll to the bottom and click the green "Commit changes" button to save your file.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 6 -->
+<section id="frontmatter">
+  <h2 class="section-title">6 · Understanding the front matter</h2>
+
+  <p>The front matter is the block at the very top of every article file, surrounded by triple dashes (<code>---</code>). It tells the website what kind of page this is. <strong>Do not delete the dashes.</strong></p>
+
+  <div class="frontmatter">
+    <div class="frontmatter-header">📄 Front matter — fill in the highlighted fields</div>
+    <pre>
+<span class="comment">---</span>
+<span class="key">layout</span>: <span class="value">article</span>             <span class="comment"># Leave this exactly as is. Never change it.</span>
+<span class="key">objectid</span>: <span class="value">grp-be-001</span>        <span class="comment"># Copy EXACTLY from the Google Sheet objectid column.</span>
+<span class="key">title</span>: <span class="value">1st Brussels Group</span>   <span class="comment"># The display name shown on the page.</span>
+<span class="key">type</span>: <span class="value">Group</span>                 <span class="comment"># Must be one of: Group, Badge, Document, Far & Wide</span>
+<span class="key">permalink</span>: <span class="value">/articles/grp-be-001.html</span>  <span class="comment"># Replace with your objectid. Must start with /articles/</span>
+<span class="comment">---</span></pre>
+  </div>
+
+  <table>
+    <thead><tr><th>Field</th><th>What to enter</th><th>Common mistake</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>layout</code></td>
+        <td>Always <code>article</code> — never change this</td>
+        <td>Deleting or changing it breaks the page entirely</td>
+      </tr>
+      <tr>
+        <td><code>objectid</code></td>
+        <td>Copy character-for-character from the Google Sheet's <code>objectid</code> column</td>
+        <td>Typing it by hand and getting a letter wrong — the metadata panel won't load</td>
+      </tr>
+      <tr>
+        <td><code>title</code></td>
+        <td>The name of the group / badge / document as you want it displayed</td>
+        <td>Leaving it as <code>REPLACE-WITH-TITLE</code></td>
+      </tr>
+      <tr>
+        <td><code>type</code></td>
+        <td>Exactly one of: <code>Group</code>, <code>Badge</code>, <code>Document</code>, <code>Far &amp; Wide</code></td>
+        <td>Using lowercase (<code>group</code>) — the navigation trail back-link breaks</td>
+      </tr>
+      <tr>
+        <td><code>permalink</code></td>
+        <td><code>/articles/</code> + your objectid + <code>.html</code></td>
+        <td>Forgetting the leading <code>/</code> or the <code>.html</code> at the end</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout danger">
+    <div class="callout-icon"></div>
+    <div class="callout-body">
+      <strong>The type field is case-sensitive.</strong> <code>Group</code> works. <code>group</code>, <code>GROUP</code>, or <code>groups</code> do not. The same applies to <code>Badge</code>, <code>Document</code>, and <code>Far &amp; Wide</code>.
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 7 -->
+<h2 class="section-title">7 · Writing in Markdown</h2>
+
+<p>For more information on how to use markdown, check <a href="/markdown-guide.html">our guide here</a> or <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">the GitHub guide here</a>.</p>
+
+
+<!-- SECTION 8 -->
+<section id="images">
+  <h2 class="section-title">8 · Adding images</h2>
+
+  <p>You can embed photographs and scanned documents in your article. The template already includes an example — all you need to do is replace the two parts shown in bold below.</p>
+
+  <p>In the template you'll find this line:</p>
+
+  <pre>![Image description]({{ '/objects/your-image.jpg' | relative_url }})</pre>
+
+  <p>Replace <strong><code>Image description</code></strong> with a short description of what the photo shows (this helps visually impaired readers). Replace <strong><code>your-image.jpg</code></strong> with the actual filename of your image. Leave everything else exactly as it is.</p>
+
+  <h3>Before you can reference an image, you need to upload it</h3>
+
+  <p>Go to the <code>objects/</code> folder in the repository. Click <strong>"Add file" → "Upload files"</strong>. Drag your image in and click "Commit changes".</p>
+
+  <div class="callout warning">
+    <div class="callout-icon"></div>
+    <div class="callout-body">
+      <strong>Image filename rules</strong> — use only lowercase letters, numbers, and hyphens. No spaces.<br>
+      ✅ <code>grp-be-001-camp-1962.jpg</code><br>
+      🚫 <code>Group photo (Brussels) 1962.jpg</code>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-icon"></div>
+    <div class="callout-body"><strong>Keep image files under 2MB.</strong> Larger files slow the page down. You can resize images for free at <a href="https://squoosh.app" target="_blank" rel="noopener">squoosh.app</a> before uploading.</div>
+  </div>
+</section>
+
+
+<!-- SECTION 9 -->
+<section id="workflow">
+  <h2 class="section-title">9 · The workflow: what order to do things</h2>
+
+  <p>Here is the recommended order for creating a new article from start to finish:</p>
+
+  <div class="flow">
+    <div class="flow-step success-step">1. Write your .md file in GitHub</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step success-step">2. Commit the file</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step success-step">3. Update article_url in the Sheet</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step success-step">4. Changes appear within minutes</div>
+  </div>
+
+  <p>You can also update the Google Sheet first if you prefer — the order is flexible. What matters is that <strong>both steps are done</strong> before you expect the article link to work: the file must exist in GitHub, and the <code>article_url</code> must be filled in the Sheet. If only one of the two is done, visitors won't see the article link yet, but nothing will break.</p>
+
+  <div class="callout info">
+    <div class="callout-icon"></div>
+    <div class="callout-body">Images can be uploaded at any time — before or after committing the article file. If an image is missing when a visitor first loads the page, it simply won't appear. Once you upload it and the site rebuilds, it will show up automatically.</div>
+  </div>
+</section>
+
+
+<!-- SECTION 10 -->
+<section id="rebuild">
+  <h2 class="section-title">10 · When will my changes appear on the site?</h2>
+
+  <p>Every time a file is saved (committed) to GitHub, the website automatically rebuilds itself. This usually takes <strong>2–5 minutes</strong>. After that, your changes will be live.</p>
+
+  <p>This means:</p>
+  <ul>
+    <li>A new article file you commit will appear on the site within a few minutes</li>
+    <li>An image you upload to <code>objects/</code> will appear within a few minutes</li>
+    <li>Changes you make <strong>only in the Google Sheet</strong> (without committing any file) will appear the following morning, when an overnight automatic rebuild runs</li>
+  </ul>
+
+  <div class="callout success">
+    <div class="callout-icon"></div>
+    <div class="callout-body">If you update the Sheet and commit a file at the same time — for example, filling in <code>article_url</code> in the Sheet and then saving your article file — everything updates together within a few minutes.</div>
+  </div>
+</section>
+
+
+<!-- SECTION 11 -->
+<section id="checklist">
+  <h2 class="section-title">10 · Quick checklist</h2>
+
+  <p>Run through this before you consider the article done:</p>
+
+  <ul class="checklist">
+    <li>I found the <code>objectid</code> in the Google Sheet and copied it exactly</li>
+    <li>My file is named <code>[objectid].md</code> and is in the <code>pages/articles/</code> folder (or a subfolder)</li>
+    <li>The <code>layout</code> field says <code>article</code> and I haven't changed it</li>
+    <li>The <code>objectid</code> in the front matter matches the Google Sheet value exactly (including uppercase/lowercase)</li>
+    <li>The <code>type</code> field is exactly one of: <code>Group</code>, <code>Badge</code>, <code>Document</code>, <code>Far &amp; Wide</code></li>
+    <li>The <code>permalink</code> starts with <code>/articles/</code> and ends with <code>.html</code></li>
+    <li>I have committed the file to GitHub (green "Commit changes" button clicked)</li>
+    <li>Any images I reference have been uploaded to the <code>objects/</code> folder</li>
+    <li>I have added the <code>article_url</code> in the Google Sheet, starting with <code>/</code></li>
+    <li>In conclusion, the first five columns in the Google sheet are correctly filled in.<code>/</code></li>
+  </ul>
+</section>
+
+
+<!-- SECTION 12 -->
+<section id="troubleshoot">
+  <h2 class="section-title">12 · Troubleshooting</h2>
+
+  <table class="trouble">
+    <thead><tr><th>Problem</th><th>Most likely cause</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Metadata panel says "not found"</td>
+        <td>The <code>objectid</code> in the front matter doesn't match the Sheet</td>
+        <td>Open the Sheet, copy the <code>objectid</code> exactly and paste it into the front matter</td>
+      </tr>
+      <tr>
+        <td>Clicking the item still goes to the old page, not the article</td>
+        <td>The <code>article_url</code> in the Sheet is missing or the Sheet hasn't been republished</td>
+        <td>Check the <code>article_url</code> column for that item, make sure it starts with <code>/</code>, and republish the Sheet</td>
+      </tr>
+      <tr>
+        <td>Changes aren't showing up yet</td>
+        <td>The site hasn't finished rebuilding</td>
+        <td>Wait 5 minutes and refresh the page. Sheet-only changes may take until the next morning.</td>
+      </tr>
+      <tr>
+        <td>Navigation trail shows "Browse" instead of "Groups" / "Badges" etc.</td>
+        <td>The <code>type</code> field is misspelled or has the wrong capitalisation</td>
+        <td>Fix it to exactly: <code>Group</code>, <code>Badge</code>, <code>Document</code>, or <code>Far &amp; Wide</code></td>
+      </tr>
+      <tr>
+        <td>Image not showing on the article page</td>
+        <td>Image not uploaded yet, or filename is wrong</td>
+        <td>Check the file exists in <code>objects/</code> and the filename in your markdown matches exactly</td>
+      </tr>
+      <tr>
+        <td>Bold or italic not working</td>
+        <td>Space between the asterisks and the text, or only one asterisk instead of two</td>
+        <td>Use <code>**text**</code> for bold (no spaces). Use <code>*text*</code> for italic.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout success">
+    <div class="callout-icon"></div>
+    <div class="callout-body">Still stuck? Post in the team channel with the <code>objectid</code> of your item and a description of what you're seeing.</div>
+  </div>
+</section>
+
+
+<div class="guide-footer">
+  <strong>BSO Heritage Website</strong> · Volunteer Article Guide<br>
+  <span style="opacity:0.7;font-size:0.85rem;">Questions? Ask in the team channel.</span>
+</div>
+
+</body>
+</html>

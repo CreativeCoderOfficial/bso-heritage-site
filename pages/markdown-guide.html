@@ -1,0 +1,365 @@
+---
+layout: none
+title: "Markdown Guide"
+permalink: /markdown-guide.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown Guide — BSO Heritage Website</title>
+<style>
+  :root {
+    --purple: #5C2D91;
+    --purple-dark: #3B1A5E;
+    --purple-light: #EDE7F6;
+    --purple-mid: #8B5BBD;
+    --text: #191919;
+    --muted: #6c757d;
+    --border: #dee2e6;
+    --bg-light: #f8f9fa;
+    --success: #198754;
+    --danger: #dc3545;
+    --warning-bg: #fff3cd;
+    --warning-border: #ffc107;
+    --info-bg: #e7f3ff;
+    --info-border: #0d6efd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+    background: #fff;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  .guide-header {
+    background: var(--purple);
+    color: #fff;
+    border-radius: 12px;
+    padding: 2.5rem 2rem 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .guide-header .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.75;
+    margin-bottom: 0.5rem;
+  }
+  .guide-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .guide-header p { opacity: 0.88; font-size: 1.05rem; max-width: 600px; }
+  section { margin-bottom: 3rem; }
+  h2.section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--purple);
+    border-bottom: 2px solid var(--purple-light);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+  h3 { font-size: 1.1rem; font-weight: 700; color: var(--purple-dark); margin: 1.5rem 0 0.5rem; }
+  p { margin-bottom: 0.85rem; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 0.85rem; }
+  li { margin-bottom: 0.35rem; }
+  strong { color: var(--purple-dark); }
+  code {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.88em;
+    color: var(--purple-dark);
+  }
+  pre {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1rem 0 1.25rem;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  pre .comment { color: #6c7086; }
+  pre .key { color: #89b4fa; }
+  pre .value { color: #a6e3a1; }
+  pre .heading { color: #cba6f7; font-weight: bold; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.25rem; font-size: 0.93rem; }
+  th { background: var(--purple); color: #fff; padding: 0.6rem 0.85rem; text-align: left; font-weight: 600; }
+  td { padding: 0.55rem 0.85rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--bg-light); }
+  .callout {
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0 1.25rem;
+    display: flex; gap: 0.75rem; align-items: flex-start;
+  }
+  .callout-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.05rem; }
+  .callout-body { flex: 1; }
+  .callout-body p:last-child { margin-bottom: 0; }
+  .callout.info { background: var(--info-bg); border-left: 4px solid var(--info-border); }
+  .callout.info .callout-icon::after { content: "💡"; }
+  .md-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
+  .md-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .md-card-header {
+    background: var(--purple-light);
+    padding: 0.4rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--purple-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .md-card pre { border-radius: 0; margin: 0; font-size: 0.82rem; padding: 0.75rem 1rem; }
+  .md-card .result {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+    background: #fff;
+  }
+  .md-card .result h2 { font-size: 1.1rem; color: var(--purple); border: none; padding: 0; margin: 0; }
+  .md-card .result h3 { font-size: 0.95rem; margin: 0; }
+  .frontmatter {
+    border: 2px dashed var(--purple-mid);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1rem 0 1.25rem;
+  }
+  .frontmatter-header {
+    background: var(--purple);
+    color: #fff;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .frontmatter pre { border-radius: 0; margin: 0; }
+  .guide-footer {
+    background: var(--purple-light);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--purple-dark);
+    font-size: 0.9rem;
+  }
+  @media (max-width: 600px) {
+    .md-grid { grid-template-columns: 1fr; }
+    body { padding: 1rem 1rem 3rem; }
+    .guide-header h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="guide-header">
+  <div class="label">BSO Heritage Website · Volunteer Guide</div>
+  <h1>Markdown Guide</h1>
+  <p>A simple guide to Markdown formatting for BSO Heritage articles.</p>
+</div>
+
+
+<!-- SECTION 7 -->
+<section id="markdown">
+  <h2 class="section-title">Writing in Markdown</h2>
+
+  <p>Markdown is a simple way of writing formatted text using ordinary characters. The website converts it into a styled page automatically. You do not need to know any code.</p>
+
+  <p>Write everything <strong>below the second <code>---</code></strong> line.</p>
+
+  <h3>Headings</h3>
+  <div class="md-grid">
+    <div class="md-card">
+      <div class="md-card-header">You type</div>
+      <pre>## About This Group
+
+### Early Years
+
+#### 1950s Leadership</pre>
+    </div>
+    <div class="md-card">
+      <div class="md-card-header">Result on the page</div>
+      <div class="result">
+        <h2>About This Group</h2>
+        <h3>Early Years</h3>
+        <p style="font-size:0.85rem;font-weight:bold;color:#444;margin-top:0.5rem;">1950s Leadership</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-icon"></div>
+    <div class="callout-body">Always start your article headings with <code>##</code> (two hashes). The page title is already shown as the biggest heading — starting at <code>##</code> keeps everything in the right order.</div>
+  </div>
+
+  <h3>Bold and italic</h3>
+  <div class="md-grid">
+    <div class="md-card">
+      <div class="md-card-header">You type</div>
+      <pre>**This is bold text**
+
+*This is italic text*
+
+***Bold and italic***</pre>
+    </div>
+    <div class="md-card">
+      <div class="md-card-header">Result</div>
+      <div class="result">
+        <p><strong>This is bold text</strong></p>
+        <p><em>This is italic text</em></p>
+        <p><strong><em>Bold and italic</em></strong></p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Lists</h3>
+  <div class="md-grid">
+    <div class="md-card">
+      <div class="md-card-header">You type</div>
+      <pre>- First item
+- Second item
+- Third item
+
+1. Step one
+2. Step two
+3. Step three</pre>
+    </div>
+    <div class="md-card">
+      <div class="md-card-header">Result</div>
+      <div class="result">
+        <ul style="padding-left:1.25rem;margin-bottom:0.5rem;font-size:0.88rem">
+          <li>First item</li><li>Second item</li><li>Third item</li>
+        </ul>
+        <ol style="padding-left:1.25rem;font-size:0.88rem">
+          <li>Step one</li><li>Step two</li><li>Step three</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <h3>Links</h3>
+  <div class="md-grid">
+    <div class="md-card">
+      <div class="md-card-header">You type</div>
+      <pre>[Link text here](https://example.com)</pre>
+    </div>
+    <div class="md-card">
+      <div class="md-card-header">Result</div>
+      <div class="result"><a href="#" style="color:#5C2D91">Link text here</a></div>
+    </div>
+  </div>
+
+  <h3>Blockquotes — for quotes from documents or people</h3>
+  <div class="md-grid">
+    <div class="md-card">
+      <div class="md-card-header">You type</div>
+      <pre>> "The Group brought together
+> families from across the
+> diplomatic community."
+>
+> — BSO Archives, 1972</pre>
+    </div>
+    <div class="md-card">
+      <div class="md-card-header">Result</div>
+      <div class="result">
+        <blockquote>"The Group brought together families from across the diplomatic community."<br><br>— BSO Archives, 1972</blockquote>
+      </div>
+    </div>
+  </div>
+
+  <h3>Tables</h3>
+  <div class="md-grid">
+    <div class="md-card">
+      <div class="md-card-header">You type</div>
+      <pre>| Year | Scoutmaster |
+|------|-------------|
+| 1954 | A. Smith    |
+| 1962 | B. Jones    |</pre>
+    </div>
+    <div class="md-card">
+      <div class="md-card-header">Result</div>
+      <div class="result">
+        <table style="font-size:0.8rem;margin:0">
+          <thead><tr><th>Year</th><th>Scoutmaster</th></tr></thead>
+          <tbody>
+            <tr><td>1954</td><td>A. Smith</td></tr>
+            <tr><td>1962</td><td>B. Jones</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h3>Dividers — to separate sections visually</h3>
+  <div class="md-grid">
+    <div class="md-card">
+      <div class="md-card-header">You type</div>
+      <pre>---</pre>
+    </div>
+    <div class="md-card">
+      <div class="md-card-header">Result</div>
+      <div class="result"><hr style="border-top: 2px solid #dee2e6;margin:0.5rem 0;"></div>
+    </div>
+  </div>
+
+  <h3>A complete article example</h3>
+  <div class="frontmatter">
+    <div class="frontmatter-header">📄 Full example — front matter + article body</div>
+    <pre>
+<span class="comment">---</span>
+<span class="key">layout</span>: <span class="value">article</span>
+<span class="key">objectid</span>: <span class="value">grp-be-001</span>
+<span class="key">title</span>: <span class="value">1st Brussels Group</span>
+<span class="key">type</span>: <span class="value">Group</span>
+<span class="key">permalink</span>: <span class="value">/articles/grp-be-001.html</span>
+<span class="comment">---</span>
+
+<span class="heading">## About the 1st Brussels Group</span>
+
+The **1st Brussels Group** was established in 1954 to serve the
+growing British community in the Belgian capital.
+
+<span class="heading">## History</span>
+
+<span class="heading">### Early Years (1954–1967)</span>
+
+The group initially met in the British Embassy compound.
+
+- 1954 — Group formally registered with British Groups Abroad
+- 1958 — First camp held in the Ardennes
+- 1963 — Reached 40 members
+
+> "Our Group gave children the stability of Scouting
+> while their families navigated life abroad."
+>
+> — Former Group Scout Leader, 2021
+
+<span class="heading">## Scoutmasters</span>
+
+| Years | Scoutmaster      |
+|-------|------------------|
+| 1954  | Arthur Whitfield |
+| 1961  | Margaret Holt    |
+
+<span class="heading">## Sources</span>
+
+- BSO Archive Box 12, File 3
+- Interview with former members, April 2023</pre>
+  </div>
+</section>
+
+
+<div class="guide-footer">
+  <strong>BSO Heritage Website</strong> · Volunteer Markdown Guide<br>
+  <span style="opacity:0.7;font-size:0.85rem;">Questions? Ask in the team channel.</span>
+</div>
+
+</body>
+</html>
