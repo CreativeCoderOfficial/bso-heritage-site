@@ -4,5 +4,7 @@ group_no,Group Number,,,Group Number
 reg_no,Regiment Number,,,Regiment Number
 country,Country,,,Country
 era,Era,,,Era
-date_founded,Newest,,,Newest
-date_founded,Oldest,,,Oldest
+date_founded,Date Founded,,,
+date_closed,Date Closed,,,
+date_founded,,,true,Newest
+date_founded,,,true,Oldest
