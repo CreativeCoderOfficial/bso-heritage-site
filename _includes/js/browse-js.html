@@ -151,7 +151,11 @@ function filterItems(arr, textQuery, fieldFilters, dateRange) {
               var dateField = dateFields[k];
               if (item[dateField]) {
                   hasValidDate = true;
-                  var itemDate = new Date(item[dateField]);
+                  var itemDate = parseFlexibleDate(item[dateField]);
+                  // If parsing failed, try direct Date constructor
+                  if (itemDate === null) {
+                      itemDate = new Date(item[dateField]);
+                  }
                   
                   // Check from date
                   if (dateFrom && itemDate < dateFrom) {
@@ -358,14 +362,79 @@ function applyAllFilters() {
     filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange);
 }
 
+/* Helper function to parse dates in multiple formats */
+function parseFlexibleDate(dateStr) {
+    if (!dateStr || typeof dateStr !== 'string') return null;
+    
+    // Remove any whitespace
+    dateStr = dateStr.trim();
+    
+    // If it's just a year (4 digits), treat it as such
+    if (/^\d{4}$/.test(dateStr)) {
+        return new Date(parseInt(dateStr), 0, 1); // Jan 1 of that year
+    }
+    
+    // Try DD/MM/YYYY format (common in Europe)
+    if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) {
+        var parts = dateStr.split('/');
+        // DD/MM/YYYY
+        return new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+    }
+    
+    // Try YYYY-MM-DD format (ISO)
+    if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+        return new Date(dateStr);
+    }
+    
+    // Try other ISO formats that Date.parse can handle
+    var parsed = Date.parse(dateStr);
+    if (!isNaN(parsed)) {
+        return new Date(parsed);
+    }
+    
+    return null; // Could not parse
+}
+
+/* Check if a field is a date field */
+function isDateField(fieldName) {
+    return fieldName === 'date' || fieldName === 'date_founded' || fieldName === 'date_closed';
+}
+
 /* item array sorting function */
-function sorting(json_object, key_to_sort_by) {
+function sorting(json_object, key_to_sort_by, sort_direction) {
+    var direction = sort_direction || 'asc';
     function sortByKey(a, b) {
         var x = a[key_to_sort_by];
         var y = b[key_to_sort_by];
-        if (typeof x === 'string' ) { x = x.toUpperCase(); }
-        if (typeof y === 'string' ) { y = y.toUpperCase(); }
-        return ((x==null) ? 1: (y==null) ? -1: (x < y) ? -1 : ((x > y) ? 1 : 0));
+        
+        // Handle date fields with flexible parsing
+        if (isDateField(key_to_sort_by)) {
+            if (typeof x === 'string') {
+                x = parseFlexibleDate(x);
+            }
+            if (typeof y === 'string') {
+                y = parseFlexibleDate(y);
+            }
+            // If parsing failed, fall back to string comparison
+            if (x === null && y === null) {
+                x = a[key_to_sort_by];
+                y = b[key_to_sort_by];
+            } else if (x === null) {
+                x = a[key_to_sort_by];
+            } else if (y === null) {
+                y = b[key_to_sort_by];
+            }
+        }
+        // For non-date string fields, use case-insensitive comparison
+        else if (typeof x === 'string') { 
+            x = x.toUpperCase(); 
+        }
+        else if (typeof y === 'string') { 
+            y = y.toUpperCase(); 
+        }
+        
+        var comparison = ((x==null) ? 1: (y==null) ? -1: (x < y) ? -1 : ((x > y) ? 1 : 0));
+        return direction === 'desc' ? -comparison : comparison;
     }
     json_object.sort(sortByKey);
 }
@@ -377,14 +446,21 @@ sortOptions.forEach((button) => {
   button.addEventListener("click", (event) => { 
     // get the sort field
     var field = button.dataset.filter; 
-    var display_name = button.textContent; 
+    var display_name = button.textContent.trim(); 
+    // determine sort direction
+    var sort_direction = 'asc';
+    if (display_name === 'Newest') {
+        sort_direction = 'desc';
+    } else if (display_name === 'Oldest') {
+        sort_direction = 'asc';
+    }
     // switch active sort option
     sortOptions.forEach((option) => { option.classList.remove("active"); } );
     button.classList.add("active");
     sortFilter.innerHTML = display_name; 
     // send to sort and filter
     if (field != 'random') { 
-        sorting(browse_items, field); 
+        sorting(browse_items, field, sort_direction); 
         filterItems(browse_items, currentTextQuery, currentFieldFilters, currentDateRange); 
     } 
     else { 

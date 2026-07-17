@@ -198,7 +198,7 @@ https://docs.google.com/spreadsheets/d/e/2PACX-.../pub?gid=1179782383&single=tru
 These are not part of the CB-Sheets default template but have been added for this project:
 
 ```
-type, era,	organisation,	district,	country,	group_number,	scarf_colour,	date_founded,	date_closed,	subject,	latitude,	longitude,	badge_tier, badge_type,	colour_variant,	document_type,	date,	issue_number,	season
+type, era,organisation,district,country,group_no,reg_no,scarf_colour,date_founded,date_closed,subject,latitude,longitude,badge_tier, badge_type,colour_variant,document_type,date,issue_number,season
 ```
 
 These are configured in `_data/config-metadata.csv`, `_data/config-browse.csv`, and `_data/config-search.csv`.

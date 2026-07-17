@@ -1,5 +1,8 @@
 field,display_name,btn,hidden,sort_name
 title,Title,,,Title
+group_no,Group Number,,,Group Number
+reg_no,Regiment Number,,,Regiment Number
 country,Country,,,Country
 era,Era,,,Era
-date,Date,,,Date
+date_founded,Newest,,,Newest
+date_founded,Oldest,,,Oldest
