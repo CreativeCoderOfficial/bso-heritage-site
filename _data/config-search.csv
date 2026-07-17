@@ -8,7 +8,8 @@ country,true,true
 date,true,true
 type,true,true
 era,true,true
-group_number,true,false
+group_no,true,false
+reg_no,true,false
 badge_type,true,false
 document_type,true,false
 location,true,false
