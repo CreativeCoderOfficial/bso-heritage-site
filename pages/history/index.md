@@ -8,16 +8,8 @@ permalink: /history.html
 
 Explore the lineage and family tree of all organisations that contributed to British Scouting Overseas.
 
-### Organisation Family Tree
-
-<div class="alert alert-light border-start border-4 border-primary mb-4">
-    <i class="bi bi-diagram-3 me-2 text-primary"></i>
-    <strong>Lineage Overview:</strong> The organisations below represent the scouting and guiding heritage that culminated in British Scouting Overseas (BSO).
-</div>
-
 {% include history-diagram.html %}
 
----
 
 ## Scouting Lineage
 
@@ -69,11 +61,11 @@ Explore the lineage and family tree of all organisations that contributed to Bri
                     <span class="badge bg-primary px-3 py-2">1947-1952</span>
                 </div>
                 <h5 class="card-title">British Scouts in Germany (BSG)</h5>
-                <p class="card-text">Transitional organisation that later merged into BSWE structure.</p>
+                <p class="card-text">Transitional organisation created to serve British military families in post-war Germany. Evolved into BSWE structure in 1952.</p>
                 <div class="mt-3">
                     <small class="text-muted">
                         <strong>Predecessor:</strong> BTIFC<br>
-                        <strong>Successor:</strong> BSWE
+                        <strong>Successor:</strong> BSWE Germany/Europe
                     </small>
                 </div>
                 <a href="{{ '/history/bsg.html' | relative_url }}" class="btn btn-outline-primary mt-3">
@@ -89,7 +81,7 @@ Explore the lineage and family tree of all organisations that contributed to Bri
                     <span class="badge bg-primary px-3 py-2">1952-2013</span>
                 </div>
                 <h5 class="card-title">BSWE Germany/Europe</h5>
-                <p class="card-text">British Scouting in Western Europe, serving military families across Germany and Europe.</p>
+                <p class="card-text">British Scouting in Western Europe, serving military families across Germany and Europe. Developed separately from BGA.</p>
                 <div class="mt-3">
                     <small class="text-muted">
                         <strong>Predecessor:</strong> BSG<br>
@@ -109,10 +101,10 @@ Explore the lineage and family tree of all organisations that contributed to Bri
                     <span class="badge bg-primary px-3 py-2">2013-Present</span>
                 </div>
                 <h5 class="card-title">British Scouting Overseas (BSO)</h5>
-                <p class="card-text">The modern unified organization, formed from the merger of BGA and BSWE.</p>
+                <p class="card-text">The modern unified organization, formed from the merger of BGA, BSWE, and BGO.</p>
                 <div class="mt-3">
                     <small class="text-muted">
-                        <strong>Predecessors:</strong> BGA + BSWE<br>
+                        <strong>Predecessors:</strong> BGA + BSWE + BGO<br>
                         <strong>Status:</strong> Active
                     </small>
                 </div>
@@ -152,14 +144,13 @@ Explore the lineage and family tree of all organisations that contributed to Bri
         <div class="card h-100 border-primary">
             <div class="card-body">
                 <div class="mb-3">
-                    <span class="badge bg-primary px-3 py-2">2017-Present</span>
+                    <span class="badge bg-primary px-3 py-2">2017-2023</span>
                 </div>
                 <h5 class="card-title">British Guides Overseas (BGO)</h5>
                 <p class="card-text">Modern guiding organisation, successor to BGIFC, working alongside BSO.</p>
                 <div class="mt-3">
                     <small class="text-muted">
-                        <strong>Predecessor:</strong> BGIFC<br>
-                        <strong>Status:</strong> Active
+                        <strong>Predecessor:</strong> BGIFC
                     </small>
                 </div>
                 <a href="{{ '/history/bgifc-bgo.html' | relative_url }}" class="btn btn-outline-primary mt-3">

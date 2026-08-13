@@ -22,7 +22,7 @@
      Coordinate calculations from percentage values:
 
 
-     - Container: 1200x1000px
+     - Container: 1200x1050px
 
 
      - x_px = x_percent * 12
@@ -43,13 +43,17 @@
 
 
 
-<div class="diagram-container">
+<!-- Diagram Title -->
+<div style="text-align: center; margin-bottom: 20px;">
+  <h2 style="color: #5C2D91; font-family: Georgia, serif; font-size: 1.8rem; font-weight: 600; margin: 0; padding: 10px 0;">OVERSEAS TIMELINE</h2>
+</div>
 
+<div class="diagram-container">
 
   <!-- SVG Layer - Connectors -->
 
 
-  <svg class="diagram-svg-layer" xmlns="http://www.w3.org/2000/svg" width="1200" height="1000" viewBox="0 0 1200 1000" preserveAspectRatio="xMidYMid meet">
+  <svg class="diagram-svg-layer" xmlns="http://www.w3.org/2000/svg" width="1200" height="1050" viewBox="0 0 1200 1050" preserveAspectRatio="xMidYMid meet">
 
 
     <!-- UK Scouting -> BTIFC -->
@@ -64,7 +68,7 @@
     <!-- BTIFC -> BGA -->
 
 
-    <path d="M 216,288 L 216,576 L 96,576" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 216,288 L 216,450 L 96,450" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 
 
     
@@ -73,16 +77,15 @@
     <!-- BTIFC -> BSG -->
 
 
-    <path d="M 216,288 L 216,400 L 408,400" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 216,288 L 216,450 L 408,450" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 
 
     
 
 
-    <!-- BTIFC -> BSWE -->
+    <!-- BSG -> BSWE (vertical evolution) -->
 
-
-    <path d="M 216,288 L 216,600 L 408,600" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 408,450 L 408,600" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 
 
     
@@ -100,34 +103,44 @@
     <!-- BGIFC -> BGO -->
 
 
-    <path d="M 840,288 L 840,600 L 840,600" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 840,288 L 840,450" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+    
+
+    <!-- BGIFC -> Other Girl Guiding Options -->
+
+    <path d="M 840,288 L 1080,288 L 1080,450" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 
 
     
 
 
-    <!-- BSWE -> BSO (via horizontal merge line at y=700) -->
+    <!-- BGA -> BSO merge -->
 
+    <path d="M 96,450 L 96,700 L 552,700" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 
-    <path d="M 408,600 L 408,700 L 552,700 L 552,840" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    
+
+    <!-- BSWE -> BSO merge -->
+
+    <path d="M 408,600 L 408,700 L 552,700" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 
 
     
 
 
-    <!-- BGO -> BSO (via horizontal merge line at y=700) -->
+    <!-- BGO -> BSO merge -->
 
-
-    <path d="M 840,600 L 840,700 L 552,700 L 552,840" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-
+    <path d="M 840,450 L 840,700 L 552,700" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 
     
 
+    <!-- BSO final drop -->
 
-    <!-- BGO -> Alternatives -->
+    <path d="M 552,700 L 552,800" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 
 
-    <path d="M 840,600 L 840,700 L 984,700 L 984,840" fill="none" stroke="#8b7d6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    
 
 
   </svg>
@@ -274,7 +287,7 @@
     <!-- BGA -->
 
 
-    <a href="{{ site.baseurl }}/history/british-groups-abroad.html" class="diagram-node-link" style="left: 96px; top: 576px;">
+    <a href="{{ site.baseurl }}/history/british-groups-abroad.html" class="diagram-node-link" style="left: 96px; top: 450px;">
 
 
       <div class="diagram-node">
@@ -286,7 +299,7 @@
           <h4 class="diagram-node-title">British Groups Abroad</h4>
 
 
-          <p class="diagram-node-subtitle">1952–2012</p>
+          <p class="diagram-node-subtitle">1952-2013</p>
 
 
         </div>
@@ -304,7 +317,7 @@
     <!-- BSG -->
 
 
-    <a href="{{ site.baseurl }}/history/bsg.html" class="diagram-node-link" style="left: 408px; top: 400px;">
+    <a href="{{ site.baseurl }}/history/bsg.html" class="diagram-node-link" style="left: 408px; top: 450px;">
 
 
       <div class="diagram-node">
@@ -316,7 +329,7 @@
           <h4 class="diagram-node-title">British Scouts in Germany</h4>
 
 
-          <p class="diagram-node-subtitle">1952–present</p>
+          <p class="diagram-node-subtitle">1947-1952</p>
 
 
         </div>
@@ -346,7 +359,7 @@
           <h4 class="diagram-node-title">British Scouts in Western Europe</h4>
 
 
-          <p class="diagram-node-subtitle">regional branch</p>
+          <p class="diagram-node-subtitle">1952-2013</p>
 
 
         </div>
@@ -364,7 +377,7 @@
     <!-- BGO -->
 
 
-    <a href="{{ site.baseurl }}/history/bgifc-bgo.html" class="diagram-node-link" style="left: 840px; top: 600px;">
+    <a href="{{ site.baseurl }}/history/bgifc-bgo.html" class="diagram-node-link" style="left: 840px; top: 450px;">
 
 
       <div class="diagram-node">
@@ -376,7 +389,7 @@
           <h4 class="diagram-node-title">British Guiding Overseas</h4>
 
 
-          <p class="diagram-node-subtitle">modern guiding branch</p>
+          <p class="diagram-node-subtitle">2017-2023</p>
 
 
         </div>
@@ -394,7 +407,7 @@
     <!-- BSO (Emphasized - final merged org) -->
 
 
-    <a href="{{ site.baseurl }}/history/bso-2013-present.html" class="diagram-node-link" style="left: 552px; top: 840px;">
+    <a href="{{ site.baseurl }}/history/bso-2013-present.html" class="diagram-node-link" style="left: 552px; top: 800px;">
 
 
       <div class="diagram-node diagram-node-emphasized">
@@ -421,10 +434,10 @@
 
 
 
-    <!-- Alternatives -->
+    <!-- Other Girl Guiding Options -->
 
 
-    <a href="{{ site.baseurl }}/history/alternatives.html" class="diagram-node-link" style="left: 984px; top: 840px;">
+    <a href="{{ site.baseurl }}/history/alternatives.html" class="diagram-node-link" style="left: 1080px; top: 450px;">
 
 
       <div class="diagram-node">
@@ -433,10 +446,7 @@
         <div class="diagram-node-content">
 
 
-          <h4 class="diagram-node-title">Other Alternatives</h4>
-
-
-          <p class="diagram-node-subtitle">independent options</p>
+          <h4 class="diagram-node-title">Other Girl Guiding Options</h4>
 
 
         </div>
@@ -475,7 +485,7 @@
     width: 1200px;
 
 
-    height: 1000px;
+    height: 1050px;
 
 
     margin: 0 auto;
@@ -853,7 +863,7 @@
       overflow-y: hidden;
 
 
-      height: 1000px;
+      height: 1050px;
 
 
     }

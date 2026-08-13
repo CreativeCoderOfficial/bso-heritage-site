@@ -7,14 +7,14 @@ permalink: /history/bsg.html
 ## British Scouts in Germany (BSG)
 
 <div class="text-center my-4">
-  <h3 class="fw-normal mb-3">British Scouts Germany; County Badge Issues.</h3>
+  <h3 class="fw-normal mb-3">County Badge Issues:</h3>
   <div class="d-flex justify-content-center gap-4 flex-wrap">
     <div class="text-center">
       <img src="{{ '/objects/history-timeline-objects/bsg/bsg-badge-till-1949.png' | relative_url }}" 
            alt="BS Germany County Badge 1947-1949" 
            class="img-fluid" 
            style="max-height: 200px;">
-      <p class="mt-2 mb-0 fw-bold">1947-1949</p>
+      <p class="mt-2 mb-0 fw-bold">A. 1947-1949</p>
     </div>
     <div class="text-center">
       <img src="{{ '/objects/history-timeline-objects/bsg/bsg-badge-till-1952.png' | relative_url }}" 
